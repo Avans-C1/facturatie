@@ -1,5 +1,6 @@
 package nl.avansc1.facturatie.model.customers;
 
+import java.security.Policy;
 import java.util.Date;
 
 /**
@@ -19,8 +20,10 @@ public class Customer {
     private int phoneNumber;
     private String email;
     private String iban;
+    private Policy policy;
 
-    public Customer(int csn, String firstName, String lastName, String streetName, String houseNumber, String zipcode, String city, Date dateOfBirth, int phoneNumber, String email, String iban) {
+    public Customer(int csn, String firstName, String lastName, String streetName, String houseNumber, String zipcode,
+                    String city, Date dateOfBirth, int phoneNumber, String email, String iban, Policy policy) {
         this.csn = csn;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -32,6 +35,22 @@ public class Customer {
         this.phoneNumber = phoneNumber;
         this.email = email;
         this.iban = iban;
+        this.policy = policy;
+    }
+
+    public Customer(String firstName, String lastName, String streetName, String houseNumber, String zipcode,
+                    String city, Date dateOfBirth, int phoneNumber, String email, String iban, Policy policy) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.streetName = streetName;
+        this.houseNumber = houseNumber;
+        this.zipcode = zipcode;
+        this.city = city;
+        this.dateOfBirth = dateOfBirth;
+        this.phoneNumber = phoneNumber;
+        this.email = email;
+        this.iban = iban;
+        this.policy = policy;
     }
 
     public Customer() {
@@ -123,5 +142,13 @@ public class Customer {
 
     public void setIban(String iban) {
         this.iban = iban;
+    }
+
+    public Policy getPolicy() {
+        return policy;
+    }
+
+    public void setPolicy(Policy policy) {
+        this.policy = policy;
     }
 }
