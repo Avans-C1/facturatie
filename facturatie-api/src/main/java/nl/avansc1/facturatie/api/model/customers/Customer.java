@@ -1,5 +1,7 @@
 package nl.avansc1.facturatie.api.model.customers;
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
 import java.util.Date;
 
 /**
@@ -7,8 +9,10 @@ import java.util.Date;
  *
  * @author Bob van der Valk
  */
+@Entity
 public class Customer {
-    private int csn;
+
+    private @Id int csn;
     private String firstName;
     private String lastName;
     private String streetName;
