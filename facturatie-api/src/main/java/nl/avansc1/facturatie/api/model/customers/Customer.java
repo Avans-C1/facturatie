@@ -11,7 +11,6 @@ import java.util.Date;
  */
 @Entity
 public class Customer {
-
     private @Id int csn;
     private String firstName;
     private String lastName;
