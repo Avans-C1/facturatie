@@ -3,12 +3,11 @@ package nl.avansc1.facturatie.model.customers;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
-import java.security.Policy;
 import java.util.Date;
 
 /**
  * Object of a customer
- *
+ *  TODO: Policy relatie terug zetten - Even verwijderd voor hibernate
  * @author Bob van der Valk
  */
 @Entity
@@ -25,10 +24,9 @@ public class Customer {
     private int phoneNumber;
     private String email;
     private String iban;
-    private Policy policy;
 
     public Customer(int csn, String firstName, String lastName, String streetName, String houseNumber, String zipcode,
-                    String city, Date dateOfBirth, int phoneNumber, String email, String iban, Policy policy) {
+                    String city, Date dateOfBirth, int phoneNumber, String email, String iban) {
         this.csn = csn;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -40,11 +38,10 @@ public class Customer {
         this.phoneNumber = phoneNumber;
         this.email = email;
         this.iban = iban;
-        this.policy = policy;
     }
 
     public Customer(String firstName, String lastName, String streetName, String houseNumber, String zipcode,
-                    String city, Date dateOfBirth, int phoneNumber, String email, String iban, Policy policy) {
+                    String city, Date dateOfBirth, int phoneNumber, String email, String iban) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.streetName = streetName;
@@ -55,7 +52,6 @@ public class Customer {
         this.phoneNumber = phoneNumber;
         this.email = email;
         this.iban = iban;
-        this.policy = policy;
     }
 
     public Customer() {
@@ -147,13 +143,5 @@ public class Customer {
 
     public void setIban(String iban) {
         this.iban = iban;
-    }
-
-    public Policy getPolicy() {
-        return policy;
-    }
-
-    public void setPolicy(Policy policy) {
-        this.policy = policy;
     }
 }
