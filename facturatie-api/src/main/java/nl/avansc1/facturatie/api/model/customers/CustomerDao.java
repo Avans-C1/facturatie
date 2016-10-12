@@ -11,5 +11,5 @@ import javax.transaction.Transactional;
  */
 @Transactional
 public interface CustomerDao extends CrudRepository<Customer, Integer> {
-    public Customer findByCnc(int cnc);
+    public Customer findByCsn(int csn);
 }

@@ -17,11 +17,11 @@ public class CustomerController {
 
     @RequestMapping("get")
     @ResponseBody
-    public String getByCNC(int cnc) {
+    public String getByCNC(int csn) {
         String lastName;
 
         try {
-            Customer customer = customerDao.findByCnc(cnc);
+            Customer customer = customerDao.findByCsn(csn);
             lastName = customer.getLastName();
         } catch (Exception ex) {
             return "Client not found";
