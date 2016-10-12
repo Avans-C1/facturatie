@@ -22,8 +22,9 @@ public class CustomerController {
     @RequestMapping("get")
     @ResponseBody
     public String getByCNC(int csn) {
-        String writer;
+        StringWriter writer;
         try {
+            writer = new StringWriter();
             Customer customer = customerDao.findByCsn(csn);
             JAXBContext jaxbContext = JAXBContext.newInstance(Customer.class);
             Marshaller jaxbMarshaller = jaxbContext.createMarshaller();
