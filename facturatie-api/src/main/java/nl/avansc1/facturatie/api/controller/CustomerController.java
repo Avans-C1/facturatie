@@ -7,6 +7,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.xml.bind.JAXBContext;
+import javax.xml.bind.Marshaller;
+import java.io.StringWriter;
+
 /**
  * This class is a controller that manages the Customer
  *
@@ -18,15 +22,16 @@ public class CustomerController {
     @RequestMapping("get")
     @ResponseBody
     public String getByCNC(int csn) {
-        String lastName;
-
+        String writer;
         try {
             Customer customer = customerDao.findByCsn(csn);
-            lastName = customer.getLastName();
+            JAXBContext jaxbContext = JAXBContext.newInstance(Customer.class);
+            Marshaller jaxbMarshaller = jaxbContext.createMarshaller();
+            jaxbMarshaller.marshal(customer, writer);
         } catch (Exception ex) {
-            return "Client not found";
+            return "Customer not found";
         }
-        return "The last name is "+ lastName;
+        return writer.toString();
     }
 
     @Autowired
