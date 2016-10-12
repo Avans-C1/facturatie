@@ -1,5 +1,5 @@
 <!-- sidebar: style can be found in sidebar.less -->
-<section class="sidebar">
+<section class="sidebar" xmlns:th="http://www.w3.org/1999/xhtml">
     <!-- Sidebar user panel -->
     <div class="user-panel">
         <div class="pull-left image">
@@ -21,7 +21,7 @@
             </a>
         </li>
         <li th:class="${page == 'customers'} ? 'active' : ''">
-            <a href="#">
+            <a th:href="@{~/customer}">
                 <i class="fa fa-user"></i> <span>Customers</span>
             </a>
         </li>
