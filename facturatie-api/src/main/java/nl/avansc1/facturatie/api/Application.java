@@ -9,8 +9,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  * @author Bob van der Valk
  */
 @SpringBootApplication
-public class API {
+public class Application {
     public static void main(String[] args) {
-        SpringApplication.run(API.class, args);
+        SpringApplication.run(Application.class, args);
     }
 }
