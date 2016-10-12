@@ -40,12 +40,12 @@ public class CustomerController {
      * @return saved message is the customer is saved
      */
     @RequestMapping(value = "/new", method = RequestMethod.POST)
-    public String addHandler(int csn, String firstName, String lastName, String streetName, String houseNumber,
-                             String zipcode, String city, Date dateOfBirth, int phoneNumber, String email,
-                             String iban) {
+//    csn=1234567&firstName=Bob&lastName=van%20der%20Valk&dateofbirth=1993-10-27&streetname=straat&housenumber=8&city=Heinenoord&zipcode=3274NB&phone=651355588&email=bobvandervalk%40gmail.com&iban=NL00INGB0000000000
+    public String addHandler(int csn, String firstName, String lastName, Date dateOfBirth, String streetName, String houseNumber,
+                             String city, String zipcode, int phone, String email, String iban) {
         try {
             Customer customer = new Customer(csn, firstName, lastName, streetName, houseNumber, zipcode, city, dateOfBirth,
-                    phoneNumber, email, iban);
+                    phone, email, iban);
             customerDAO.save(customer);
         } catch (Exception ex) {
             return "saving error";
