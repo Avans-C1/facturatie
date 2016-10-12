@@ -2,7 +2,6 @@ package nl.avansc1.facturatie;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.boot.context.web.SpringBootServletInitializer;
 
 /**
  * This class is used to run the Spring Boot application. It will start a tomcat server to load all the template files.
@@ -13,7 +12,7 @@ import org.springframework.boot.context.web.SpringBootServletInitializer;
  * @author Bob van der Valk
  */
 @SpringBootApplication
-public class Server extends SpringBootServletInitializer {
+public class Server {
 
     public static void main(String[] args) {
         SpringApplication.run(Server.class, args);
