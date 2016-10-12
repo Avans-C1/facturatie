@@ -17,10 +17,13 @@ import java.util.Date;
 @Controller
 @RequestMapping("/customer")
 public class CustomerController {
-
-    @RequestMapping("/")
+    /**
+     * Overview page
+     * @return template/customer/overview.html
+     */
+    @RequestMapping("")
     public String overview() {
-        return "howdy";
+        return "customer/overview";
     }
 
     /**
@@ -34,25 +37,20 @@ public class CustomerController {
 
     /**
      * Process the saving stuff
-     * @return
+     * @return saved message is the customer is saved
      */
     @RequestMapping(value = "/new", method = RequestMethod.POST)
     public String addHandler(int csn, String firstName, String lastName, String streetName, String houseNumber,
                              String zipcode, String city, Date dateOfBirth, int phoneNumber, String email,
                              String iban) {
-        Customer customer = new Customer();
-        customer.setCsn(csn);
-        customer.setFirstName(firstName);
-        customer.setLastName(lastName);
-        customer.setStreetName(streetName);
-        customer.setHouseNumber(houseNumber);
-        customer.setZipcode(zipcode);
-        customer.setCity(city);
-        customer.setDateOfBirth(dateOfBirth);
-        customer.setPhoneNumber(phoneNumber);
-        customer.setEmail(email);
-        customer.setIban(iban);
-        customerDAO.save(customer);
+        try {
+            Customer customer = new Customer(csn, firstName, lastName, streetName, houseNumber, zipcode, city, dateOfBirth,
+                    phoneNumber, email, iban);
+            customerDAO.save(customer);
+        } catch (Exception ex) {
+            return "saving error";
+        }
+
         return "saved!";
     }
 
