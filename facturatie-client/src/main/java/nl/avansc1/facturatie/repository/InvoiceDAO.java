@@ -1,21 +1,15 @@
 package nl.avansc1.facturatie.repository;
 
 import nl.avansc1.facturatie.model.billing.Invoice;
+import org.springframework.data.repository.CrudRepository;
 
+import javax.transaction.Transactional;
 import java.util.List;
 
 /**
  * Created by kevin on 11-10-2016.
  */
-public interface InvoiceDAO {
+@Transactional
+public interface InvoiceDAO extends CrudRepository<Invoice, Integer> {
 
-    public List<Invoice> getInvoices();
-
-    public Invoice getInvoice(int id);
-
-    public boolean deleteInvoice(int id);
-
-    public boolean addInvoice(Invoice invoice);
-
-    public boolean updateInvoice(Invoice invoice);
 }

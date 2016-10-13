@@ -1,11 +1,14 @@
 package nl.avansc1.facturatie.controller;
 
+import nl.avansc1.facturatie.model.billing.Invoice;
 import nl.avansc1.facturatie.repository.InvoiceDAO;
-import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+
+import java.util.List;
 
 /**
  * Created by kevin on 11-10-2016.
@@ -14,20 +17,25 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("/invoice")
 public class InvoiceController {
 
-    //@Autowired
+    @Autowired
     private InvoiceDAO invoiceDAO;
 
-    @RequestMapping("/list")
+    @RequestMapping("")
     public String listInvoices(Model theModel) {
 
         System.out.println(invoiceDAO.toString());
 
         //Get invoices from DAO
-        //Invoice invoiceList = invoiceDAO.getInvoice(1);
+        Iterable<Invoice> invoiceList = invoiceDAO.findAll();
 
         //Add invoices to model
-        //theModel.addAttribute("invoices", invoiceList);
+        theModel.addAttribute("invoices", invoiceList);
 
-        return "invoice/list-invoices";
+        return "invoice/index";
+    }
+
+    @ModelAttribute("page")
+    public String module() {
+        return "invoices";
     }
 }

@@ -1,6 +1,7 @@
 package nl.avansc1.facturatie.model.billing;
 
 import javax.persistence.*;
+import java.text.NumberFormat;
 
 /**
  * This is a vat object
@@ -37,8 +38,8 @@ public class Vat {
         this.id = id;
     }
 
-    public double getPercentage() {
-        return percentage;
+    public String getPercentage() {
+        return percentage + "%";
     }
 
     public void setPercentage(double percentage) {
