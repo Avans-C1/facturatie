@@ -55,9 +55,9 @@
                             <td th:text="${invoice.vat.percentage}">%</td>
                             <td>
                                 <div class="btn-group">
-                                    <a href="/Invoice/pay" class="btn btn-xs btn-primary" ><span
+                                    <a  th:href="@{'/invoice/pay/' + ${invoice.id}}"  class="btn btn-xs btn-primary" ><span
                                             class="fa fa-pencil">Pay</span></a>
-                                    <a href="/Invoice/delete/1" class="btn btn-xs btn-danger"><span
+                                    <a  th:href="@{'/invoice/delete/' + ${invoice.id}}" class="btn btn-xs btn-danger"><span
                                             class="fa fa-trash"></span></a>
                                 </div>
                             </td>
