@@ -1,30 +1,40 @@
 package nl.avansc1.facturatie.model.billing;
 
+import javax.persistence.*;
+
 /**
  * This is the object of a treatment
  *
  * @author Bob van der Valk
  */
-public class Threatment {
+@Entity
+@Table(name ="treatments")
+public class Treatment {
+    @Id
+    @Column(name="id")
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
     private String id;
+    @Column(name = "name")
     private String name;
+    @Column(name = "duration")
     private int duration;
+    @Column(name = "price")
     private float price;
 
-    public Threatment(String id, String name, int duration, float price) {
+    public Treatment(String id, String name, int duration, float price) {
         this.id = id;
         this.name = name;
         this.duration = duration;
         this.price = price;
     }
 
-    public Threatment(String name, int duration, float price) {
+    public Treatment(String name, int duration, float price) {
         this.name = name;
         this.duration = duration;
         this.price = price;
     }
 
-    public Threatment() {
+    public Treatment() {
     }
 
     public String getId() {

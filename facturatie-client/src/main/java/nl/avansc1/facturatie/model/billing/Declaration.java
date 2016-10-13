@@ -2,6 +2,7 @@ package nl.avansc1.facturatie.model.billing;
 
 import nl.avansc1.facturatie.model.customers.Customer;
 
+import javax.persistence.*;
 import java.util.Date;
 
 /**
@@ -9,26 +10,40 @@ import java.util.Date;
  *
  * @author Bob van der Valk
  */
+@Entity
+@Table(name ="declarations")
 public class Declaration {
+    @Id
+    @Column(name="id")
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
     private int id;
+    @OneToOne
+    @JoinColumn(name = "customer_id")
     private Customer customer;
-    private Threatment threatment;
+    @OneToOne
+    @JoinColumn(name = "treatment_id")
+    private Treatment treatment;
+    @OneToOne
+    @JoinColumn(name = "invoice_id")
     private Invoice invoice;
+    @Temporal(TemporalType.DATE)
+    @Column(name = "declarated_at")
     private Date declaredAt;
+    @Column(name = "price")
     private float price;
 
-    public Declaration(int id, Customer customer, Threatment threatment, Invoice invoice, Date declaredAt, float price) {
+    public Declaration(int id, Customer customer, Treatment treatment, Invoice invoice, Date declaredAt, float price) {
         this.id = id;
         this.customer = customer;
-        this.threatment = threatment;
+        this.treatment = treatment;
         this.invoice = invoice;
         this.declaredAt = declaredAt;
         this.price = price;
     }
 
-    public Declaration(Customer customer, Threatment threatment, Invoice invoice, Date declaredAt, float price) {
+    public Declaration(Customer customer, Treatment treatment, Invoice invoice, Date declaredAt, float price) {
         this.customer = customer;
-        this.threatment = threatment;
+        this.treatment = treatment;
         this.invoice = invoice;
         this.declaredAt = declaredAt;
         this.price = price;
@@ -53,12 +68,12 @@ public class Declaration {
         this.customer = customer;
     }
 
-    public Threatment getThreatment() {
-        return threatment;
+    public Treatment getTreatment() {
+        return treatment;
     }
 
-    public void setThreatment(Threatment threatment) {
-        this.threatment = threatment;
+    public void setTreatment(Treatment treatment) {
+        this.treatment = treatment;
     }
 
     public Invoice getInvoice() {

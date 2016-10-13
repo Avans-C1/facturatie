@@ -1,12 +1,20 @@
 package nl.avansc1.facturatie.model.billing;
 
+import javax.persistence.*;
+
 /**
  * This is a vat object
  *
  * @author Bob van der Valk
  */
+@Entity
+@Table(name ="vat")
 public class Vat {
+    @Id
+    @Column(name="id")
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
     private int id;
+    @Column(name = "percentage")
     private double percentage;
 
     public Vat(int id, double percentage) {

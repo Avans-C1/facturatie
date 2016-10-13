@@ -2,6 +2,7 @@ package nl.avansc1.facturatie.model.billing;
 
 import nl.avansc1.facturatie.model.customers.Customer;
 
+import javax.persistence.*;
 import java.util.Date;
 
 /**
@@ -9,13 +10,29 @@ import java.util.Date;
  *
  * @author Bob van der Valk
  */
+@Entity
+@Table(name ="invoices")
 public class Invoice {
+    @Id
+    @Column(name="id")
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
     private int id;
+    @OneToOne
+    @JoinColumn(name = "customer_id")
     private Customer customer;
+    @OneToOne
+    @JoinColumn(name = "vat_id")
     private Vat vat;
+    @Temporal(TemporalType.DATE)
+    @Column(name = "date_created")
     private Date dateCreated;
+    @Temporal(TemporalType.DATE)
+    @Column(name = "date_payed")
     private Date datePayed;
+    @Column(name = "state")
     private int state;
+    @OneToOne
+    @JoinColumn(name = "payment_condition_id")
     private PaymentCondition paymentCondition;
 
     public Invoice(int id, Customer customer, Vat vat, Date dateCreated, Date datePayed, int state, PaymentCondition paymentCondition) {

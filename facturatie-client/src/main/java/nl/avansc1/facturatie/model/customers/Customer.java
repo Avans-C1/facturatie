@@ -1,5 +1,6 @@
 package nl.avansc1.facturatie.model.customers;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
@@ -13,16 +14,28 @@ import java.util.Date;
 @Entity
 @Table(name = "customers")
 public class Customer {
-    private @Id int csn;
+    @Id
+    @Column(name = "csn")
+    private int csn;
+    @Column(name = "first_name")
     private String firstName;
+    @Column(name = "last_name")
     private String lastName;
+    @Column(name = "street_name")
     private String streetName;
+    @Column(name = "house_name")
     private String houseNumber;
+    @Column(name = "zipcode")
     private String zipcode;
+    @Column(name = "city")
     private String city;
+    @Column(name = "date_of_birth")
     private Date dateOfBirth;
+    @Column(name = "phoneNumber")
     private int phoneNumber;
+    @Column(name = "email")
     private String email;
+    @Column(name = "iban")
     private String iban;
 
     public Customer(int csn, String firstName, String lastName, String streetName, String houseNumber, String zipcode,
