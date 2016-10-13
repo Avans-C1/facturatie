@@ -41,7 +41,7 @@ public class VatController {
         try {
             Vat vat = new  Vat(percentage);
             VatDAO.save(vat);
-        } catch (Exception ex) {
+        } catch (Exception ex) { 
             return "vat/add";
         }
         model.addAttribute("message", "Vat added to the database");
