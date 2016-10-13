@@ -23,6 +23,17 @@
                 <div class="box-header">
                     <h3 class="box-title">Create</h3>
                 </div>
+
+                <div th:if="${message}">
+                    <div layout:include="fragments/alert :: alert" th:with="type='success', header='Success'" th:remove="tag">
+                        <!--/* Implements alert summary fragment with full-blown HTML summary */-->
+                        <th:block layout:fragment="alert-content">
+                            <p th:text="${message}"></p>
+                        </th:block>
+                    </div>
+                </div>
+
+
                 <!-- /.box-header -->
                 <div class="box-body">
                     <form name="customerForm" id="customerForm" method="post">

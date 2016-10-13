@@ -6,6 +6,7 @@ import nl.avansc1.facturatie.repository.CustomerDAO;
 import nl.avansc1.facturatie.repository.VatDAO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -36,15 +37,15 @@ public class VatController {
 
 
     @RequestMapping(value = "/new", method = RequestMethod.POST)
-    public String addHandler(int percentage) {
+    public String addHandler(int percentage, final ModelMap model) {
         try {
             Vat vat = new  Vat(percentage);
             VatDAO.save(vat);
         } catch (Exception ex) {
-            return "saving error";
+            return "vat/add";
         }
-
-        return "saved!";
+        model.addAttribute("message", "Vat added to the database");
+        return "vat/overview";
     }
 
     @Autowired
