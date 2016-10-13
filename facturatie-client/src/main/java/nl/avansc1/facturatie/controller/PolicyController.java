@@ -24,7 +24,7 @@ public class PolicyController {
     }
     /**
      * Overview page
-     * @return template/customer/overview.html
+     * @return template/policy/overview.html
      */
 
     @RequestMapping("/new")
