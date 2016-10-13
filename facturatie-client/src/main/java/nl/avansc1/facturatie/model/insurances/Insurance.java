@@ -1,14 +1,27 @@
 package nl.avansc1.facturatie.model.insurances;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+
 /**
  * This is the object of a Insurance
  *
  * @author Bob van der Valk
  */
+@Entity
+@Table(name = "insurances")
 public class Insurance {
+    @Id
+    @Column(name = "id")
     private int id;
+    @Column(name = "name")
     private String name;
+    @Column(name = "monthlyFee")
     private float monthlyFee;
+    @Column(name = "coveredTreatments")
     private int coveredTreatments;
 
     public Insurance(int id, String name, float monthlyFee, int coveredTreatments) {
