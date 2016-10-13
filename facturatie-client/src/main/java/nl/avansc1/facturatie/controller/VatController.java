@@ -44,7 +44,7 @@ public class VatController {
             return "saving error";
         }
 
-        return "saved!";
+        return "saved";
     }
 
     @Autowired
