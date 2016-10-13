@@ -1,5 +1,9 @@
 package nl.avansc1.facturatie.model.insurances;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
 import java.util.Date;
 import java.util.List;
 
@@ -8,13 +12,23 @@ import java.util.List;
  *
  * @author Bob van der Valk
  */
+@Entity
+@Table(name = "policies")
 public class Policy {
+    @Id
+    @Column(name = "id")
     private int id;
+    @Column(name = "contribution")
     private float contribution;
+    @Column(name = "dateStart")
     private Date dateStart;
+    @Column(name = "dateEnd")
     private Date dateEnd;
+    @Column(name = "active")
     private boolean active;
+    @Column(name = "contributionUsed")
     private float contributionUsed;
+    @Column(name = "insurances")
     private List<Insurance> insurances;
 
     public Policy(int id, float contribution, Date dateStart, Date dateEnd, boolean active, float contributionUsed, List<Insurance> insurances) {
