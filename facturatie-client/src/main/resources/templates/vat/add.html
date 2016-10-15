@@ -24,14 +24,7 @@
                     <h3 class="box-title">Create</h3>
                 </div>
 
-                <div th:if="${message}">
-                    <div layout:include="fragments/alert :: alert" th:with="type='success', header='Success'" th:remove="tag">
-                        <!--/* Implements alert summary fragment with full-blown HTML summary */-->
-                        <th:block layout:fragment="alert-content">
-                            <p th:text="${message}"></p>
-                        </th:block>
-                    </div>
-                </div>
+
 
 
                 <!-- /.box-header -->
@@ -41,7 +34,8 @@
                             <div class="col-sm-4">
                                 <div class="form-group">
                                     <label for="percentage">Vat percentage</label>
-                                    <input type="number" min="1" max="100" class="form-control" id="percentage" name="percentage" value=""/>
+                                    <input type="number" th:value="${vat.percentage.replace()}"  min="1" max="100" class="form-control" id="percentage" name="percentage" value=""/>
+                                    <input type="number"  th:value="${vat.id}" />
                                 </div>
                             </div>
                         </div>
