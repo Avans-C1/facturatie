@@ -1,5 +1,6 @@
 package nl.avansc1.facturatie.controller;
 
+import nl.avansc1.facturatie.model.billing.Invoice;
 import nl.avansc1.facturatie.model.billing.Vat;
 import nl.avansc1.facturatie.repository.VatDAO;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,14 +40,21 @@ public class VatController {
     }
 
 
-    @RequestMapping("/new/{id}")
-    public String edit(@PathVariable(value="id") int id, final ModelMap model){
-        System.out.println("Yeah lets edit :D " + id);
-        model.addAttribute("vat", VatDAO.findOne(id));
+    @RequestMapping(value = "/delete/{id}" , method = RequestMethod.GET)
+    public String deleteDeclaration(Model model, @PathVariable int id) {
 
-        return "vat/add";
+        //Delete invoice with Id
+        Vat vat = VatDAO.findOne(id);
+        this.VatDAO.delete(vat);
+
+
+        //Add invoices to model
+        model.addAttribute("message", "Vat removed from the database");
+        model.addAttribute("vats", getVatList());
+
+        // Open view
+        return "vat/overview";
     }
-
 
 
     @RequestMapping(value = "/new", method = RequestMethod.POST)
@@ -58,7 +66,7 @@ public class VatController {
             model.addAttribute("message", "Vat added to the database");
             model.addAttribute("vats", getVatList());
             return "vat/overview";
-        } catch (Exception ex) { 
+        } catch (Exception ex) {
             return "vat/add";
         }
 
