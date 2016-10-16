@@ -8,7 +8,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -27,7 +26,9 @@ public class CustomerController {
      * @return template/customer/overview.html
      */
     @RequestMapping("")
-    public String overview() {
+    public String overview(Model model) {
+        Iterable<Customer> customers = customerDAO.findAll();
+        model.addAttribute(customers);
         return "customer/overview";
     }
 
