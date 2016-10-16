@@ -12,10 +12,7 @@ import org.springframework.core.env.SystemEnvironmentPropertySource;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * Created by kevin on 11-10-2016.
@@ -44,7 +41,7 @@ public class TreatmentController {
     @RequestMapping(value = "/delete/{id}" , method = RequestMethod.GET)
     public String deleteTreatment(Model model, @PathVariable int id) {
 
-        System.out.println("Treatment id: " + id);
+
         //Delete invoice with Id
         Treatment treatment = TreatmentDAO.findOne(id);
         TreatmentDAO.delete(treatment);
@@ -52,7 +49,7 @@ public class TreatmentController {
 
 
         //Add invoices to model
-        model.addAttribute("message", "Vat removed from the database");
+        model.addAttribute("message", "Treatment removed from the database");
         model.addAttribute("Treatments", getTreatmentList());
 
         // Open view
@@ -65,12 +62,26 @@ public class TreatmentController {
     }
 
     @RequestMapping(value = "/new", method = RequestMethod.POST)
-    public String addTreatment(String name, int duration, float price, final ModelMap model) {
+    public String addTreatment(String name, int duration, float price, @RequestParam(value = "id", required=false, defaultValue = "0") int id, final ModelMap model) {
         try {
-            Treatment treatment = new  Treatment(name, duration, price);
-            TreatmentDAO.save(treatment);
 
-            model.addAttribute("message", "Vat added to the database");
+            if(id>0){
+                //update
+                Treatment treatment = TreatmentDAO.findOne(id);
+                treatment.setDuration(duration);
+                treatment.setPrice(price);
+                treatment.setName(name);
+
+                TreatmentDAO.save(treatment);
+                model.addAttribute("message", "Treatment aangepast");
+            }else{
+                //add
+                Treatment treatment = new  Treatment(name, duration, price);
+                TreatmentDAO.save(treatment);
+
+                model.addAttribute("message", "Treatment added to the database");
+            }
+
             model.addAttribute("Treatments", getTreatmentList());
             return "treatments/index";
         } catch (Exception ex) {
@@ -78,6 +89,22 @@ public class TreatmentController {
         }
 
     }
+
+    @RequestMapping(value = "/new/{id}" , method = RequestMethod.GET)
+    public String editTreatment(Model model, @PathVariable int id) {
+        Treatment treatment = TreatmentDAO.findOne(id);
+        System.out.println("Treatment id: " + id + " Name: " + treatment.getName());
+        if(treatment!=null){
+
+            model.addAttribute("Treatment", treatment);
+            return "treatments/create";
+        }else{
+            return "treatments/index";
+        }
+    }
+
+
+
 
     @ModelAttribute("page")
     public String module() {

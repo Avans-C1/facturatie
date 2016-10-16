@@ -27,7 +27,7 @@
                 <div class="box-body">
                     <!-- Form om een nieuwe declaration te maken. Het object 'declaration' is het object waarin de
                     waarden uit het formulier worden ingevuld. Het is afkomstig uit de DeclarationController. -->
-                    <form action="#" th:action="@{/treatments/new}" th:object="${Treatment}" method="post">
+                    <form action="#" th:action="@{/treatments/new} " th:object="${Treatment}" method="post">
 
                         <!-- Het formulier wordt na verzenden gevalideerd in de DeclarationController.
                             Als er fouten waren kun je hier een lijst met foutmeldingen tonen.
@@ -52,19 +52,20 @@
                                 <div class="form-group">
                                     <label for="name">Name</label>
                                     <!-- th:field="*{name}" is de koppeling naar het attribuut 'name' van het object 'member'-->
-                                    <input type="text" class="form-control" id="name" name="name"/>
+                                    <input type="hidden" th:value="${Treatment?.id}" class="form-control" id="id" name="id"/>
+                                    <input type="text" th:value="${Treatment?.name}" class="form-control" id="name" name="name"/>
                                 </div>
 
                                 <div class="form-group">
                                     <label for="duration">Duration</label>
                                     <!-- th:field="*{name}" is de koppeling naar het attribuut 'name' van het object 'member'-->
-                                    <input type="number" min="0" max="99999" class="form-control" id="duration" name="duration"/>
+                                    <input type="number" th:value="${Treatment?.duration}" min="0" max="99999" class="form-control" id="duration" name="duration"/>
                                 </div>
 
                                 <div class="form-group">
                                     <label for="price">price</label>
                                     <!-- th:field="*{name}" is de koppeling naar het attribuut 'name' van het object 'member'-->
-                                    <input type="number" step="0.1" min="0" max="99999" class="form-control" id="price" name="price"/>
+                                    <input type="number" th:value="${Treatment?.price}" step="0.1" min="0" max="99999" class="form-control" id="price" name="price"/>
                                 </div>
 
                             </div>
