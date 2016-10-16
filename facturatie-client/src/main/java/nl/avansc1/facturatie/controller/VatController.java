@@ -1,16 +1,14 @@
 package nl.avansc1.facturatie.controller;
 
-import nl.avansc1.facturatie.model.billing.Invoice;
 import nl.avansc1.facturatie.model.billing.Vat;
 import nl.avansc1.facturatie.repository.VatDAO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 
 /**
  * Created by Pascal van Hoof on 13-10-2016.
@@ -21,64 +19,63 @@ import org.springframework.web.bind.annotation.RequestParam;
 @RequestMapping("/vat")
 public class VatController {
 
+    @ModelAttribute("page")
+    public String module() {
+        return "vat";
+    }
+
     /**
      * Overview page
      * @return template/customer/overview.html
      */
     @RequestMapping("")
-    public String overview(Model theModel) {
+    public String index(Model theModel) {
 
         //Add invoices to model
         theModel.addAttribute("vats", getVatList());
 
-        return "vat/overview";
+        return "vat/index";
     }
 
     @RequestMapping("/new")
-    public String add() {
+    public String add(Model model) {
+        model.addAttribute("vat", new Vat());
+
         return "vat/add";
     }
 
 
     @RequestMapping(value = "/delete/{id}" , method = RequestMethod.GET)
     public String deleteDeclaration(Model model, @PathVariable int id) {
+        this.vatDAO.delete(id);
 
-        //Delete invoice with Id
-        Vat vat = VatDAO.findOne(id);
-        this.VatDAO.delete(vat);
+        model.addAttribute("success", "Vat removed from the database");
 
-
-        //Add invoices to model
-        model.addAttribute("message", "Vat removed from the database");
-        model.addAttribute("vats", getVatList());
-
-        // Open view
-        return "vat/overview";
+        return this.index(model);
     }
 
 
     @RequestMapping(value = "/new", method = RequestMethod.POST)
-    public String addHandler(int percentage, final ModelMap model) {
+    public String addHandler(int percentage, Model model) {
         try {
             Vat vat = new  Vat(percentage);
-            VatDAO.save(vat);
+            vatDAO.save(vat);
 
-            model.addAttribute("message", "Vat added to the database");
-            model.addAttribute("vats", getVatList());
-            return "vat/overview";
+            model.addAttribute("success", "Vat added to the database");
+
+            return this.index(model);
         } catch (Exception ex) {
             return "vat/add";
         }
-
     }
 
     private Iterable<Vat> getVatList(){
-        return  VatDAO.findAll();
+        return  vatDAO.findAll();
     }
 
 
 
     @Autowired
-    private VatDAO VatDAO;
+    private VatDAO vatDAO;
 
 }
