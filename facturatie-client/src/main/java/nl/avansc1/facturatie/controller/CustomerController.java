@@ -42,10 +42,24 @@ public class CustomerController {
     }
 
     /**
+     * View every detail about a user
+     * @param model
+     * @param csn main ID of the user
+     * @return template/customer/view.html
+     */
+    @RequestMapping(value = "/view/{csn")
+    public String view(Model model, @PathVariable int csn) {
+        Customer customer = customerDAO.findByCsn(csn);
+        model.addAttribute("customer", customer);
+
+        return "customer/view";
+    }
+
+    /**
      * Add new customers page
      * @return template/customer/add.html
      */
-    @RequestMapping(value = "/show/{csn}", method = RequestMethod.GET)
+    @RequestMapping(value = "/show/{csn}")
     public String show(Model model, @PathVariable int csn) {
         List<Customer> customers = new ArrayList<Customer>();
         customers.add(customerDAO.findByCsn(csn));
@@ -60,7 +74,6 @@ public class CustomerController {
      * @return saved message is the customer is saved
      */
     @RequestMapping(value = "/new", method = RequestMethod.POST)
-//    csn=1234567&firstName=Bob&lastName=van%20der%20Valk&dateofbirth=1993-10-27&streetname=straat&housenumber=8&city=Heinenoord&zipcode=3274NB&phone=651355588&email=bobvandervalk%40gmail.com&iban=NL00INGB0000000000
     public String addHandler(int csn, String firstName, String lastName, Date dateOfBirth, String streetName, String houseNumber,
                              String city, String zipcode, int phone, String email, String iban) {
         try {
