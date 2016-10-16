@@ -41,7 +41,7 @@ public class VatController {
 
 
     @RequestMapping(value = "/delete/{id}" , method = RequestMethod.GET)
-    public String deleteDeclaration(Model model, @PathVariable int id) {
+    public String deleteVat(Model model, @PathVariable int id) {
 
         //Delete invoice with Id
         Vat vat = VatDAO.findOne(id);
@@ -58,7 +58,7 @@ public class VatController {
 
 
     @RequestMapping(value = "/new", method = RequestMethod.POST)
-    public String addHandler(int percentage, final ModelMap model) {
+    public String addVat(int percentage, final ModelMap model) {
         try {
             Vat vat = new  Vat(percentage);
             VatDAO.save(vat);

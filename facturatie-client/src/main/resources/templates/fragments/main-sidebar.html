@@ -43,7 +43,7 @@
 
         <li class="header">ADMINISTRATION</li>
         <li th:class="${page == 'treatments'} ? 'active' : ''">
-            <a href="#">
+            <a th:href="@{~/treatments}">
                 <i class="fa fa-cubes"></i> <span>Treatments</span>
             </a>
         </li>
