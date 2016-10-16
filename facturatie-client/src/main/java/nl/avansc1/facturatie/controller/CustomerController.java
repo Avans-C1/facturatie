@@ -28,7 +28,7 @@ public class CustomerController {
     @RequestMapping("")
     public String overview(Model model) {
         Iterable<Customer> customers = customerDAO.findAll();
-        model.addAttribute(customers);
+        model.addAttribute("customers", customers);
         return "customer/overview";
     }
 
