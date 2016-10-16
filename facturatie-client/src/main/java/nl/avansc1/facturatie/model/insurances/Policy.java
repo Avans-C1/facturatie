@@ -1,9 +1,8 @@
 package nl.avansc1.facturatie.model.insurances;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import nl.avansc1.facturatie.model.customers.Customer;
+
+import javax.persistence.*;
 import java.util.Date;
 import java.util.List;
 
@@ -17,37 +16,51 @@ import java.util.List;
 public class Policy {
     @Id
     @Column(name = "id")
+    @GeneratedValue(strategy= GenerationType.IDENTITY)
     private int id;
+    @OneToOne
+    @JoinColumn(name = "customer_id")
+    private Customer customer;
+    @OneToOne
+    @JoinColumn(name = "insurance_id")
+    private Insurance insurance;
     @Column(name = "contribution")
     private float contribution;
-    @Column(name = "dateStart")
+    @Column(name = "date_start")
     private Date dateStart;
-    @Column(name = "dateEnd")
+    @Column(name = "date_end")
     private Date dateEnd;
     @Column(name = "active")
     private boolean active;
-    @Column(name = "contributionUsed")
+    @Column(name = "contributions_used")
+    private float contributionsUsed;
+    @Column(name = "contribution_used")
     private float contributionUsed;
-    @Column(name = "insurances")
-    private List<Insurance> insurances;
 
-    public Policy(int id, float contribution, Date dateStart, Date dateEnd, boolean active, float contributionUsed, List<Insurance> insurances) {
+
+    public Policy(int id, Customer customer, Insurance insurance, float contribution, Date dateStart, Date dateEnd, boolean active, float contributionsUsed, float contributionUsed) {
         this.id = id;
+        this.customer = customer;
+        this.insurance = insurance;
         this.contribution = contribution;
         this.dateStart = dateStart;
         this.dateEnd = dateEnd;
         this.active = active;
+        this.contributionsUsed = contributionsUsed;
         this.contributionUsed = contributionUsed;
-        this.insurances = insurances;
+        ;
     }
 
-    public Policy(float contribution, Date dateStart, Date dateEnd, boolean active, float contributionUsed, List<Insurance> insurances) {
+    public Policy(float contribution, Customer customer, Insurance insurance, Date dateStart, Date dateEnd, boolean active, float contributionsUsed, float contributionUsed) {
         this.contribution = contribution;
+        this.customer = customer;
+        this.insurance = insurance;
         this.dateStart = dateStart;
         this.dateEnd = dateEnd;
         this.active = active;
+        this.contributionsUsed = contributionsUsed;
         this.contributionUsed = contributionUsed;
-        this.insurances = insurances;
+        ;
     }
 
     public Policy() {
@@ -67,6 +80,22 @@ public class Policy {
 
     public void setContribution(float contribution) {
         this.contribution = contribution;
+    }
+
+    public Customer getCustomer() {
+        return customer;
+    }
+
+    public void setCustomer(Customer customer) {
+        this.customer = customer;
+    }
+
+    public Insurance getInsurance() {
+        return insurance;
+    }
+
+    public void setInsurance(Insurance insurance) {
+        this.insurance = insurance;
     }
 
     public Date getDateStart() {
@@ -93,6 +122,14 @@ public class Policy {
         this.active = active;
     }
 
+    public float getContributionsUsed() {
+        return contributionsUsed;
+    }
+
+    public void setContributionsUsed(float contributionsUsed) {
+        this.contributionsUsed = contributionsUsed;
+    }
+
     public float getContributionUsed() {
         return contributionUsed;
     }
@@ -101,11 +138,4 @@ public class Policy {
         this.contributionUsed = contributionUsed;
     }
 
-    public List<Insurance> getInsurances() {
-        return insurances;
-    }
-
-    public void setInsurances(List<Insurance> insurances) {
-        this.insurances = insurances;
-    }
 }

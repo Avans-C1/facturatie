@@ -5,8 +5,8 @@ import nl.avansc1.facturatie.model.insurances.Policy;
 import nl.avansc1.facturatie.repository.PolicyDAO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.*;
 
 import java.sql.Date;
 import java.util.List;
@@ -17,39 +17,66 @@ import java.util.List;
 @Controller
 @RequestMapping("/policy")
 public class PolicyController {
+    private PolicyDAO policyDAO;
 
-    @RequestMapping("")
-    public String index(){
+    @Autowired
+    public PolicyController(PolicyDAO policyDAO) {
+        this.policyDAO = policyDAO;
+    }
+
+    @ModelAttribute("page")
+    public String module() {
+        return "policies";
+    }
+
+
+    // index
+
+    @GetMapping(value = "")
+    String index(Model model) {
+        model.addAttribute("policies", policyDAO.findAll());
+
         return "policy/index";
     }
-    /**
-     * Overview page
-     * @return template/customer/overview.html
-     */
 
-    @RequestMapping("/new")
-    public String add() {
-        return "policy/add";
+
+    // create
+
+    @GetMapping(value = "/create")
+    String create(Model model) {
+        model.addAttribute("user", new Policy());
+
+        return "policy/edit";
     }
 
-    /**
-     * Process the saving stuff
-     * @return saved message is the policy is saved
-     */
+    @PostMapping(value = "/create")
+    String store(Model model, @ModelAttribute Policy policy) {
+        policyDAO.save(policy);
 
-    @RequestMapping(value = "/new", method = RequestMethod.POST)
-    public String addHandler(float Contribution, Date dateStart, Date dateEnd, boolean active, float ContributionUsed, List<Insurance> insurances ) {
-        try {
-            Policy policy = new Policy(Contribution, dateStart, dateEnd, active, ContributionUsed, insurances);
-            policyDAO.save(policy);
-        } catch (Exception ex) {
-            return "saving error";
-        }
+        model.addAttribute("success", "Policy successfully saved");
 
-        return "saved!";
+        return this.index(model);
     }
 
-@Autowired
-private PolicyDAO policyDAO;
 
+    // edit
+
+    @GetMapping(value = "/edit/{id}")
+    String edit(Model model, @PathVariable int id) {
+        model.addAttribute("policy", policyDAO.findOne(id));
+
+        return "policy/edit";
+    }
+
+
+    // delete
+
+    @GetMapping(value = "/delete/{id}")
+    String delete(Model model, @PathVariable int id) {
+        policyDAO.delete(id);
+
+        model.addAttribute("success", "Policy successfully removed");
+
+        return this.index(model);
+    }
 }

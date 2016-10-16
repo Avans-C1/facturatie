@@ -9,5 +9,5 @@ import org.springframework.transaction.annotation.Transactional;
  */
 @Transactional
 public interface PolicyDAO extends CrudRepository<Policy, Integer> {
-    public Policy findbyId(int id);
+
 }
