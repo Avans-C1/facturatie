@@ -47,7 +47,7 @@ public class CustomerController {
      * @param csn main ID of the user
      * @return template/customer/view.html
      */
-    @RequestMapping(value = "/view/{csn")
+    @RequestMapping(value = "/view/{csn}/", method = RequestMethod.GET)
     public String view(Model model, @PathVariable int csn) {
         Customer customer = customerDAO.findByCsn(csn);
         model.addAttribute("customer", customer);
@@ -59,7 +59,7 @@ public class CustomerController {
      * Add new customers page
      * @return template/customer/add.html
      */
-    @RequestMapping(value = "/show/{csn}")
+    @RequestMapping(value = "/show/{csn}/")
     public String show(Model model, @PathVariable int csn) {
         List<Customer> customers = new ArrayList<Customer>();
         customers.add(customerDAO.findByCsn(csn));
