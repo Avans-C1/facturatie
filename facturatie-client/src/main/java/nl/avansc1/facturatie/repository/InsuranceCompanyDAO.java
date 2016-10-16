@@ -9,6 +9,5 @@ import org.springframework.transaction.annotation.Transactional;
  */
 @Transactional
 public interface InsuranceCompanyDAO extends CrudRepository<InsuranceCompany, Integer> {
-    public InsuranceCompany findById(int id);
 
 }

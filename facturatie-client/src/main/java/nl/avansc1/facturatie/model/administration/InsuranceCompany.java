@@ -14,6 +14,7 @@ import javax.persistence.*;
 public class InsuranceCompany {
     @Id
     @Column(name = "id")
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
     private int id;
     @Column(name = "street_name")
     private String name;

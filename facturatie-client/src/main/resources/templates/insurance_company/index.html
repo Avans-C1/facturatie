@@ -34,8 +34,63 @@
                     </div>
                 </div>
                 <!-- /.box-header -->
-                <div class="box-body table-responsive no-padding">
+                <div class="box-body table-responsive">
                     <p>Insurance Company overview</p>
+
+
+                    <div class="flex-wrapper" style="display: flex; align-items: center;">
+                        <div class="btn-group" style="margin: 0 50px 0 20px;">
+                            <a th:href="@{/insurance_company/create}" class="btn btn-app">
+                                <span class="fa fa-plus"></span> Add
+                            </a>
+                        </div>
+
+                        <div th:if="${success}" style="flex: 1; margin: 0 30px;">
+                            <div layout:include="fragments/alert :: alert" th:with="type='success', header='Success!'" th:remove="tag">
+                                <!--/* Implements alert summary fragment with full-blown HTML summary */-->
+                                <th:block layout:fragment="alert-content">
+                                    <p th:text="${success}">Message</p>
+                                </th:block>
+                            </div>
+                        </div>
+                    </div>
+
+                    <table class="table table-hover">
+                        <tbody>
+                        <tr>
+                            <th>ID</th>
+                            <th>Street name</th>
+                            <th>House number</th>
+                            <th>Zip Code</th>
+                            <th>City</th>
+                            <th>Phone number</th>
+                            <th>E-mail</th>
+                            <th>KvK number</th>
+                            <th>VAT</th>
+
+                            <th width="4%">&nbsp;</th>
+                        </tr>
+                        <tr th:each="insuranceCompany : ${insuranceCompanies}">
+                            <td th:text="${InsuranceCompany.id}"></td>
+                            <td th:text="${InsuranceCompany.name}"></td>
+                            <td th:text="${InsuranceCompany.houseNumber}"></td>
+                            <td th:text="${InsuranceCompany.zipcode}"></td>
+                            <td th:text="${InsuranceCompany.city}"></td>
+                            <td th:text="${InsuranceCompany.phoneNumber}"></td>
+                            <td th:text="${InsuranceCompany.email}"></td>
+                            <td th:text="${InsuranceCompany.kvkNumber}"></td>
+                            <td th:text="${InsuranceCompany.vat}"></td>
+                            <td>
+                                <div class="btn-group">
+                                    <a th:href="@{'/insurance_company/edit/' + ${InsuranceCompany.id}}"  class="btn btn-xs btn-primary" ><span
+                                            class="fa fa-pencil"></span></a>
+                                    <a th:href="@{'/insurance_company/delete/' + ${InsuranceCompany.id}}" class="btn btn-xs btn-danger"><span
+                                            class="fa fa-trash"></span></a>
+                                </div>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
                 </div>
                 <!-- /.box-body -->
             </div>
