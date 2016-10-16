@@ -1,9 +1,8 @@
 package nl.avansc1.facturatie.model.insurances;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import nl.avansc1.facturatie.model.administration.InsuranceCompany;
+
+import javax.persistence.*;
 
 
 /**
@@ -16,22 +15,28 @@ import javax.persistence.Table;
 public class Insurance {
     @Id
     @Column(name = "id")
+    @GeneratedValue(strategy= GenerationType.IDENTITY)
     private int id;
+    @OneToOne
+    @JoinColumn(name = "insurance_company_id")
+    private InsuranceCompany insuranceCompany;
     @Column(name = "name")
     private String name;
-    @Column(name = "monthlyFee")
+    @Column(name = "monthly_fee")
     private float monthlyFee;
-    @Column(name = "coveredTreatments")
+    @Column(name = "covered_treatments")
     private int coveredTreatments;
 
-    public Insurance(int id, String name, float monthlyFee, int coveredTreatments) {
+    public Insurance(int id, InsuranceCompany insuranceCompany, String name, float monthlyFee, int coveredTreatments) {
         this.id = id;
+        this.insuranceCompany = insuranceCompany;
         this.name = name;
         this.monthlyFee = monthlyFee;
         this.coveredTreatments = coveredTreatments;
     }
 
-    public Insurance(String name, float monthlyFee, int coveredTreatments) {
+    public Insurance(InsuranceCompany insuranceCompany, String name, float monthlyFee, int coveredTreatments) {
+        this.insuranceCompany = insuranceCompany;
         this.name = name;
         this.monthlyFee = monthlyFee;
         this.coveredTreatments = coveredTreatments;
@@ -46,6 +51,14 @@ public class Insurance {
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public InsuranceCompany getInsuranceCompany() {
+        return insuranceCompany;
+    }
+
+    public void setInsuranceCompany(InsuranceCompany insuranceCompany) {
+        this.insuranceCompany = insuranceCompany;
     }
 
     public String getName() {

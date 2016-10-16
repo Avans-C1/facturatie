@@ -35,7 +35,54 @@
                 </div>
                 <!-- /.box-header -->
                 <div class="box-body table-responsive no-padding">
-                    <p>insurances overview</p>
+
+
+                    <div class="flex-wrapper" style="display: flex; align-items: center;">
+                        <div class="btn-group" style="margin: 0 50px 0 20px;">
+                            <a th:href="@{/insurance/create}" class="btn btn-app">
+                                <span class="fa fa-plus"></span> Add
+                            </a>
+                        </div>
+
+                        <div th:if="${success}" style="flex: 1; margin: 0 30px;">
+                            <div layout:include="fragments/alert :: alert" th:with="type='success', header='Success!'" th:remove="tag">
+                                <!--/* Implements alert summary fragment with full-blown HTML summary */-->
+                                <th:block layout:fragment="alert-content">
+                                    <p th:text="${success}">Message</p>
+                                </th:block>
+                            </div>
+                        </div>
+                    </div>
+
+                    <table class="table table-hover">
+                        <tbody>
+                        <tr>
+                            <th>ID</th>
+                            <th>Insurance Company</th>
+                            <th>Name</th>
+                            <th>Monthly Fee</th>
+                            <th>Covered Treatments</th>
+                            <th width="4%">&nbsp;</th>
+                        </tr>
+                        <tr th:each="insurance : ${insurances}">
+                            <td th:text="${insurance.id}"></td>
+                            <td th:text="${insurance.insuranceCompany}"></td>
+                            <td th:text="${insurance.name}"></td>
+                            <td th:text="${insurance.monthlyFee}"></td>
+                            <td th:text="${insurance.coveredTreatments}"></td>
+                            <td>
+                                <div class="btn-group">
+                                    <a th:href="@{'/insurance/edit/' + ${insurance.id}}"  class="btn btn-xs btn-primary" ><span
+                                            class="fa fa-pencil"></span></a>
+                                    <a th:href="@{'/insurance/delete/' + ${insurance.id}}" class="btn btn-xs btn-danger"><span
+                                            class="fa fa-trash"></span></a>
+                                </div>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+
+                    <p>Insurances overview</p>
                 </div>
                 <!-- /.box-body -->
             </div>

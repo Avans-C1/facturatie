@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
+      layout:decorate="layout">
+<head>
+    <title>Insurances - Edit</title>
+</head>
+<body>
+<section layout:fragment="header">
+    <h1>
+        Insurances
+    </h1>
+    <ol class="breadcrumb">
+        <li><a href="#"><i class="fa fa-inbox"></i> Home</a></li>
+        <li>User</li>
+        <li class="active">Create</li>
+    </ol>
+</section>
+<div layout:fragment="content">
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="box">
+                <div class="box-header">
+                    <h3 class="box-title">Edit</h3>
+                </div>
+                <!-- /.box-header -->
+                <div class="box-body">
+                    <!-- Form om een nieuwe declaration te maken. Het object 'declaration' is het object waarin de
+                    waarden uit het formulier worden ingevuld. Het is afkomstig uit de DeclarationController. -->
+                    <form action="#" th:action="@{/insurance/create}" th:object="${insurance}" method="post">
+
+                        <input type="hidden" th:field="*{id}"/>
+
+                        <div th:if="${#fields.hasErrors('*')}">
+                            <div layout:include="views/fragments/alert :: alert" th:with="type='danger', header='Fouten in het formulier'" th:remove="tag">
+                                <!--/* Implements alert summary fragment with full-blown HTML summary */-->
+                                <th:block layout:fragment="alert-summary">
+                                    <p>Niet alle velden in het formulier zijn correct ingevuld. Corrigeer deze en verzend opnieuw.</p>
+                                    <!--<p><button type="button" class="btn btn-danger">Take this action</button></p>-->
+                                </th:block>
+                            </div>
+                        </div>
+                        <div th:if="${exception}">
+                            <div layout:include="views/fragments/alert :: alert" th:with="type='danger', header='Fouten in het formulier'" th:remove="tag">
+                                <!--/* Implements alert summary fragment with full-blown HTML summary */-->
+                                <th:block layout:fragment="alert-summary">
+                                    <p th:text="${exception}">Exception message</p>
+                                </th:block>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <div class="form-group">
+                                    <label for="id">ID</label>
+                                    <!-- th:field="*{name}" is de koppeling naar het attribuut 'name' van het object 'member'-->
+                                    <input type="text" class="form-control" id="id" th:field="*{id}"/>
+                                    <p th:if="${#fields.hasErrors('id')}" th:errors="*{id}">Name Error</p>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="insuranceCompany">Insurance Company</label>
+                                    <!-- th:field="*{name}" is de koppeling naar het attribuut 'name' van het object 'member'-->
+                                    <input type="text" class="form-control" id="insuranceCompany" th:field="*{insuranceCompany}"/>
+                                    <p th:if="${#fields.hasErrors('insuranceCompany')}" th:errors="*{insuranceCompany}">Name Error</p>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="name">name</label>
+                                    <!-- th:field="*{name}" is de koppeling naar het attribuut 'name' van het object 'member'-->
+                                    <input type="text" class="form-control" id="name" th:field="*{name}"/>
+                                    <p th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Name Error</p>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="monthlyFee">Monthly Fee</label>
+                                    <!-- th:field="*{name}" is de koppeling naar het attribuut 'name' van het object 'member'-->
+                                    <input type="number" min="70" max="150" class="form-control" id="monthlyFee" th:field="*{monthlyFee}"/>
+                                    <p th:if="${#fields.hasErrors('monthlyFee')}" th:errors="*{monthlyFee}">Name Error</p>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="coveredTreatments">Covered Treatments</label>
+                                    <!-- th:field="*{name}" is de koppeling naar het attribuut 'name' van het object 'member'-->
+                                    <input type="number" min="0" max="10" step="1" class="form-control" id="coveredTreatments" th:field="*{coveredTreatments}"/>
+                                    <p th:if="${#fields.hasErrors('coveredTreatments')}" th:errors="*{coveredTreatments}">Name Error</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- De button die voor verzenden van het formulier zorgt.
+                            De name 'save' is een parameter waarmee in de MemberController de juiste
+                            save-actie wordt gestart. -->
+                        <button type="submit" class="btn btn-primary" name="save">Submit</button>
+
+                    </form>
+                </div>
+                <!-- /.box-body -->
+            </div>
+            <!-- /.box -->
+        </div>
+    </div>
+</div>
+</body>
+</html>
