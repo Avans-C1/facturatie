@@ -1,9 +1,6 @@
 package nl.avansc1.facturatie.model.customers;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.util.Date;
 
 /**
@@ -156,5 +153,8 @@ public class Customer {
 
     public void setIban(String iban) {
         this.iban = iban;
+    }
+    public String getFullName() {
+        return firstName + " " + lastName;
     }
 }

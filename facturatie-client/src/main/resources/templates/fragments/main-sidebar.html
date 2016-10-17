@@ -26,7 +26,7 @@
             </a>
         </li>
         <li th:class="${page == 'invoices'} ? 'active' : ''">
-            <a href="#">
+            <a th:href="@{~/invoice}">
                 <i class="fa fa-file-text"></i> <span>Invoices</span>
             </a>
         </li>
@@ -48,17 +48,17 @@
             </a>
         </li>
         <li th:class="${page == 'vat'} ? 'active' : ''">
-            <a href="#">
+            <a th:href="@{~/vat}">
                 <i class="fa fa-percent"></i> <span>Vat</span>
             </a>
         </li>
         <li th:class="${page == 'payment-conditions'} ? 'active' : ''">
-            <a href="#">
+            <a th:href="@{~/payments}">
                 <i class="fa fa-bell"></i> <span>Payment Conditions</span>
             </a>
         </li>
         <li th:class="${page == 'users'} ? 'active' : ''">
-            <a href="#">
+            <a th:href="@{~/user}">
                 <i class="fa fa-users"></i> <span>Users</span>
             </a>
         </li>
