@@ -1,14 +1,25 @@
 package nl.avansc1.facturatie.model.administration;
 
-/**
- * The object of a admin user
- *
- * @author Bob van der Valk
- */
+import javax.persistence.*;
+
+@Entity
+@Table(name ="users")
 public class User {
+    @Id
+    @Column(name="id")
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
     private int id;
-    private String email;
+
+    @Column(name="name")
     private String name;
+
+    @Column(name="email")
+    private String email;
+
+    @Column(name="password")
+    private String password;
+
+    @Column(name="role")
     private String role;
 
     public User(int id, String email, String name, String role) {
@@ -49,6 +60,14 @@ public class User {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     public String getRole() {
