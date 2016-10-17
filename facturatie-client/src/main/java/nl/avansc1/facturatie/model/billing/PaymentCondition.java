@@ -16,17 +16,14 @@ public class PaymentCondition {
     private int id;
     @Column(name = "name")
     private String name;
+    @Column(name = "template")
+    private String template;
     @Column(name = "period_in_days")
     private int periodInDays;
 
-    public PaymentCondition(int id, String name, int periodInDays) {
-        this.id = id;
+    public PaymentCondition(String name, String template, int periodInDays) {
         this.name = name;
-        this.periodInDays = periodInDays;
-    }
-
-    public PaymentCondition(String name, int periodInDays) {
-        this.name = name;
+        this.template = template;
         this.periodInDays = periodInDays;
     }
 
@@ -55,5 +52,13 @@ public class PaymentCondition {
 
     public void setPeriodInDays(int periodInDays) {
         this.periodInDays = periodInDays;
+    }
+
+    public String getTemplate() {
+        return template;
+    }
+
+    public void setTemplate(String template) {
+        this.template = template;
     }
 }
