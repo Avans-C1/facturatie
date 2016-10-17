@@ -2,20 +2,36 @@ package nl.avansc1.facturatie.model.administration;
 
 import nl.avansc1.facturatie.model.billing.Vat;
 
+import javax.persistence.*;
+
 /**
  * This is the object of a insurance company
  *
  * @author Bob van der Valk
  */
+@Entity
+@Table(name = "insurance_company")
 public class InsuranceCompany {
+    @Id
+    @Column(name = "id")
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
     private int id;
+    @Column(name = "street_name")
     private String name;
+    @Column(name = "house_number")
     private String houseNumber;
+    @Column(name = "zipcode")
     private String zipcode;
+    @Column(name = "city")
     private String city;
+    @Column(name = "phonenumber")
     private int phoneNumber;
+    @Column(name = "email")
     private String email;
+    @Column(name = "kvk_number")
     private int kvkNumber;
+    @OneToOne
+    @JoinColumn(name = "vat_id")
     private Vat vat;
 
     public InsuranceCompany(int id, String name, String houseNumber, String zipcode, String city, int phoneNumber, String email, int kvkNumber, Vat vat) {

@@ -58,7 +58,7 @@ public class PolicyController {
         return this.index(model);
     }
 
-
+    
     // edit
 
     @GetMapping(value = "/edit/{id}")
