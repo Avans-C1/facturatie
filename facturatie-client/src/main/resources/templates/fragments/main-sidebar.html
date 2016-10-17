@@ -40,7 +40,11 @@
                 <i class="fa fa-archive"></i> <span>Policies</span>
             </a>
         </li>
-
+        <li th:class="${page == 'insurances'} ? 'active' : ''">
+            <a th:href="@{~/insurance}">
+                <i class="fa fa-archive"></i> <span>Insurances</span>
+            </a>
+        </li>
         <li class="header">ADMINISTRATION</li>
         <li th:class="${page == 'treatments'} ? 'active' : ''">
             <a href="#">
@@ -62,8 +66,8 @@
                 <i class="fa fa-users"></i> <span>Users</span>
             </a>
         </li>
-        <li th:class="${page == 'settings'} ? 'active' : ''">
-            <a href="@{~/insurance_company}">
+        <li th:class="${page == 'insurance-companies'} ? 'active' : ''">
+            <a th:href="@{~/insurance_company}">
                 <i class="fa fa-gear"></i> <span>Settings</span>
             </a>
         </li>

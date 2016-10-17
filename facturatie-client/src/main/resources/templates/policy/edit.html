@@ -25,8 +25,8 @@
                 </div>
                 <!-- /.box-header -->
                 <div class="box-body">
-                    <!-- Form om een nieuwe declaration te maken. Het object 'declaration' is het object waarin de
-                    waarden uit het formulier worden ingevuld. Het is afkomstig uit de DeclarationController. -->
+                    <!-- Form om een nieuwe policy te maken. Het object 'policy' is het object waarin de
+                    waarden uit het formulier worden ingevuld. Het is afkomstig uit de PolicyController. -->
                     <form action="#" th:action="@{/policy/create}" th:object="${policy}" method="post">
 
                         <input type="hidden" th:field="*{id}"/>
@@ -52,65 +52,58 @@
                         <div class="row">
                             <div class="col-sm-12">
                                 <div class="form-group">
-                                    <label for="id">ID</label>
-                                    <!-- th:field="*{name}" is de koppeling naar het attribuut 'name' van het object 'member'-->
-                                    <input type="text" class="form-control" id="id" th:field="*{id}"/>
-                                    <p th:if="${#fields.hasErrors('id')}" th:errors="*{id}">Name Error</p>
-                                </div>
-
-                                <div class="form-group">
-                                    <label for="customer">customer</label>
+                                    <label for="customer">Customer ID</label>
                                     <!-- th:field="*{name}" is de koppeling naar het attribuut 'name' van het object 'member'-->
                                     <input type="text" class="form-control" id="customer" th:field="*{customer}"/>
                                     <p th:if="${#fields.hasErrors('customer')}" th:errors="*{customer}">Name Error</p>
                                 </div>
 
                                 <div class="form-group">
-                                    <label for="insurance">insurance</label>
+                                    <label for="insurance">Insurance ID</label>
                                     <!-- th:field="*{name}" is de koppeling naar het attribuut 'name' van het object 'member'-->
                                     <input type="text" class="form-control" id="insurance" th:field="*{insurance}"/>
                                     <p th:if="${#fields.hasErrors('insurance')}" th:errors="*{insurance}">Name Error</p>
                                 </div>
 
                                 <div class="form-group">
-                                    <label for="contribution">contribution</label>
+                                    <label for="contribution">Contribution</label>
                                     <!-- th:field="*{name}" is de koppeling naar het attribuut 'name' van het object 'member'-->
                                     <input type="text" class="form-control" id="contribution" th:field="*{contribution}"/>
                                     <p th:if="${#fields.hasErrors('contribution')}" th:errors="*{contribution}">Name Error</p>
                                 </div>
 
                                 <div class="form-group">
-                                    <label for="dateStart">dateStart</label>
+                                    <label for="dateStart">Date Start</label>
                                     <!-- th:field="*{name}" is de koppeling naar het attribuut 'name' van het object 'member'-->
                                     <input type="date" class="form-control" id="dateStart" th:field="*{dateStart}"/>
                                     <p th:if="${#fields.hasErrors('dateStart')}" th:errors="*{dateStart}">Name Error</p>
                                 </div>
 
                                 <div class="form-group">
-                                    <label for="dateEnd">dateEnd</label>
+                                    <label for="dateEnd">Date End</label>
                                     <!-- th:field="*{name}" is de koppeling naar het attribuut 'name' van het object 'member'-->
                                     <input type="date" class="form-control" id="dateEnd" th:field="*{dateEnd}"/>
-                                    <p th:if="${#fields.hasErrors('role')}" th:errors="*{dateEnd}">Name Error</p>
+                                    <p th:if="${#fields.hasErrors('dateEnd')}" th:errors="*{dateEnd}">Name Error</p>
                                 </div>
 
                                 <div class="form-group">
-                                    <label for="active">active</label>
+                                    <label for="active">Active</label>
                                     <!-- th:field="*{name}" is de koppeling naar het attribuut 'name' van het object 'member'-->
                                     <input type="text" class="form-control" id="active" th:field="*{active}"/>
                                     <p th:if="${#fields.hasErrors('active')}" th:errors="*{active}">Name Error</p>
                                 </div>
 
                                 <div class="form-group">
-                                    <label for="contributionsUsed">contributionsUsed</label>
+                                    <label for="contributionsUsed">Contributions Used</label>
                                     <!-- th:field="*{name}" is de koppeling naar het attribuut 'name' van het object 'member'-->
-                                    <input type="number" step="1" class="form-control" id="contributionsUsed" th:field="*{contributionsUsed}"/>
+                                    <input type="number" min="0" step="1" class="form-control" id="contributionsUsed" th:field="*{contributionsUsed}"/>
                                     <p th:if="${#fields.hasErrors('contributionsUsed')}" th:errors="*{contributionsUsed}">Name Error</p>
                                 </div>
 
                                 <div class="form-group">
-                                    <label for="contributionUsed">contributionUsed</label>
+                                    <label for="contributionUsed">Contribution Used</label>
                                     <!-- th:field="*{name}" is de koppeling naar het attribuut 'name' van het object 'member'-->
-                                    <input type="number" step="any" class="form-control" id="contributionUsed" th:field="*{contributionUsed}"/>
+                                    <input type="number" class="form-control" id="contributionUsed" th:field="*{contributionUsed}"/>
                                     <p th:if="${#fields.hasErrors('contributionUsed')}" th:errors="*{contributionUsed}">Name Error</p>
                                 </div>
                             </div>

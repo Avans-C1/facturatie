@@ -17,6 +17,7 @@ import java.util.List;
 @Controller
 @RequestMapping("/policy")
 public class PolicyController {
+
     private PolicyDAO policyDAO;
 
     @Autowired
@@ -44,7 +45,7 @@ public class PolicyController {
 
     @GetMapping(value = "/create")
     String create(Model model) {
-        model.addAttribute("user", new Policy());
+        model.addAttribute("policy", new Policy());
 
         return "policy/edit";
     }

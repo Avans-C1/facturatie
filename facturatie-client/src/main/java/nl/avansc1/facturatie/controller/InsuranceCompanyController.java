@@ -23,7 +23,7 @@ public class InsuranceCompanyController {
 
     @ModelAttribute("page")
     public String module() {
-        return "insuranceCompany";
+        return "insuranceCompanies";
     }
 
 
@@ -31,7 +31,7 @@ public class InsuranceCompanyController {
 
     @GetMapping(value = "")
     String index(Model model) {
-        model.addAttribute("InsuranceCompanies", insuranceCompanyDAO.findAll());
+        model.addAttribute("insuranceCompanies", insuranceCompanyDAO.findAll());
 
         return "insurance_company/index";
     }
@@ -41,9 +41,9 @@ public class InsuranceCompanyController {
 
     @GetMapping(value = "/create")
     String create(Model model) {
-        model.addAttribute("InsuranceCompany", new InsuranceCompany());
+        model.addAttribute("insuranceCompany", new InsuranceCompany());
 
-        return "insurance_company/create";
+        return "insurance_company/edit";
     }
 
     @PostMapping(value = "/create")
@@ -60,7 +60,7 @@ public class InsuranceCompanyController {
 
     @GetMapping(value = "/edit/{id}")
     String edit(Model model, @PathVariable int id) {
-        model.addAttribute("InsuranceCompany", insuranceCompanyDAO.findOne(id));
+        model.addAttribute("insuranceCompany", insuranceCompanyDAO.findOne(id));
 
         return "insurance_company/edit";
     }

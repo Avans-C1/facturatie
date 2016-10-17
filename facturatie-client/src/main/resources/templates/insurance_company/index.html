@@ -35,9 +35,6 @@
                 </div>
                 <!-- /.box-header -->
                 <div class="box-body table-responsive">
-                    <p>Insurance Company overview</p>
-
-
                     <div class="flex-wrapper" style="display: flex; align-items: center;">
                         <div class="btn-group" style="margin: 0 50px 0 20px;">
                             <a th:href="@{/insurance_company/create}" class="btn btn-app">
@@ -71,20 +68,22 @@
                             <th width="4%">&nbsp;</th>
                         </tr>
                         <tr th:each="insuranceCompany : ${insuranceCompanies}">
-                            <td th:text="${InsuranceCompany.id}"></td>
-                            <td th:text="${InsuranceCompany.name}"></td>
-                            <td th:text="${InsuranceCompany.houseNumber}"></td>
-                            <td th:text="${InsuranceCompany.zipcode}"></td>
-                            <td th:text="${InsuranceCompany.city}"></td>
-                            <td th:text="${InsuranceCompany.phoneNumber}"></td>
-                            <td th:text="${InsuranceCompany.email}"></td>
-                            <td th:text="${InsuranceCompany.kvkNumber}"></td>
-                            <td th:text="${InsuranceCompany.vat}"></td>
+                            <td th:text="${insuranceCompany.id}"></td>
+                            <td th:text="${insuranceCompany.name}"></td>
+                            <td th:text="${insuranceCompany.houseNumber}"></td>
+                            <td th:text="${insuranceCompany.zipcode}"></td>
+                            <td th:text="${insuranceCompany.city}"></td>
+                            <td th:text="${insuranceCompany.phoneNumber}"></td>
+                            <td th:text="${insuranceCompany.email}"></td>
+                            <td th:text="${insuranceCompany.kvkNumber}"></td>
+                            <td>
+                                <a th:href="@{~/vat} + ${insuranceCompany.vat.id}"><span class="fa fa-cubes"></span> <span th:text="${insuranceCompany.vat.percentage}"></span></a>
+                            </td>
                             <td>
                                 <div class="btn-group">
-                                    <a th:href="@{'/insurance_company/edit/' + ${InsuranceCompany.id}}"  class="btn btn-xs btn-primary" ><span
+                                    <a th:href="@{'/insurance_company/edit/' + ${insuranceCompany.id}}"  class="btn btn-xs btn-primary" ><span
                                             class="fa fa-pencil"></span></a>
-                                    <a th:href="@{'/insurance_company/delete/' + ${InsuranceCompany.id}}" class="btn btn-xs btn-danger"><span
+                                    <a th:href="@{'/insurance_company/delete/' + ${insuranceCompany.id}}" class="btn btn-xs btn-danger"><span
                                             class="fa fa-trash"></span></a>
                                 </div>
                             </td>

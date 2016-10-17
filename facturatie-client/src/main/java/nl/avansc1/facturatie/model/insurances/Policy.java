@@ -4,7 +4,7 @@ import nl.avansc1.facturatie.model.customers.Customer;
 
 import javax.persistence.*;
 import java.util.Date;
-import java.util.List;
+
 
 /**
  * This is a object of a policy
@@ -26,10 +26,12 @@ public class Policy {
     private Insurance insurance;
     @Column(name = "contribution")
     private float contribution;
+    //@Temporal(TemporalType.DATE)
     @Column(name = "date_start")
-    private Date dateStart;
+    private java.sql.Date dateStart;
+    //@Temporal(TemporalType.DATE)
     @Column(name = "date_end")
-    private Date dateEnd;
+    private java.sql.Date dateEnd;
     @Column(name = "active")
     private boolean active;
     @Column(name = "contributions_used")
@@ -38,7 +40,7 @@ public class Policy {
     private float contributionUsed;
 
 
-    public Policy(int id, Customer customer, Insurance insurance, float contribution, Date dateStart, Date dateEnd, boolean active, float contributionsUsed, float contributionUsed) {
+    public Policy(int id, Customer customer, Insurance insurance, float contribution, java.sql.Date dateStart, java.sql.Date dateEnd, boolean active, float contributionsUsed, float contributionUsed) {
         this.id = id;
         this.customer = customer;
         this.insurance = insurance;
@@ -51,7 +53,7 @@ public class Policy {
         ;
     }
 
-    public Policy(float contribution, Customer customer, Insurance insurance, Date dateStart, Date dateEnd, boolean active, float contributionsUsed, float contributionUsed) {
+    public Policy(float contribution, Customer customer, Insurance insurance, java.sql.Date dateStart, java.sql.Date dateEnd, boolean active, float contributionsUsed, float contributionUsed) {
         this.contribution = contribution;
         this.customer = customer;
         this.insurance = insurance;
@@ -98,19 +100,19 @@ public class Policy {
         this.insurance = insurance;
     }
 
-    public Date getDateStart() {
+    public java.sql.Date getDateStart() {
         return dateStart;
     }
 
-    public void setDateStart(Date dateStart) {
+    public void setDateStart(java.sql.Date dateStart) {
         this.dateStart = dateStart;
     }
 
-    public Date getDateEnd() {
+    public java.sql.Date getDateEnd() {
         return dateEnd;
     }
 
-    public void setDateEnd(Date dateEnd) {
+    public void setDateEnd(java.sql.Date dateEnd) {
         this.dateEnd = dateEnd;
     }
 

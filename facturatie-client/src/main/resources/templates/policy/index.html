@@ -70,8 +70,12 @@
                         </tr>
                         <tr th:each="policy : ${policies}">
                             <td th:text="${policy.id}"></td>
-                            <td th:text="${policy.customer}"></td>
-                            <td th:text="${policy.insurance}"></td>
+                            <td>
+                                <a th:href="@{~/customer/show/} + ${policy.customer.csn}"><span class="fa fa-user"> <span th:text="${policy.customer.fullName}"></span></span></a>
+                            </td>
+                            <td>
+                                <a th:href="@{~/insurance}"><span class="fa fa-heartbeat"> <span th:text="${policy.insurance.name}"></span></span></a>
+                            </td>
                             <td th:text="${policy.contribution}"></td>
                             <td th:text="${policy.dateStart}"></td>
                             <td th:text="${policy.dateEnd}"></td>
@@ -90,7 +94,7 @@
                         </tbody>
                     </table>
 
-                    <p>vette shit ouwe</p>
+
                 </div>
                 <!-- /.box-body -->
             </div>
