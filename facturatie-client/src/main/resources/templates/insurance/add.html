@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
+      layout:decorate="layout">
+<head>
+    <title>Customers - Add</title>
+</head>
+<body>
+<section layout:fragment="header">
+    <h1>
+        <!--Insurance - <a th:href="@{~/insurance/new}">Add new Insurance</a>-->
+        Insurances
+    </h1>
+    <ol class="breadcrumb">
+        <li><a href="#"><i class="fa fa-inbox"></i> Home</a></li>
+        <li>Insurance</li>
+        <li class="active">Create</li>
+    </ol>
+</section>
+<div layout:fragment="content">
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="box">
+                <div class="box-header">
+                    <h3 class="box-title">Create</h3>
+                </div>
+                <!-- /.box-header -->
+                <div class="box-body">
+                    <form name="insuranceForm" id="insuranceForm" method="post" onsubmit="return false;">
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <div class="form-group">
+                                    <label for="id">ID</label>
+                                    <input type="text" class="form-control" id="id" name="id" value=""/>
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-sm-6">
+                                        <label for="insuranceCompany">Insurance Company</label>
+                                        <input type="text" class="form-control" id="insuranceCompany" name="insuranceCompany" value=""/>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <label for="name">name</label>
+                                        <input type="text" class="form-control" id="name" name="name" value=""/>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="coveredTreatments">Covered Treatments</label>
+                                    <input type="number" min="0" max="10" class="form-control" id="coveredTreatments" name="coveredTreatments" value=""/>
+                                </div>
+                            </div>
+                        </div>
+                        <p><button type="submit" class="btn btn-primary" id="save" name="save">Save insurance</button></p>
+                    </form>
+                </div>
+                <!-- /.box-body -->
+            </div>
+            <!-- /.box -->
+        </div>
+    </div>
+</div>
+</body>
+</html>

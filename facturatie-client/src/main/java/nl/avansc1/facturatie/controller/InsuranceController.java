@@ -4,8 +4,8 @@ import nl.avansc1.facturatie.model.insurances.Insurance;
 import nl.avansc1.facturatie.repository.InsuranceDAO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.*;
 
 
 /**
@@ -15,37 +15,66 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @RequestMapping("/insurance")
 public class InsuranceController {
 
-    @RequestMapping("")
-    public String index(){
-        return "insurance/index";
-    }
-    /**
-     * Overview page
-     * @return template/insurance/overview.html
-     */
-
-    @RequestMapping("/new")
-    public String add() {
-        return "insurance/add";
-    }
-
-    /**
-     * Process the saving stuff
-     * @return saved message is the insurance is saved
-     */
-
-    @RequestMapping(value = "/new", method = RequestMethod.POST)
-    public String addHandler(int id, String name, float monthlyFee, int coveredTreatments) {
-        try {
-            Insurance insurance = new Insurance(id, name, monthlyFee, coveredTreatments);
-            insuranceDAO.save(insurance);
-        } catch (Exception ex) {
-            return "saving error";
-        }
-
-        return "saved!";
-    }
+    private InsuranceDAO insuranceDAO;
 
     @Autowired
-    private InsuranceDAO insuranceDAO;
+    public InsuranceController(InsuranceDAO insuranceDAO) {
+        this.insuranceDAO = insuranceDAO;
+    }
+
+    @ModelAttribute("page")
+    public String module() {
+        return "insurances";
+    }
+
+
+    // index
+
+    @GetMapping(value = "")
+    String index(Model model) {
+        model.addAttribute("insurances", insuranceDAO.findAll());
+
+        return "insurance/index";
+    }
+
+
+    // create
+
+    @GetMapping(value = "/create")
+    String create(Model model) {
+        model.addAttribute("insurance", new Insurance());
+
+        return "insurance/edit";
+    }
+
+    @PostMapping(value = "/create")
+    String store(Model model, @ModelAttribute Insurance insurance) {
+        insuranceDAO.save(insurance);
+
+        model.addAttribute("success", "Insurance successfully saved");
+
+        return this.index(model);
+    }
+
+
+    // edit
+
+    @GetMapping(value = "/edit/{id}")
+    String edit(Model model, @PathVariable int id) {
+        model.addAttribute("insurance", insuranceDAO.findOne(id));
+
+        return "insurance/edit";
+    }
+
+
+    // delete
+
+    @GetMapping(value = "/delete/{id}")
+    String delete(Model model, @PathVariable int id) {
+        insuranceDAO.delete(id);
+
+        model.addAttribute("success", "Insurance successfully removed");
+
+        return this.index(model);
+    }
 }
