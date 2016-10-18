@@ -3,7 +3,7 @@
       xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
       layout:decorate="layout">
 <head>
-    <title>Declarations - Overview</title>
+    <title>Invoices - Overview</title>
 </head>
 <body>
 <section layout:fragment="header">
@@ -23,7 +23,7 @@
                 <div class="box-header">
                     <h3 class="box-title">Overview</h3>
 
-                    <div class="box-tools">
+                    <!--<div class="box-tools">
                         <div class="input-group input-group-sm" style="width: 150px;">
                             <input type="text" name="table_search" class="form-control pull-right" placeholder="Search">
 
@@ -31,10 +31,25 @@
                                 <button type="submit" class="btn btn-default"><i class="fa fa-search"></i></button>
                             </div>
                         </div>
-                    </div>
+                    </div>-->
                 </div>
                 <!-- /.box-header -->
                 <div class="box-body table-responsive">
+
+                    <div class="flex-wrapper" style="display: flex; align-items: center;">
+                        <div class="btn-group" style="margin: 0 50px 0 20px;">
+                        </div>
+
+                        <div th:if="${success}" style="flex: 1; margin: 0 30px;">
+                            <div layout:include="fragments/alert :: alert" th:with="type='success', header='Success!'" th:remove="tag">
+                                <!--/* Implements alert summary fragment with full-blown HTML summary */-->
+                                <th:block layout:fragment="alert-content">
+                                    <p th:text="${success}">Message</p>
+                                </th:block>
+                            </div>
+                        </div>
+                    </div>
+
                     <table class="table table-hover">
                         <tbody>
                         <tr>
@@ -44,21 +59,50 @@
                             <th>Date payed</th>
                             <th>State</th>
                             <th>Vat</th>
-                            <th width="3%">&nbsp;</th>
+                            <th colspan="2">&nbsp;</th>
+                            <th width="2%">&nbsp;</th>
                         </tr>
                         <tr th:each="invoice : ${invoices}">
                             <td th:text="${invoice.id}"></td>
                             <td th:text="${invoice.customer.fullName}"></td>
                             <td th:text="${invoice.dateCreated}"></td>
-                            <td><span class="label label-success" th:text="${invoice.datePayed}" ></span></td>
-                            <td><span class="label " th:text="${invoice.state}" th:classappend="${invoice.state} == 1 ? label-success : label-danger"></span></td>
+                            <td>
+                                <!--Pay date-->
+                                <span th:text="${invoice.getUserFriendlyDatePayed()}"></span>
+
+                                <!--Mark as paid-->
+                                <a th:href="@{'/invoice/pay/' + ${invoice.id}}" class="btn btn-xs btn-default" th:if="${invoice.state} == 0"><span class="fa fa-check"></span> Mark as paid</a>
+                            </td>
+                            <td>
+                                <!--Status-->
+                                <span th:switch="${invoice.isOverdue()}">
+                                    <span th:case="true">
+                                        <span class="label label-danger" th:if="${invoice.datePayed}">Paid overdue</span>
+                                        <span class="label label-warning" th:unless="${invoice.datePayed}">Pending and Overdue</span>
+                                    </span>
+                                    <span th:case="false">
+                                        <span class="label label-success" th:if="${invoice.datePayed}">Paid</span>
+                                        <span class="label label-info" th:unless="${invoice.datePayed}">Pending</span>
+                                    </span>
+                                </span>
+                            </td>
+                            <!--<span class="label fa" th:text="' ' + ${invoice.getStateInText()}" th:classappend="${invoice.state} == 1 ? 'label-success fa-check' : 'label-danger fa-times'"></span></td>-->
                             <td th:text="${invoice.vat.percentage}">%</td>
+                            <td th:text="${invoice.paymentCondition.name}"></td>
+                            <td>
+                                <a class="btn btn-xs btn-default js-change-invoice-payment-condition"><span class="fa fa-bell"></span> Change payment condition</a>
+                                <select class="js-payment-conditions form-control" th:attr="data-invoice-id=${invoice.id}">
+                                    <option
+                                            th:each="paymentCondition: ${paymentConditions}"
+                                            th:value="${paymentCondition.id}"
+                                            th:text="${paymentCondition.name}"
+                                            th:selected="${paymentCondition.id.equals(invoice.paymentCondition.id)}"
+                                    ></option>
+                                </select>
+                            </td>
                             <td>
                                 <div class="btn-group">
-                                    <a  th:href="@{'/invoice/pay/' + ${invoice.id}}"  class="btn btn-xs btn-primary" ><span
-                                            class="fa fa-pencil">Pay</span></a>
-                                    <a  th:href="@{'/invoice/delete/' + ${invoice.id}}" class="btn btn-xs btn-danger"><span
-                                            class="fa fa-trash"></span></a>
+                                    <a th:href="@{'/invoice/delete/' + ${invoice.id}}" class="btn btn-xs btn-danger"><span class="fa fa-trash"></span></a>
                                 </div>
                             </td>
                         </tr>
@@ -71,5 +115,20 @@
         </div>
     </div>
 </div>
+
+<script type="text/javascript" layout:fragment="custom-javascript">
+    $(document).ready(function () {
+        $('.js-payment-conditions').hide();
+
+        $('.js-change-invoice-payment-condition').click(function() {
+            $(this).parent().find('.js-payment-conditions').toggle();
+        });
+
+        $('.js-payment-conditions').change(function () {
+            window.location = '/invoice/' + $(this).data('invoice-id') + '/change-payment-condition/' + $(this).val();
+        });
+    });
+</script>
+
 </body>
 </html>
