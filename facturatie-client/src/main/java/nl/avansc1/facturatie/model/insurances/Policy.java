@@ -34,8 +34,6 @@ public class Policy {
     private java.sql.Date dateEnd;
     @Column(name = "active")
     private boolean active;
-    @Column(name = "contributions_used")
-    private float contributionsUsed;
     @Column(name = "contribution_used")
     private float contributionUsed;
 
@@ -48,7 +46,6 @@ public class Policy {
         this.dateStart = dateStart;
         this.dateEnd = dateEnd;
         this.active = active;
-        this.contributionsUsed = contributionsUsed;
         this.contributionUsed = contributionUsed;
         ;
     }
@@ -60,7 +57,6 @@ public class Policy {
         this.dateStart = dateStart;
         this.dateEnd = dateEnd;
         this.active = active;
-        this.contributionsUsed = contributionsUsed;
         this.contributionUsed = contributionUsed;
         ;
     }
@@ -122,14 +118,6 @@ public class Policy {
 
     public void setActive(boolean active) {
         this.active = active;
-    }
-
-    public float getContributionsUsed() {
-        return contributionsUsed;
-    }
-
-    public void setContributionsUsed(float contributionsUsed) {
-        this.contributionsUsed = contributionsUsed;
     }
 
     public float getContributionUsed() {

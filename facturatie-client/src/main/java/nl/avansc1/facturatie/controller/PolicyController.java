@@ -1,15 +1,13 @@
 package nl.avansc1.facturatie.controller;
 
-import nl.avansc1.facturatie.model.insurances.Insurance;
 import nl.avansc1.facturatie.model.insurances.Policy;
+import nl.avansc1.facturatie.repository.CustomerDAO;
+import nl.avansc1.facturatie.repository.InsuranceDAO;
 import nl.avansc1.facturatie.repository.PolicyDAO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-
-import java.sql.Date;
-import java.util.List;
 
 /**
  * Created by Matthijs on 13-10-2016.
@@ -18,12 +16,14 @@ import java.util.List;
 @RequestMapping("/policy")
 public class PolicyController {
 
-    private PolicyDAO policyDAO;
+    @Autowired
+    private CustomerDAO customerDAO;
 
     @Autowired
-    public PolicyController(PolicyDAO policyDAO) {
-        this.policyDAO = policyDAO;
-    }
+    private InsuranceDAO insuranceDAO;
+
+    @Autowired
+    private PolicyDAO policyDAO;
 
     @ModelAttribute("page")
     public String module() {
@@ -46,6 +46,8 @@ public class PolicyController {
     @GetMapping(value = "/create")
     String create(Model model) {
         model.addAttribute("policy", new Policy());
+        model.addAttribute("customers", customerDAO.findAll());
+        model.addAttribute("insurances", insuranceDAO.findAll());
 
         return "policy/edit";
     }
@@ -65,6 +67,8 @@ public class PolicyController {
     @GetMapping(value = "/edit/{id}")
     String edit(Model model, @PathVariable int id) {
         model.addAttribute("policy", policyDAO.findOne(id));
+        model.addAttribute("customers", customerDAO.findAll());
+        model.addAttribute("insurances", insuranceDAO.findAll());
 
         return "policy/edit";
     }

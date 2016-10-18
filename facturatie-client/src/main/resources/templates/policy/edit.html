@@ -52,16 +52,22 @@
                         <div class="row">
                             <div class="col-sm-12">
                                 <div class="form-group">
-                                    <label for="customer">Customer ID</label>
+                                    <label for="customer">Customer</label>
                                     <!-- th:field="*{name}" is de koppeling naar het attribuut 'name' van het object 'member'-->
-                                    <input type="text" class="form-control" id="customer" th:field="*{customer}"/>
+                                    <!--<input type="text" class="form-control" id="customer" th:field="*{customer}"/>-->
+                                    <select name="customer" id="customer" th:field="*{customer}" class="form-control">
+                                        <option th:text="${customer.getFullName()}" th:value="${customer.csn}" th:each="customer: ${customers}"></option>
+                                    </select>
                                     <p th:if="${#fields.hasErrors('customer')}" th:errors="*{customer}">Name Error</p>
                                 </div>
 
                                 <div class="form-group">
-                                    <label for="insurance">Insurance ID</label>
+                                    <label for="insurance">Insurance</label>
                                     <!-- th:field="*{name}" is de koppeling naar het attribuut 'name' van het object 'member'-->
-                                    <input type="text" class="form-control" id="insurance" th:field="*{insurance}"/>
+                                    <select name="insurance" id="insurance" th:field="*{insurance}" class="form-control">
+                                        <option th:text="${insurance.name}" th:value="${insurance.id}" th:each="insurance: ${insurances}"></option>
+                                    </select>
+                                    <!--<input type="text" class="form-control" id="insurance" th:field="*{insurance}"/>-->
                                     <p th:if="${#fields.hasErrors('insurance')}" th:errors="*{insurance}">Name Error</p>
                                 </div>
 
@@ -86,18 +92,12 @@
                                     <p th:if="${#fields.hasErrors('dateEnd')}" th:errors="*{dateEnd}">Name Error</p>
                                 </div>
 
-                                <div class="form-group">
-                                    <label for="active">Active</label>
-                                    <!-- th:field="*{name}" is de koppeling naar het attribuut 'name' van het object 'member'-->
-                                    <input type="text" class="form-control" id="active" th:field="*{active}"/>
+                                <div class="checkbox">
+                                    <label for="active">
+                                        <input type="checkbox" id="active" th:field="*{active}"/>
+                                        Active
+                                    </label>
                                     <p th:if="${#fields.hasErrors('active')}" th:errors="*{active}">Name Error</p>
-                                </div>
-
-                                <div class="form-group">
-                                    <label for="contributionsUsed">Contributions Used</label>
-                                    <!-- th:field="*{name}" is de koppeling naar het attribuut 'name' van het object 'member'-->
-                                    <input type="number" min="0" step="1" class="form-control" id="contributionsUsed" th:field="*{contributionsUsed}"/>
-                                    <p th:if="${#fields.hasErrors('contributionsUsed')}" th:errors="*{contributionsUsed}">Name Error</p>
                                 </div>
 
                                 <div class="form-group">
