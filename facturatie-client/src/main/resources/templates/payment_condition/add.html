@@ -8,11 +8,11 @@
 <body>
 <section layout:fragment="header">
     <h1>
-        Payment conditions
+        Payment Conditions
     </h1>
     <ol class="breadcrumb">
         <li><a href="#"><i class="fa fa-inbox"></i> Home</a></li>
-        <li>Payment conditions</li>
+        <li>Payment Conditions</li>
         <li class="active">Create</li>
     </ol>
 </section>
@@ -26,7 +26,7 @@
 
                 <!-- /.box-header -->
                 <div class="box-body">
-                    <form action="#" th:action="@{/payments/add}" th:object="${paymentCondition}" method="post">
+                    <form action="#" th:action="@{/payment-condition/add}" th:object="${paymentCondition}" method="post">
                         <div class="row">
                             <div class="col-sm-4">
                                 <div class="form-group">
