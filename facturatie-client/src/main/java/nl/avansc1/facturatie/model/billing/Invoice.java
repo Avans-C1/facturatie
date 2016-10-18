@@ -3,7 +3,10 @@ package nl.avansc1.facturatie.model.billing;
 import nl.avansc1.facturatie.model.customers.Customer;
 
 import javax.persistence.*;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.concurrent.TimeUnit;
 
 /**
  * This is the object of a invoice
@@ -105,11 +108,47 @@ public class Invoice {
         this.state = state;
     }
 
+    public String getStateInText() {
+        switch (this.state) {
+            case 1:
+                return "Paid";
+            case 0:
+            default:
+                return "Not payed";
+        }
+    }
+
+    public String getUserFriendlyDatePayed() {
+        if (this.datePayed == null) {
+            return "";
+        }
+
+        DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+        return df.format(this.datePayed);
+    }
+
     public PaymentCondition getPaymentCondition() {
         return paymentCondition;
     }
 
     public void setPaymentCondition(PaymentCondition paymentCondition) {
         this.paymentCondition = paymentCondition;
+    }
+
+    public boolean isOverdue() {
+        Date start = new Date();
+
+        if (this.datePayed != null) {
+            start = this.datePayed;
+        }
+
+        Date created = this.dateCreated;
+
+        long duration  = start.getTime() - created.getTime();
+        long diffInDays = TimeUnit.MILLISECONDS.toDays(duration);
+
+        System.out.println(diffInDays);
+
+        return diffInDays > this.paymentCondition.getPeriodInDays();
     }
 }

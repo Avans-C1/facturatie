@@ -2,6 +2,7 @@ package nl.avansc1.facturatie.controller;
 
 import nl.avansc1.facturatie.model.billing.Invoice;
 import nl.avansc1.facturatie.repository.InvoiceDAO;
+import nl.avansc1.facturatie.repository.PaymentConditionDAO;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,8 +20,12 @@ import java.util.List;
 @RequestMapping("/invoice")
 public class InvoiceController {
     private final Logger logger = LoggerFactory.getLogger(DeclarationController.class);
+
     @Autowired
     private InvoiceDAO invoiceDAO;
+
+    @Autowired
+    private PaymentConditionDAO paymentConditionDAO;
 
     @RequestMapping("")
     public String listInvoices(Model theModel) {
@@ -32,6 +37,7 @@ public class InvoiceController {
 
         //Add invoices to model
         theModel.addAttribute("invoices", invoiceList);
+        theModel.addAttribute("paymentConditions", paymentConditionDAO.findAll());
 
         return "invoice/index";
     }
@@ -44,20 +50,13 @@ public class InvoiceController {
         Invoice invoice = invoiceDAO.findOne(id);
         this.invoiceDAO.delete(invoice);
 
-        //Get invoices from DAO
-        Iterable<Invoice> invoiceList = invoiceDAO.findAll();
+        model.addAttribute("success", "Invoice removed!");
 
-        //Add invoices to model
-        model.addAttribute("invoices", invoiceList);
-
-        // Open view
-        return "invoice/index";
+        return this.listInvoices(model);
     }
 
     @RequestMapping(value = "/pay/{id}", method = RequestMethod.GET)
     public String payDeclaration(Model model, @PathVariable int id) {
-        logger.debug("Invoice, id = " + id);
-
         Invoice invoice = invoiceDAO.findOne(id);
         invoice.setDatePayed(new Date());
         invoice.setState(1);
@@ -65,14 +64,24 @@ public class InvoiceController {
         //Save invoice
         this.invoiceDAO.save(invoice);
 
-        //Get invoices from DAO
-        Iterable<Invoice> invoiceList = invoiceDAO.findAll();
-
-        //Add invoices to model
-        model.addAttribute("invoices", invoiceList);
+        model.addAttribute("success", "Invoice marked as paid!");
 
         // Open view
-        return "invoice/index";
+        return this.listInvoices(model);
+    }
+
+    @RequestMapping(value = "/{id}/change-payment-condition/{paymentConditionId}", method = RequestMethod.GET)
+    public String changePaymenyCondition(Model model, @PathVariable int id, @PathVariable int paymentConditionId) {
+        Invoice invoice = invoiceDAO.findOne(id);
+        invoice.setPaymentCondition(paymentConditionDAO.findOne(paymentConditionId));
+
+        //Save invoice
+        this.invoiceDAO.save(invoice);
+
+        model.addAttribute("success", "Payment Condition updated!");
+
+        // Open view
+        return this.listInvoices(model);
     }
 
     @ModelAttribute("page")
