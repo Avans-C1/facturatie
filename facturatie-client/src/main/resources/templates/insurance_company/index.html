@@ -76,9 +76,7 @@
                             <td th:text="${insuranceCompany.phoneNumber}"></td>
                             <td th:text="${insuranceCompany.email}"></td>
                             <td th:text="${insuranceCompany.kvkNumber}"></td>
-                            <td>
-                                <a th:href="@{~/vat} + ${insuranceCompany.vat.id}"><span class="fa fa-cubes"></span> <span th:text="${insuranceCompany.vat.percentage}"></span></a>
-                            </td>
+                            <td th:text="${insuranceCompany.vat.percentage}"></td>
                             <td>
                                 <div class="btn-group">
                                     <a th:href="@{'/insurance_company/edit/' + ${insuranceCompany.id}}"  class="btn btn-xs btn-primary" ><span

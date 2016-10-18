@@ -2,6 +2,7 @@ package nl.avansc1.facturatie.controller;
 
 import nl.avansc1.facturatie.model.administration.InsuranceCompany;
 import nl.avansc1.facturatie.repository.InsuranceCompanyDAO;
+import nl.avansc1.facturatie.repository.VatDAO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -14,12 +15,11 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/insurance_company")
 public class InsuranceCompanyController {
 
+    @Autowired
     private InsuranceCompanyDAO insuranceCompanyDAO;
 
     @Autowired
-    public InsuranceCompanyController (InsuranceCompanyDAO insuranceCompanyDAO) {
-        this.insuranceCompanyDAO = insuranceCompanyDAO;
-    }
+    private VatDAO vatDAO;
 
     @ModelAttribute("page")
     public String module() {
@@ -42,6 +42,7 @@ public class InsuranceCompanyController {
     @GetMapping(value = "/create")
     String create(Model model) {
         model.addAttribute("insuranceCompany", new InsuranceCompany());
+        model.addAttribute("vats", vatDAO.findAll());
 
         return "insurance_company/edit";
     }
@@ -61,6 +62,7 @@ public class InsuranceCompanyController {
     @GetMapping(value = "/edit/{id}")
     String edit(Model model, @PathVariable int id) {
         model.addAttribute("insuranceCompany", insuranceCompanyDAO.findOne(id));
+        model.addAttribute("vats", vatDAO.findAll());
 
         return "insurance_company/edit";
     }
