@@ -69,7 +69,9 @@
                             <td>
                                 <a th:href="@{~/insurance_Company}"><span class="fa fa-university"></span> <span th:text="${insurance.insuranceCompany.id}"></span></a>
                             </td>
-                            <td th:text="${insurance.name}"></td>
+                            <td>
+                                <span class="fa fa-heartbeat"></span> <span th:text="${insurance.name}"></span>
+                            </td>
                             <td th:text="${insurance.monthlyFee}"></td>
                             <td th:text="${insurance.coveredTreatments}"></td>
                             <td>
