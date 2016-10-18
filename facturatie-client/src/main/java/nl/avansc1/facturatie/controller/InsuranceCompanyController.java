@@ -61,6 +61,8 @@ public class InsuranceCompanyController {
     @GetMapping(value = "/edit/{id}")
     String edit(Model model, @PathVariable int id) {
         model.addAttribute("insuranceCompany", insuranceCompanyDAO.findOne(id));
+        model.addAttribute("success", "Insurance Company successfully saved");
+
 
         return "insurance_company/edit";
     }
