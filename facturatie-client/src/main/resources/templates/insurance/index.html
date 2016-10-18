@@ -58,7 +58,7 @@
                         <tbody>
                         <tr>
                             <th>ID</th>
-                            <th>Insurance Company</th>
+                            <!--<th>Insurance Company</th>-->
                             <th>Name</th>
                             <th>Monthly Fee</th>
                             <th>Covered Treatments</th>
@@ -66,9 +66,9 @@
                         </tr>
                         <tr th:each="insurance : ${insurances}">
                             <td th:text="${insurance.id}"></td>
-                            <td>
+                            <!--<td>
                                 <a th:href="@{~/insurance_Company}"><span class="fa fa-university"></span> <span th:text="${insurance.insuranceCompany.id}"></span></a>
-                            </td>
+                            </td>-->
                             <td th:text="${insurance.name}"></td>
                             <td th:text="${insurance.monthlyFee}"></td>
                             <td th:text="${insurance.coveredTreatments}"></td>
