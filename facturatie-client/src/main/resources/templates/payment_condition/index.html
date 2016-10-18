@@ -3,7 +3,7 @@
       xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
       layout:decorate="layout">
 <head>
-    <title>Declarations - Overview</title>
+    <title>Payment conditions - Overview</title>
 </head>
 <body>
 <section layout:fragment="header">
@@ -12,7 +12,7 @@
     </h1>
     <ol class="breadcrumb">
         <li><a href="#"><i class="fa fa-inbox"></i> Home</a></li>
-        <li>Payment condition</li>
+        <li>Payment Conditions</li>
         <li class="active">Overview</li>
     </ol>
 </section>
@@ -38,7 +38,7 @@
 
                     <div class="flex-wrapper" style="display: flex; align-items: center;">
                         <div class="btn-group" style="margin: 0 50px 0 20px;">
-                            <a th:href="@{/payments/add}" class="btn btn-app">
+                            <a th:href="@{/payment-condition/add}" class="btn btn-app">
                                 <span class="fa fa-plus"></span> Add
                             </a>
                         </div>
@@ -67,9 +67,9 @@
                             <td th:text="${term.periodInDays}"></td>
                             <td>
                                 <div class="btn-group">
-                                    <a  th:href="@{'/payments/edit/' + ${term.id}}"  class="btn btn-xs btn-primary" ><span
+                                    <a  th:href="@{'/payment-condition/edit/' + ${term.id}}"  class="btn btn-xs btn-primary" ><span
                                             class="fa fa-pencil"></span></a>
-                                    <a  th:href="@{'/payments/delete/' + ${term.id}}" class="btn btn-xs btn-danger"><span
+                                    <a  th:href="@{'/payment-condition/delete/' + ${term.id}}" class="btn btn-xs btn-danger"><span
                                             class="fa fa-trash"></span></a>
                                 </div>
                             </td>

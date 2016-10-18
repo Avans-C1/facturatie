@@ -15,7 +15,7 @@ import java.util.Date;
  * Created by kevin on 11-10-2016.
  */
 @Controller
-@RequestMapping("/payments")
+@RequestMapping("/payment-condition")
 public class PaymentController {
     private final Logger logger = LoggerFactory.getLogger(DeclarationController.class);
     @Autowired
@@ -32,7 +32,7 @@ public class PaymentController {
         //Add paymentConditions to model
         theModel.addAttribute("paymentConditions", paymentConditionList);
 
-        return "payments/index";
+        return "payment_condition/index";
     }
 
     @RequestMapping(value = "/delete/{id}" , method = RequestMethod.GET)
@@ -50,13 +50,13 @@ public class PaymentController {
         model.addAttribute("paymentConditions", paymentConditionList);
 
         // Open view
-        return "payments/index";
+        return "payment_condition/index";
     }
 
     @GetMapping("/add")
     public String addCondition(Model model) {
         model.addAttribute("paymentCondition", new PaymentCondition());
-        return "payments/add";
+        return "payment_condition/add";
     }
 
     @PostMapping("/add")
@@ -71,14 +71,14 @@ public class PaymentController {
         model.addAttribute("paymentConditions", paymentConditionList);
 
         // Open view
-        return "payments/index";
+        return "payment_condition/index";
     }
 
     @RequestMapping(value = "/edit/{id}", method = RequestMethod.GET)
     public String editCondition(Model model, @PathVariable int id) {
         PaymentCondition paymentCondition = paymentConditionDAO.findOne(id);
         model.addAttribute("paymentCondition", paymentCondition);
-        return "payments/add";
+        return "payment_condition/add";
     }
 
     @ModelAttribute("page")

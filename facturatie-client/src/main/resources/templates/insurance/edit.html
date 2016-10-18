@@ -12,7 +12,7 @@
     </h1>
     <ol class="breadcrumb">
         <li><a href="#"><i class="fa fa-inbox"></i> Home</a></li>
-        <li>User</li>
+        <li>Insurances</li>
         <li class="active">Create</li>
     </ol>
 </section>
@@ -51,12 +51,14 @@
 
                         <div class="row">
                             <div class="col-sm-12">
-                                <div class="form-group">
+                                <!--<div class="form-group">
                                     <label for="insuranceCompany">Insurance Company ID</label>
-                                    <!-- th:field="*{name}" is de koppeling naar het attribuut 'name' van het object 'member'-->
-                                    <input type="text" class="form-control" id="insuranceCompany" th:field="*{insuranceCompany}"/>
+                                    &lt;!&ndash; th:field="*{name}" is de koppeling naar het attribuut 'name' van het object 'member'&ndash;&gt;
+                                    <input type="hidden" class="form-control" id="insuranceCompany" th:field="*{insuranceCompany}"/>
                                     <p th:if="${#fields.hasErrors('insuranceCompany')}" th:errors="*{insuranceCompany}">Name Error</p>
-                                </div>
+                                </div>-->
+
+                                <input type="hidden" name="insuranceCompany" value="1">
 
                                 <div class="form-group">
                                     <label for="name">Name</label>
