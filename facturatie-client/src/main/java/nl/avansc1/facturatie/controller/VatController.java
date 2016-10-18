@@ -26,7 +26,7 @@ public class VatController {
 
     /**
      * Overview page
-     * @return template/customer/overview.html
+     * @return template/customer/index.html
      */
     @RequestMapping("")
     public String index(Model theModel) {

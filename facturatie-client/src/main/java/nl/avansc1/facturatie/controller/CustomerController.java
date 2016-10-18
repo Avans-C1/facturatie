@@ -23,13 +23,13 @@ import java.util.List;
 public class CustomerController {
     /**
      * Overview page
-     * @return template/customer/overview.html
+     * @return template/customer/index.html
      */
     @RequestMapping("")
     public String overview(Model model) {
         Iterable<Customer> customers = customerDAO.findAll();
         model.addAttribute("customers", customers);
-        return "customer/overview";
+        return "customer/index";
     }
 
     /**
@@ -66,7 +66,7 @@ public class CustomerController {
 
         model.addAttribute("customers", customers);
 
-        return "customer/overview";
+        return "customer/index";
     }
 
     /**
