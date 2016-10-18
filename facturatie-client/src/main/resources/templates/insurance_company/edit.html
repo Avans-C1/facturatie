@@ -3,12 +3,12 @@
       xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
       layout:decorate="layout">
 <head>
-    <title>Insurance Companies - Edit</title>
+    <title>Insurance Company - Edit</title>
 </head>
 <body>
 <section layout:fragment="header">
     <h1>
-        Insurance Companies
+        Insurance Company
     </h1>
     <ol class="breadcrumb">
         <li><a href="#"><i class="fa fa-inbox"></i> Home</a></li>
@@ -40,6 +40,16 @@
                                 </th:block>
                             </div>
                         </div>
+
+                        <div th:if="${success}" style="flex: 1; margin: 0 30px;">
+                            <div layout:include="fragments/alert :: alert" th:with="type='success', header='Success!'" th:remove="tag">
+                                <!--/* Implements alert summary fragment with full-blown HTML summary */-->
+                                <th:block layout:fragment="alert-content">
+                                    <p th:text="${success}">Message</p>
+                                </th:block>
+                            </div>
+                        </div>
+
                         <div th:if="${exception}">
                             <div layout:include="views/fragments/alert :: alert" th:with="type='danger', header='Fouten in het formulier'" th:remove="tag">
                                 <!--/* Implements alert summary fragment with full-blown HTML summary */-->
