@@ -71,9 +71,15 @@ public class InsuranceController {
 
     @GetMapping(value = "/delete/{id}")
     String delete(Model model, @PathVariable int id) {
+        try {
         insuranceDAO.delete(id);
 
         model.addAttribute("success", "Insurance successfully removed");
+        } catch (Exception ex) {
+
+            model.addAttribute("failure", "Insurance could not be removed - Is insurance linked to a Customer?");
+
+        }
 
         return this.index(model);
     }
