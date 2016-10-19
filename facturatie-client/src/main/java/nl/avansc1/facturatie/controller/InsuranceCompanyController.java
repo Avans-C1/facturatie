@@ -23,7 +23,7 @@ public class InsuranceCompanyController {
 
     @ModelAttribute("page")
     public String module() {
-        return "insuranceCompany";
+        return "insurance-companies";
     }
 
 
@@ -32,6 +32,7 @@ public class InsuranceCompanyController {
     @GetMapping(value = "")
     String index(Model model) {
         model.addAttribute("insuranceCompany", insuranceCompanyDAO.findOne(1));
+        model.addAttribute("vats", vatDAO.findAll());
 
         return "insurance_company/edit";
     }
