@@ -60,28 +60,31 @@
                         </div>
 
                         <div class="row">
-                            <div class="col-sm-12">
+                            <div class="col-sm-3"> <!--was: -4"-->
                                 <div class="form-group">
                                     <label for="name">Street Name</label>
                                     <!-- th:field="*{name}" is de koppeling naar het attribuut 'name' van het object 'member'-->
                                     <input type="text" class="form-control" id="name" th:field="*{name}"/>
                                     <p th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Name Error</p>
                                 </div>
+                                <div class="row">
+                                    <div class="form-group">
+                                        <div class="col-sm-6">
+                                            <label for="houseNumber">House Number</label>
+                                            <!-- th:field="*{name}" is de koppeling naar het attribuut 'name' van het object 'member'-->
+                                            <input type="text" class="form-control" id="houseNumber" th:field="*{houseNumber}"/>
+                                            <p th:if="${#fields.hasErrors('houseNumber')}" th:errors="*{houseNumber}">Name Error</p>
+                                        </div>
 
-                                <div class="form-group">
-                                    <label for="houseNumber">House Number</label>
-                                    <!-- th:field="*{name}" is de koppeling naar het attribuut 'name' van het object 'member'-->
-                                    <input type="number" class="form-control" id="houseNumber" th:field="*{houseNumber}"/>
-                                    <p th:if="${#fields.hasErrors('houseNumber')}" th:errors="*{houseNumber}">Name Error</p>
+                                        <div class="col-sm-6">
+                                            <label for="zipcode">Zip Code</label>
+                                            <!-- th:field="*{name}" is de koppeling naar het attribuut 'name' van het object 'member'-->
+                                            <input type="text" class="form-control" id="zipcode" th:field="*{zipcode}"/>
+                                            <p th:if="${#fields.hasErrors('zipcode')}" th:errors="*{zipcode}">Name Error</p>
+                                        </div>
+                                    </div>
                                 </div>
-
-                                <div class="form-group">
-                                    <label for="zipcode">Zip Code</label>
-                                    <!-- th:field="*{name}" is de koppeling naar het attribuut 'name' van het object 'member'-->
-                                    <input type="text" class="form-control" id="zipcode" th:field="*{zipcode}"/>
-                                    <p th:if="${#fields.hasErrors('zipcode')}" th:errors="*{zipcode}">Name Error</p>
-                                </div>
-
+                                <br>
                                 <div class="form-group">
                                     <label for="city">City</label>
                                     <!-- th:field="*{name}" is de koppeling naar het attribuut 'name' van het object 'member'-->
@@ -106,7 +109,7 @@
                                 <div class="form-group">
                                     <label for="kvkNumber">KvK Number</label>
                                     <!-- th:field="*{name}" is de koppeling naar het attribuut 'name' van het object 'member'-->
-                                    <input type="number" class="form-control" id="kvkNumber" th:field="*{kvkNumber}"/>
+                                    <input type="number" minlength="8" maxlength="8" class="form-control" id="kvkNumber" th:field="*{kvkNumber}"/>
                                     <p th:if="${#fields.hasErrors('kvkNumber')}" th:errors="*{kvkNumber}">Name Error</p>
                                 </div>
 

@@ -50,7 +50,7 @@
                         </div>
 
                         <div class="row">
-                            <div class="col-sm-12">
+                            <div class="col-sm-3">
                                 <!--<div class="form-group">
                                     <label for="insuranceCompany">Insurance Company ID</label>
                                     &lt;!&ndash; th:field="*{name}" is de koppeling naar het attribuut 'name' van het object 'member'&ndash;&gt;
@@ -66,23 +66,26 @@
                                     <input type="text" class="form-control" id="name" th:field="*{name}"/>
                                     <p th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Name Error</p>
                                 </div>
+                                <div class="row">
+                                    <div class="form-group">
+                                        <div class="col-sm-6">
+                                            <label for="monthlyFee">Monthly Fee</label>
+                                            <!-- th:field="*{name}" is de koppeling naar het attribuut 'name' van het object 'member'-->
+                                            <input type="number" min="70" max="150" class="form-control" id="monthlyFee" th:field="*{monthlyFee}"/>
+                                            <p th:if="${#fields.hasErrors('monthlyFee')}" th:errors="*{monthlyFee}">Name Error</p>
+                                        </div>
 
-                                <div class="form-group">
-                                    <label for="monthlyFee">Monthly Fee</label>
-                                    <!-- th:field="*{name}" is de koppeling naar het attribuut 'name' van het object 'member'-->
-                                    <input type="number" min="70" max="150" class="form-control" id="monthlyFee" th:field="*{monthlyFee}"/>
-                                    <p th:if="${#fields.hasErrors('monthlyFee')}" th:errors="*{monthlyFee}">Name Error</p>
-                                </div>
-
-                                <div class="form-group">
-                                    <label for="coveredTreatments">Covered Treatments</label>
-                                    <!-- th:field="*{name}" is de koppeling naar het attribuut 'name' van het object 'member'-->
-                                    <input type="number" min="0" max="10" step="1" class="form-control" id="coveredTreatments" th:field="*{coveredTreatments}"/>
-                                    <p th:if="${#fields.hasErrors('coveredTreatments')}" th:errors="*{coveredTreatments}">Name Error</p>
+                                        <div class="col-sm-6">
+                                            <label for="coveredTreatments">Covered Treatments</label>
+                                            <!-- th:field="*{name}" is de koppeling naar het attribuut 'name' van het object 'member'-->
+                                            <input type="number" min="0" max="10" step="1" class="form-control" id="coveredTreatments" th:field="*{coveredTreatments}"/>
+                                            <p th:if="${#fields.hasErrors('coveredTreatments')}" th:errors="*{coveredTreatments}">Name Error</p>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-
+                        <br>
                         <!-- De button die voor verzenden van het formulier zorgt.
                             De name 'save' is een parameter waarmee in de MemberController de juiste
                             save-actie wordt gestart. -->
