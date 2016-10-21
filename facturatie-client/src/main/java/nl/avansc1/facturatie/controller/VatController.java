@@ -41,7 +41,7 @@ public class VatController {
     public String add(Model model) {
         model.addAttribute("vat", new Vat());
 
-        return "vat/add";
+        return "vat/create";
     }
 
 
@@ -65,7 +65,7 @@ public class VatController {
 
             return this.index(model);
         } catch (Exception ex) {
-            return "vat/add";
+            return "vat/create";
         }
     }
 

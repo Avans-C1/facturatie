@@ -15,6 +15,7 @@ public class Vat {
     @Column(name="id")
     @GeneratedValue(strategy=GenerationType.IDENTITY)
     private int id;
+
     @Column(name = "percentage")
     private double percentage;
 

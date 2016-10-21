@@ -26,13 +26,24 @@
 
                 <!-- /.box-header -->
                 <div class="box-body">
-                    <form name="customerForm" id="customerForm" method="post">
+                    <form action="#" th:action="@{/vat/new}" th:object="${vat}" method="post">
+
+                        <div th:if="${#fields.hasErrors('*')}">
+                            <div layout:include="views/fragments/alert :: alert" th:with="type='danger', header='Fouten in het formulier'" th:remove="tag">
+                                <!--/* Implements alert summary fragment with full-blown HTML summary */-->
+                                <th:block layout:fragment="alert-summary">
+                                    <p>Niet alle velden in het formulier zijn correct ingevuld. Corrigeer deze en verzend opnieuw.</p>
+                                    <!--<p><button type="button" class="btn btn-danger">Take this action</button></p>-->
+                                </th:block>
+                            </div>
+                        </div>
+
+
                         <div class="row">
                             <div class="col-sm-4">
                                 <div class="form-group">
                                     <label for="percentage">Vat percentage</label>
-                                    <input type="number" th:value="${vat.percentage}"  min="1" max="100" class="form-control" id="percentage" name="percentage" value=""/>
-                                    <input type="hidden" name="id"  th:value="${vat.id}" />
+                                    <input type="number"  min="1" max="100" class="form-control" id="percentage" name="percentage" value=""/>
                                 </div>
                             </div>
                         </div>
