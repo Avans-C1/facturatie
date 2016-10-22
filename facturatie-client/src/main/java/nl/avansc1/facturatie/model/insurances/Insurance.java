@@ -8,7 +8,7 @@ import javax.persistence.*;
 /**
  * This is the object of a Insurance
  *
- * @author Bob van der Valk
+ * @author Bob van der Valk, Matthijs Wilhelmus
  */
 @Entity
 @Table(name = "insurances")

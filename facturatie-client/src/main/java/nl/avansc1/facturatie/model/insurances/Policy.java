@@ -9,7 +9,7 @@ import java.util.Date;
 /**
  * This is a object of a policy
  *
- * @author Bob van der Valk
+ * @author Bob van der Valk, Matthijs Wilhelmus
  */
 @Entity
 @Table(name = "policies")

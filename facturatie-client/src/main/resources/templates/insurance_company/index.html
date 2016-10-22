@@ -56,6 +56,7 @@
                         <tbody>
                         <tr>
                             <th>ID</th>
+                            <th>Company name</th>
                             <th>Street name</th>
                             <th>House number</th>
                             <th>Zip Code</th>
@@ -64,11 +65,14 @@
                             <th>E-mail</th>
                             <th>KvK number</th>
                             <th>VAT</th>
+                            <th>BTW number</th>
+                            <th>IBAN</th>
 
                             <th width="4%">&nbsp;</th>
                         </tr>
                         <tr th:each="insuranceCompany : ${insuranceCompanies}">
                             <td th:text="${insuranceCompany.id}"></td>
+                            <td th:text="${insuranceCompany.companyname}"></td>
                             <td th:text="${insuranceCompany.name}"></td>
                             <td th:text="${insuranceCompany.houseNumber}"></td>
                             <td th:text="${insuranceCompany.zipcode}"></td>
@@ -77,6 +81,8 @@
                             <td th:text="${insuranceCompany.email}"></td>
                             <td th:text="${insuranceCompany.kvkNumber}"></td>
                             <td th:text="${insuranceCompany.vat.percentage}"></td>
+                            <td th:text="${insuranceCompany.btw}"></td>
+                            <td th:text="${insuranceCompany.iban}"></td>
                             <td>
                                 <div class="btn-group">
                                     <a th:href="@{'/insurance_company/edit/' + ${insuranceCompany.id}}"  class="btn btn-xs btn-primary" ><span

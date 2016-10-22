@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.*;
 
 
 /**
- * Created by Matthijs on 13-10-2016.
+ * Created by Matthijs Wilhelmus on 13-10-2016.
  */
 @Controller
 @RequestMapping("/insurance")

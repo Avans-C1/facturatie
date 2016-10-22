@@ -7,7 +7,7 @@ import javax.persistence.*;
 /**
  * This is the object of a insurance company
  *
- * @author Bob van der Valk
+ * @author Bob van der Valk, Matthijs Wilhelmus
  */
 @Entity
 @Table(name = "insurance_company")
@@ -16,6 +16,8 @@ public class InsuranceCompany {
     @Column(name = "id")
     @GeneratedValue(strategy=GenerationType.IDENTITY)
     private int id;
+    @Column(name = "name")
+    private String companyname;
     @Column(name = "street_name")
     private String name;
     @Column(name = "house_number")
@@ -33,9 +35,14 @@ public class InsuranceCompany {
     @OneToOne
     @JoinColumn(name = "vat_id")
     private Vat vat;
+    @Column(name = "btw_number")
+    private String btw;
+    @Column(name = "iban")
+    private String iban;
 
-    public InsuranceCompany(int id, String name, String houseNumber, String zipcode, String city, int phoneNumber, String email, int kvkNumber, Vat vat) {
+    public InsuranceCompany(int id, String companyname, String name, String houseNumber, String zipcode, String city, int phoneNumber, String email, int kvkNumber, Vat vat, String btw, String iban) {
         this.id = id;
+        this.companyname = companyname;
         this.name = name;
         this.houseNumber = houseNumber;
         this.zipcode = zipcode;
@@ -44,9 +51,12 @@ public class InsuranceCompany {
         this.email = email;
         this.kvkNumber = kvkNumber;
         this.vat = vat;
+        this.btw = btw;
+        this.iban = iban;
     }
 
-    public InsuranceCompany(String name, String houseNumber, String zipcode, String city, int phoneNumber, String email, int kvkNumber, Vat vat) {
+    public InsuranceCompany(String companyname, String name, String houseNumber, String zipcode, String city, int phoneNumber, String email, int kvkNumber, Vat vat, String btw, String iban) {
+        this.companyname = companyname;
         this.name = name;
         this.houseNumber = houseNumber;
         this.zipcode = zipcode;
@@ -55,6 +65,8 @@ public class InsuranceCompany {
         this.email = email;
         this.kvkNumber = kvkNumber;
         this.vat = vat;
+        this.btw = btw;
+        this.iban = iban;
     }
 
     public InsuranceCompany() {
@@ -66,6 +78,14 @@ public class InsuranceCompany {
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public String getCompanyname() {
+        return companyname;
+    }
+
+    public void setCompanyname(String companyname) {
+        this.companyname = companyname;
     }
 
     public String getName() {
@@ -131,4 +151,21 @@ public class InsuranceCompany {
     public void setVat(Vat vat) {
         this.vat = vat;
     }
+
+    public String getBtw() {
+        return btw;
+    }
+
+    public void setBtw(String btw) {
+        this.btw = btw;
+    }
+
+    public String getIban() {
+        return iban;
+    }
+
+    public void setIban(String iban) {
+        this.iban = iban;
+    }
+
 }

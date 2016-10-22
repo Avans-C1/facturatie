@@ -7,7 +7,7 @@
 </head>
 <body>
 <section layout:fragment="header">
-    <h1>
+    <h1 th:text="${insuranceCompany.companyname}">
         Insurance Company
     </h1>
     <ol class="breadcrumb">
@@ -61,6 +61,12 @@
 
                         <div class="row">
                             <div class="col-sm-3"> <!--was: -4"-->
+                                <div class="form-group">
+                                    <label for="companyname">Company Name</label>
+                                    <!-- th:field="*{name}" is de koppeling naar het attribuut 'name' van het object 'member'-->
+                                    <input type="text" class="form-control" id="companyname" th:field="*{companyname}"/>
+                                    <p th:if="${#fields.hasErrors('companyname')}" th:errors="*{companyname}">Name Error</p>
+                                </div>
                                 <div class="form-group">
                                     <label for="name">Street Name</label>
                                     <!-- th:field="*{name}" is de koppeling naar het attribuut 'name' van het object 'member'-->
@@ -121,6 +127,20 @@
                                         <option th:text="${vat.getPercentage()}" th:value="${vat.id}" th:each="vat: ${vats}"></option>
                                     </select>
                                     <p th:if="${#fields.hasErrors('vat')}" th:errors="*{vat}">Name Error</p>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="btw">BTW Number</label>
+                                    <!-- th:field="*{name}" is de koppeling naar het attribuut 'name' van het object 'member'-->
+                                    <input type="text" minlength="14" maxlength="14" class="form-control" id="btw" th:field="*{btw}"/>
+                                    <p th:if="${#fields.hasErrors('btw')}" th:errors="*{btw}">Name Error</p>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="iban">IBAN</label>
+                                    <!-- th:field="*{name}" is de koppeling naar het attribuut 'name' van het object 'member'-->
+                                    <input type="text" minlength="18" maxlength="18" class="form-control" id="iban" th:field="*{iban}"/>
+                                    <p th:if="${#fields.hasErrors('iban')}" th:errors="*{iban}">Name Error</p>
                                 </div>
                             </div>
                         </div>
