@@ -1,5 +1,6 @@
 package nl.avansc1.facturatie.repository;
 
+import nl.avansc1.facturatie.model.customers.Customer;
 import nl.avansc1.facturatie.model.insurances.Policy;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.transaction.annotation.Transactional;
@@ -9,5 +10,5 @@ import org.springframework.transaction.annotation.Transactional;
  */
 @Transactional
 public interface PolicyDAO extends CrudRepository<Policy, Integer> {
-
+    public Policy findByCustomer(Customer customer);
 }
