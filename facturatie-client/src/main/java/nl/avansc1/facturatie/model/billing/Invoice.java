@@ -5,7 +5,9 @@ import nl.avansc1.facturatie.model.customers.Customer;
 import javax.persistence.*;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -150,5 +152,13 @@ public class Invoice {
         System.out.println(diffInDays);
 
         return diffInDays > this.paymentCondition.getPeriodInDays();
+    }
+
+    public String getDateToBePayed() {
+        DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+        GregorianCalendar cal = new GregorianCalendar();
+        cal.setTime(dateCreated);
+        cal.add(Calendar.DATE, paymentCondition.getPeriodInDays());
+        return df.format(cal.getTime());
     }
 }
