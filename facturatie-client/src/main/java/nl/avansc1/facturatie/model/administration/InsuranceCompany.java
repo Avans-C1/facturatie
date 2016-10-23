@@ -19,7 +19,7 @@ public class InsuranceCompany {
     @Column(name = "name")
     private String companyname;
     @Column(name = "street_name")
-    private String name;
+    private String streetname;
     @Column(name = "house_number")
     private String houseNumber;
     @Column(name = "zipcode")
@@ -40,10 +40,10 @@ public class InsuranceCompany {
     @Column(name = "iban")
     private String iban;
 
-    public InsuranceCompany(int id, String companyname, String name, String houseNumber, String zipcode, String city, int phoneNumber, String email, int kvkNumber, Vat vat, String btw, String iban) {
+    public InsuranceCompany(int id, String companyname, String streetname, String houseNumber, String zipcode, String city, int phoneNumber, String email, int kvkNumber, Vat vat, String btw, String iban) {
         this.id = id;
         this.companyname = companyname;
-        this.name = name;
+        this.streetname = streetname;
         this.houseNumber = houseNumber;
         this.zipcode = zipcode;
         this.city = city;
@@ -55,9 +55,9 @@ public class InsuranceCompany {
         this.iban = iban;
     }
 
-    public InsuranceCompany(String companyname, String name, String houseNumber, String zipcode, String city, int phoneNumber, String email, int kvkNumber, Vat vat, String btw, String iban) {
+    public InsuranceCompany(String companyname, String streetname, String houseNumber, String zipcode, String city, int phoneNumber, String email, int kvkNumber, Vat vat, String btw, String iban) {
         this.companyname = companyname;
-        this.name = name;
+        this.streetname = streetname;
         this.houseNumber = houseNumber;
         this.zipcode = zipcode;
         this.city = city;
@@ -88,12 +88,12 @@ public class InsuranceCompany {
         this.companyname = companyname;
     }
 
-    public String getName() {
-        return name;
+    public String getStreetname() {
+        return streetname;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setStreetname(String streetname) {
+        this.streetname = streetname;
     }
 
     public String getHouseNumber() {

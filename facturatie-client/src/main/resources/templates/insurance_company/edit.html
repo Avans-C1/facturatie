@@ -68,10 +68,10 @@
                                     <p th:if="${#fields.hasErrors('companyname')}" th:errors="*{companyname}">Name Error</p>
                                 </div>
                                 <div class="form-group">
-                                    <label for="name">Street Name</label>
+                                    <label for="streetname">Street Name</label>
                                     <!-- th:field="*{name}" is de koppeling naar het attribuut 'name' van het object 'member'-->
-                                    <input type="text" class="form-control" id="name" th:field="*{name}"/>
-                                    <p th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Name Error</p>
+                                    <input type="text" class="form-control" id="streetname" th:field="*{streetname}"/>
+                                    <p th:if="${#fields.hasErrors('streetname')}" th:errors="*{streetname}">Name Error</p>
                                 </div>
                                 <div class="row">
                                     <div class="form-group">
