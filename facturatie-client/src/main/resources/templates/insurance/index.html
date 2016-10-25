@@ -85,7 +85,7 @@
                                 <div class="btn-group">
                                     <a th:href="@{'/insurance/edit/' + ${insurance.id}}"  class="btn btn-xs btn-primary" ><span
                                             class="fa fa-pencil"></span></a>
-                                    <a th:href="@{'/insurance/delete/' + ${insurance.id}}" class="btn btn-xs btn-danger"><span
+                                    <a th:href="@{'/insurance/delete/' + ${insurance.id}}" class="btn btn-xs btn-danger" onclick="return confirm('Are you sure you want to delete this insurance ?') ? true : false;"><span
                                             class="fa fa-trash"></span></a>
                                 </div>
                             </td>

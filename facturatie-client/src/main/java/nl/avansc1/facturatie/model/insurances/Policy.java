@@ -7,9 +7,13 @@ import java.util.Date;
 
 
 /**
- * This is a object of a policy
+ * This is a object of a policy.
+ *
  *
  * @author Bob van der Valk, Matthijs Wilhelmus
+ * @version 1.0
+ * @see Customer
+ * @see Insurance
  */
 @Entity
 @Table(name = "policies")
@@ -26,10 +30,8 @@ public class Policy {
     private Insurance insurance;
     @Column(name = "contribution")
     private float contribution;
-    //@Temporal(TemporalType.DATE)
     @Column(name = "date_start")
     private java.sql.Date dateStart;
-    //@Temporal(TemporalType.DATE)
     @Column(name = "date_end")
     private java.sql.Date dateEnd;
     @Column(name = "active")
@@ -38,7 +40,18 @@ public class Policy {
     private float contributionUsed;
 
 
-    public Policy(int id, Customer customer, Insurance insurance, float contribution, java.sql.Date dateStart, java.sql.Date dateEnd, boolean active, float contributionsUsed, float contributionUsed) {
+    /**
+     * Initializes a Policy for Database
+     * @param id id of Policy will be used as primary key in Database
+     * @param customer id of Customer will be used as foreign key in Database
+     * @param insurance id of Insurance will be used as foreign key in Database
+     * @param contribution amount of Contribution(Eigen risico)
+     * @param dateStart start date of policy
+     * @param dateEnd date on which the policy ends/expires
+     * @param active indicates of policy is active or not
+     * @param contributionUsed amount of Contribution that has been 'spent'
+     */
+    public Policy(int id, Customer customer, Insurance insurance, float contribution, java.sql.Date dateStart, java.sql.Date dateEnd, boolean active, float contributionUsed) {
         this.id = id;
         this.customer = customer;
         this.insurance = insurance;
@@ -50,7 +63,7 @@ public class Policy {
         ;
     }
 
-    public Policy(float contribution, Customer customer, Insurance insurance, java.sql.Date dateStart, java.sql.Date dateEnd, boolean active, float contributionsUsed, float contributionUsed) {
+    public Policy(float contribution, Customer customer, Insurance insurance, java.sql.Date dateStart, java.sql.Date dateEnd, boolean active, float contributionUsed) {
         this.contribution = contribution;
         this.customer = customer;
         this.insurance = insurance;
@@ -64,6 +77,10 @@ public class Policy {
     public Policy() {
     }
 
+    /**
+     * Returns the id of this Policy
+     * @return id
+     */
     public int getId() {
         return id;
     }
@@ -72,6 +89,10 @@ public class Policy {
         this.id = id;
     }
 
+    /**
+     * Returns the contribution of this Policy
+     * @return contribution
+     */
     public float getContribution() {
         return contribution;
     }
@@ -80,6 +101,10 @@ public class Policy {
         this.contribution = contribution;
     }
 
+    /**
+     * Returns the customer belonging to this Policy
+     * @return customer
+     */
     public Customer getCustomer() {
         return customer;
     }
@@ -88,6 +113,10 @@ public class Policy {
         this.customer = customer;
     }
 
+    /**
+     * Returns the insurance belonging to this Policy
+     * @return insurance
+     */
     public Insurance getInsurance() {
         return insurance;
     }
@@ -96,6 +125,10 @@ public class Policy {
         this.insurance = insurance;
     }
 
+    /**
+     * Returns the start date of this Policy
+     * @return dateStart
+     */
     public java.sql.Date getDateStart() {
         return dateStart;
     }
@@ -104,6 +137,10 @@ public class Policy {
         this.dateStart = dateStart;
     }
 
+    /**
+     * Returns the end date(/expire date) of this Policy
+     * @return dateEnd
+     */
     public java.sql.Date getDateEnd() {
         return dateEnd;
     }
@@ -112,6 +149,10 @@ public class Policy {
         this.dateEnd = dateEnd;
     }
 
+    /**
+     * Tells if this Policy ia active or not
+     * @return active
+     */
     public boolean isActive() {
         return active;
     }
@@ -120,6 +161,10 @@ public class Policy {
         this.active = active;
     }
 
+    /**
+     * Returns the amount of Contribution that has been spent of this Policy
+     * @return contributionUsed
+     */
     public float getContributionUsed() {
         return contributionUsed;
     }

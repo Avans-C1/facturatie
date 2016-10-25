@@ -6,9 +6,11 @@ import javax.persistence.*;
 
 
 /**
- * This is the object of a Insurance
+ * This is the object of an Insurance.
  *
  * @author Bob van der Valk, Matthijs Wilhelmus
+ * @version 1.0
+ * @see InsuranceCompany
  */
 @Entity
 @Table(name = "insurances")
@@ -27,6 +29,14 @@ public class Insurance {
     @Column(name = "covered_treatments")
     private int coveredTreatments;
 
+    /**
+     * Initializes an Insurance for Database
+     * @param id of Insurance will be used as primary key in Database
+     * @param insuranceCompany id of InsuranceCompany will be used as foreign key inn database
+     * @param name of the Insurance
+     * @param monthlyFee price of Insurance per month
+     * @param coveredTreatments amount of treatments covered by this Insurance
+     */
     public Insurance(int id, InsuranceCompany insuranceCompany, String name, float monthlyFee, int coveredTreatments) {
         this.id = id;
         this.insuranceCompany = insuranceCompany;
@@ -45,6 +55,10 @@ public class Insurance {
     public Insurance() {
     }
 
+    /**
+     * Returns the id of this Insurance
+     * @return id
+     */
     public int getId() {
         return id;
     }
@@ -53,6 +67,10 @@ public class Insurance {
         this.id = id;
     }
 
+    /**
+     * Returns the InsuranceCompany of this Insurance
+     * @return insuranceCompany
+     */
     public InsuranceCompany getInsuranceCompany() {
         return insuranceCompany;
     }
@@ -61,6 +79,10 @@ public class Insurance {
         this.insuranceCompany = insuranceCompany;
     }
 
+    /**
+     * Returns the name of this Insurance
+     * @return name
+     */
     public String getName() {
         return name;
     }
@@ -69,6 +91,10 @@ public class Insurance {
         this.name = name;
     }
 
+    /**
+     * Returns the price per month of this Insurance
+     * @return monthlyFee
+     */
     public float getMonthlyFee() {
         return monthlyFee;
     }
@@ -77,6 +103,10 @@ public class Insurance {
         this.monthlyFee = monthlyFee;
     }
 
+    /**
+     * Returns the number of covered treatments of this Insurance
+     * @return coveredTreatments
+     */
     public int getCoveredTreatments() {
         return coveredTreatments;
     }

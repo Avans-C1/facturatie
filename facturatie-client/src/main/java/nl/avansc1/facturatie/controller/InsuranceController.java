@@ -10,6 +10,16 @@ import org.springframework.web.bind.annotation.*;
 
 /**
  * Created by Matthijs Wilhelmus on 13-10-2016.
+ *
+ * This ia a controller for <code>Insurance</code>.
+ * This controller regulates the mapping of the insurance pages
+ * for viewing all insurances as well as creating/updating/deleting an insurance
+ * using the linked <code>InsuranceDAO</code>.
+ *
+ * @author Matthijs Wilhelmus
+ * @version 1.0
+ * @see InsuranceDAO
+ * @see  Insurance
  */
 @Controller
 @RequestMapping("/insurance")
@@ -30,6 +40,11 @@ public class InsuranceController {
 
     // index
 
+    /**
+     * Mapping of the index page containing all insurances.
+     * @param model
+     * @return insurance/index with all insurances
+     */
     @GetMapping(value = "")
     String index(Model model) {
         model.addAttribute("insurances", insuranceDAO.findAll());
@@ -40,6 +55,11 @@ public class InsuranceController {
 
     // create
 
+    /**
+     * Mapping of the create page for creating a new insurance.
+     * @param model
+     * @return insurance/edit with blank insurance creation form.
+     */
     @GetMapping(value = "/create")
     String create(Model model) {
         model.addAttribute("insurance", new Insurance());
@@ -47,6 +67,12 @@ public class InsuranceController {
         return "insurance/edit";
     }
 
+    /**
+     * Mapping of success message upon successfully submitting filled policy form.
+     * @param model
+     * @param insurance
+     * @return
+     */
     @PostMapping(value = "/create")
     String store(Model model, @ModelAttribute Insurance insurance) {
         insuranceDAO.save(insurance);
@@ -56,9 +82,22 @@ public class InsuranceController {
         return this.index(model);
     }
 
+    //show method
+    @GetMapping(value = "/show/{id}")
+    String show(Model model, @PathVariable int id) {
+        model.addAttribute("insurances", insuranceDAO.findOne(id));
 
+        return "insurance/index";
+    }
+    //end show method
     // edit
 
+    /**
+     * Mapping for editing a specific insurance by id.
+     * @param model
+     * @param id
+     * @return insurance/edit/id with filled insurance form.
+     */
     @GetMapping(value = "/edit/{id}")
     String edit(Model model, @PathVariable int id) {
         model.addAttribute("insurance", insuranceDAO.findOne(id));
@@ -69,6 +108,13 @@ public class InsuranceController {
 
     // delete
 
+    /**
+     * Mapping for the deletion of a specific insurance by id.
+     * @param model
+     * @param id
+     * @return insurance/index with message (success or failure)
+     * @throws Exception for possible Database restriction.
+     */
     @GetMapping(value = "/delete/{id}")
     String delete(Model model, @PathVariable int id) {
         try {

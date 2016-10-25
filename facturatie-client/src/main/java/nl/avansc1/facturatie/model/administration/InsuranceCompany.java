@@ -40,6 +40,21 @@ public class InsuranceCompany {
     @Column(name = "iban")
     private String iban;
 
+    /**
+     * Initializes an InsuranceCompany for Database
+     * @param id id of Insurance Company will be used as primary key in Database
+     * @param companyname name of the Insurance Company
+     * @param streetname  street name of the Insurance Company
+     * @param houseNumber house number of the Insurance Company
+     * @param zipcode Zip Code of the Insurance Company
+     * @param city name of the city where the Insurance Company is located
+     * @param phoneNumber phone number of the Insurance Company
+     * @param email email address of the Insurance Company
+     * @param kvkNumber kvk number of the Insurance Company
+     * @param vat id of a vat percentage will be used as foreign key in Database.
+     * @param btw BTW number of the Insurance Company
+     * @param iban IBAN of the Insurance Company
+     */
     public InsuranceCompany(int id, String companyname, String streetname, String houseNumber, String zipcode, String city, int phoneNumber, String email, int kvkNumber, Vat vat, String btw, String iban) {
         this.id = id;
         this.companyname = companyname;
@@ -72,6 +87,10 @@ public class InsuranceCompany {
     public InsuranceCompany() {
     }
 
+    /**
+     * Returns the id of this Insurance Company
+     * @return id
+     */
     public int getId() {
         return id;
     }
@@ -80,6 +99,10 @@ public class InsuranceCompany {
         this.id = id;
     }
 
+    /**
+     * Returns the Company name of this Insurance Company
+     * @return companyname
+     */
     public String getCompanyname() {
         return companyname;
     }
@@ -88,6 +111,10 @@ public class InsuranceCompany {
         this.companyname = companyname;
     }
 
+    /**
+     * Returns the street name of this Insurance Company
+     * @return streetname
+     */
     public String getStreetname() {
         return streetname;
     }
@@ -96,6 +123,10 @@ public class InsuranceCompany {
         this.streetname = streetname;
     }
 
+    /**
+     * Returns house number of this Insurance Company
+     * @return houseNumber
+     */
     public String getHouseNumber() {
         return houseNumber;
     }
@@ -104,6 +135,10 @@ public class InsuranceCompany {
         this.houseNumber = houseNumber;
     }
 
+    /**
+     * Returns zip code of this Insurance Company
+     * @return zipcode
+     */
     public String getZipcode() {
         return zipcode;
     }
@@ -112,6 +147,10 @@ public class InsuranceCompany {
         this.zipcode = zipcode;
     }
 
+    /**
+     * Returns the city where this Insurance Company is located
+     * @return city
+     */
     public String getCity() {
         return city;
     }
@@ -120,6 +159,10 @@ public class InsuranceCompany {
         this.city = city;
     }
 
+    /**
+     * Returns the phone number of this Insurance Company
+     * @return phoneNumber
+     */
     public int getPhoneNumber() {
         return phoneNumber;
     }
@@ -128,6 +171,10 @@ public class InsuranceCompany {
         this.phoneNumber = phoneNumber;
     }
 
+    /**
+     * Returns the email address of this Insurance Company
+     * @return email
+     */
     public String getEmail() {
         return email;
     }
@@ -136,6 +183,10 @@ public class InsuranceCompany {
         this.email = email;
     }
 
+    /**
+     * Returns kvk number of this Insurance Company
+     * @return kvkNumber
+     */
     public int getKvkNumber() {
         return kvkNumber;
     }
@@ -144,6 +195,10 @@ public class InsuranceCompany {
         this.kvkNumber = kvkNumber;
     }
 
+    /**
+     * Returns the vat of this Insurance Company
+     * @return vat
+     */
     public Vat getVat() {
         return vat;
     }
@@ -152,6 +207,10 @@ public class InsuranceCompany {
         this.vat = vat;
     }
 
+    /**
+     * Returns the btw number of this Insurance Company
+     * @return btw
+     */
     public String getBtw() {
         return btw;
     }
@@ -160,6 +219,10 @@ public class InsuranceCompany {
         this.btw = btw;
     }
 
+    /**
+     * Returns the IBAN of this Insurance Company
+     * @return iban
+     */
     public String getIban() {
         return iban;
     }

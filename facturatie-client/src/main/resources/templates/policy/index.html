@@ -72,7 +72,8 @@
                                 <a th:href="@{~/customer/show/} + ${policy.customer.csn}"><span class="fa fa-user"> <span th:text="${policy.customer.fullName}"></span></span></a>
                             </td>
                             <td>
-                                <a th:href="@{~/insurance}"><span class="fa fa-heartbeat"> <span th:text="${policy.insurance.name}"></span></span></a>
+                                <a th:href="@{~/insurance/show/} + ${policy.insurance.id}"><span class="fa fa-heartbeat"> <span th:text="${policy.insurance.name}"></span></span></a>
+                                <!-- original <a th:href="@{~/insurance/}"><span class="fa fa-heartbeat"> <span th:text="${policy.insurance.name}"></span></span></a>-->
                             </td>
                             <td th:text="${policy.contribution}"></td>
                             <td th:text="${policy.dateStart}"></td>
@@ -83,7 +84,7 @@
                                 <div class="btn-group">
                                     <a th:href="@{'/policy/edit/' + ${policy.id}}"  class="btn btn-xs btn-primary" ><span
                                             class="fa fa-pencil"></span></a>
-                                    <a th:href="@{'/policy/delete/' + ${policy.id}}" class="btn btn-xs btn-danger"><span
+                                    <a th:href="@{'/policy/delete/' + ${policy.id}}" class="btn btn-xs btn-danger" onclick="return confirm('Are you sure you want to delete this policy ?') ? true : false;"><span
                                             class="fa fa-trash"></span></a>
                                 </div>
                             </td>
