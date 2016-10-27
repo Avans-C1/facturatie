@@ -9,6 +9,7 @@ import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 /**
@@ -44,14 +45,14 @@ public class UserController {
     // create
 
     @GetMapping(value = "/create")
-    String create(Model model) {
+    String create(Model model, HttpSession session) {
         model.addAttribute("user", new User());
 
         return "user/edit";
     }
 
     @PostMapping(value = "/create")
-    String store(Model model, @ModelAttribute User user) {
+    String store(Model model, HttpSession session,  @ModelAttribute User user) {
         userDAO.save(user);
 
         model.addAttribute("success", "User successfully saved");
@@ -63,7 +64,7 @@ public class UserController {
     // edit
 
     @GetMapping(value = "/edit/{id}")
-    String edit(Model model, @PathVariable int id) {
+    String edit(Model model, HttpSession session, @PathVariable int id) {
         model.addAttribute("user", userDAO.findOne(id));
 
         return "user/edit";
@@ -73,7 +74,7 @@ public class UserController {
     // delete
 
     @GetMapping(value = "/delete/{id}")
-    String delete(Model model, @PathVariable int id) {
+    String delete(Model model, HttpSession session, @PathVariable int id) {
         userDAO.delete(id);
 
         model.addAttribute("success", "User successfully removed");

@@ -1,5 +1,9 @@
 package nl.avansc1.facturatie.model.administration;
 
+import org.springframework.security.crypto.bcrypt.BCrypt;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
+
 import javax.persistence.*;
 
 @Entity
@@ -35,6 +39,14 @@ public class User {
         this.role = role;
     }
 
+    public User(User user) {
+        this.id = user.getId();
+        this.email = user.getEmail();
+        this.password = user.getPassword();
+        this.name = user.getName();
+        this.role = user.getRole();
+    }
+
     public User() {
     }
 
@@ -67,7 +79,8 @@ public class User {
     }
 
     public void setPassword(String password) {
-        this.password = password;
+        PasswordEncoder passwordEncoder = new BCryptPasswordEncoder(12);
+        this.password = BCrypt.hashpw(password, BCrypt.gensalt());
     }
 
     public String getRole() {
