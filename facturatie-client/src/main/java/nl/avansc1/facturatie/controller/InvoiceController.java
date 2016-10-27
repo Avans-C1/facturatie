@@ -42,9 +42,6 @@ public class InvoiceController {
 
     @RequestMapping("")
     public String listInvoices(Model theModel) {
-
-        System.out.println(invoiceDAO.toString());
-
         //Get invoices from DAO
         Iterable<Invoice> invoiceList = invoiceDAO.findAll();
 

@@ -23,9 +23,6 @@ public class PaymentController {
 
     @RequestMapping("")
     public String listpaymentConditions(Model theModel) {
-
-        System.out.println(paymentConditionDAO.toString());
-
         //Get paymentConditions from DAO
         Iterable<PaymentCondition> paymentConditionList = paymentConditionDAO.findAll();
 

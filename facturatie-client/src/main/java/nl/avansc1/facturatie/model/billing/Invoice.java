@@ -149,8 +149,6 @@ public class Invoice {
         long duration  = start.getTime() - created.getTime();
         long diffInDays = TimeUnit.MILLISECONDS.toDays(duration);
 
-        System.out.println(diffInDays);
-
         return diffInDays > this.paymentCondition.getPeriodInDays();
     }
 
