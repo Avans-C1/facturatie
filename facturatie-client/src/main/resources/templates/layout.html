@@ -1,6 +1,8 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org"
-      xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -42,12 +44,12 @@
 <div class="wrapper">
 
     <header class="main-header">
-        <div th:replace="/fragments/header"></div>
+        <div th:replace="fragments/header"></div>
     </header>
     <!-- Left side column. contains the logo and sidebar -->
 
     <aside class="main-sidebar">
-        <div th:replace="/fragments/main-sidebar"></div>
+        <div th:replace="fragments/main-sidebar"></div>
     </aside>
 
     <!-- Content Wrapper. Contains page content -->
