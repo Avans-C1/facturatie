@@ -75,11 +75,11 @@
                                 <a th:href="@{~/insurance/show/} + ${policy.insurance.id}"><span class="fa fa-heartbeat"> <span th:text="${policy.insurance.name}"></span></span></a>
                                 <!-- original <a th:href="@{~/insurance/}"><span class="fa fa-heartbeat"> <span th:text="${policy.insurance.name}"></span></span></a>-->
                             </td>
-                            <td th:text="${policy.contribution}"></td>
                             <td th:text="${policy.dateStart}"></td>
                             <td th:text="${policy.dateEnd}"></td>
+                            <td th:text="${'&euro; ' + #numbers.formatDecimal(policy.contribution, 1, 'COMMA', 2, 'POINT')}"></td>
+                            <td th:text="${'&euro; ' + #numbers.formatDecimal(policy.contributionUsed, 1, 'COMMA', 2, 'POINT')}"></td>
                             <td th:text="${policy.active ? 'Yes' : 'No'}"></td>
-                            <td th:text="${policy.contributionUsed}"></td>
                             <td>
                                 <div class="btn-group">
                                     <a th:href="@{'/policy/edit/' + ${policy.id}}"  class="btn btn-xs btn-primary" ><span

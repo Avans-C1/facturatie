@@ -46,7 +46,7 @@ public class VatController {
 
 
     @RequestMapping(value = "/delete/{id}" , method = RequestMethod.GET)
-    public String deleteDeclaration(Model model, @PathVariable int id) {
+    public String deleteVat(Model model, @PathVariable int id) {
         this.vatDAO.delete(id);
 
         model.addAttribute("success", "Vat removed from the database");
@@ -56,7 +56,7 @@ public class VatController {
 
 
     @RequestMapping(value = "/new", method = RequestMethod.POST)
-    public String addHandler(int percentage, Model model) {
+    public String addVat(int percentage, final Model model) {
         try {
             Vat vat = new  Vat(percentage);
             vatDAO.save(vat);

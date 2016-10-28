@@ -79,7 +79,7 @@
                                 <a th:href="@{~/insurance_Company}"><span class="fa fa-university"></span> <span th:text="${insurance.insuranceCompany.id}"></span></a>
                             </td>-->
                             <td th:text="${insurance.name}"></td>
-                            <td th:text="${insurance.monthlyFee}"></td>
+                            <td th:text="${'&euro; ' + #numbers.formatDecimal(insurance.monthlyFee, 1, 'COMMA', 2, 'POINT')}"></td>
                             <td th:text="${insurance.coveredTreatments}"></td>
                             <td>
                                 <div class="btn-group">
