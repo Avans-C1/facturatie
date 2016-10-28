@@ -13,7 +13,7 @@ public class Treatment {
     @Id
     @Column(name="id")
     @GeneratedValue(strategy=GenerationType.IDENTITY)
-    private String id;
+    private int id;
     @Column(name = "name")
     private String name;
     @Column(name = "duration")
@@ -21,7 +21,7 @@ public class Treatment {
     @Column(name = "price")
     private float price;
 
-    public Treatment(String id, String name, int duration, float price) {
+    public Treatment(int id, String name, int duration, float price) {
         this.id = id;
         this.name = name;
         this.duration = duration;
@@ -37,11 +37,11 @@ public class Treatment {
     public Treatment() {
     }
 
-    public String getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(int id) {
         this.id = id;
     }
 
