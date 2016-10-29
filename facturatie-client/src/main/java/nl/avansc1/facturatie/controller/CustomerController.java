@@ -37,29 +37,15 @@ public class CustomerController {
      * @return template/customer/add.html
      */
     @RequestMapping("/new")
-    public String add() {
-        return "customer/add";
-    }
-
-    /**
-     * View every detail about a user
-     * @param model
-     * @param csn main ID of the user
-     * @return template/customer/view.html
-     */
-    @RequestMapping(value = "/view/{csn}/", method = RequestMethod.GET)
-    public String view(Model model, @PathVariable int csn) {
-        Customer customer = customerDAO.findByCsn(csn);
-        model.addAttribute("customer", customer);
-
-        return "customer/view";
+    public String add(Model model) {
+        return "customer/edit";
     }
 
     /**
      * Add new customers page
      * @return template/customer/add.html
      */
-    @RequestMapping(value = "/show/{csn}/")
+    @RequestMapping(value = "/show/{csn}")
     public String show(Model model, @PathVariable int csn) {
         List<Customer> customers = new ArrayList<Customer>();
         customers.add(customerDAO.findByCsn(csn));
@@ -73,18 +59,20 @@ public class CustomerController {
      * Process the saving stuff
      * @return saved message is the customer is saved
      */
-    @RequestMapping(value = "/new", method = RequestMethod.POST)
-    public String addHandler(int csn, String firstName, String lastName, Date dateOfBirth, String streetName, String houseNumber,
-                             String city, String zipcode, int phone, String email, String iban) {
+    @RequestMapping(value = "/store", method = RequestMethod.POST)
+    public String store(int csn, String firstName, String lastName, Date dateOfBirth, String streetName, String houseNumber,
+                             String city, String zipcode, String phone, String email, String iban, Model model) {
         try {
             Customer customer = new Customer(csn, firstName, lastName, streetName, houseNumber, zipcode, city, dateOfBirth,
                     phone, email, iban);
             customerDAO.save(customer);
         } catch (Exception ex) {
-            return "saving error";
+            return editCustomer(model, csn);
         }
 
-        return "saved!";
+        model.addAttribute("success", "Customer saved!");
+
+        return this.overview(model);
     }
 
     @RequestMapping(value = "/edit/{csn}", method = RequestMethod.GET)
@@ -99,12 +87,9 @@ public class CustomerController {
         Customer customer = customerDAO.findByCsn(csn);
         customerDAO.delete(customer);
 
-        List<Customer> customers = new ArrayList<Customer>();
-        customers.add(customerDAO.findByCsn(csn));
+        model.addAttribute("success", "Customer successfully deleted!");
 
-        model.addAttribute("customers", customers);
-
-        return "customer/index";
+        return this.overview(model);
     }
 
     @Autowired
