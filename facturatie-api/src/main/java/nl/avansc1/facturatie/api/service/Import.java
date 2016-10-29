@@ -1,12 +1,16 @@
 package nl.avansc1.facturatie.api.service;
 
-import nl.avansc1.facturatie.api.repository.CustomerDao;
+import nl.avansc1.facturatie.api.repository.DeclarationDAO;
+import nl.avansc1.facturatie.api.repository.TreatmentDAO;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.w3c.dom.Document;
+import org.xml.sax.SAXException;
 
-import java.io.BufferedReader;
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
 import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
+import java.io.IOException;
 
 /**
  * This class is responsible to import new declarations
@@ -14,31 +18,27 @@ import java.io.FileReader;
  * @author Bob van der Valk
  */
 public class Import {
-    private BufferedReader reader;
+    private Document document;
 
     /**
      * This method imports the data from the xml example sheet
      * @param fileName
      * @return
      */
-    public static Import importWithTestFile(String fileName) throws FileNotFoundException {
+    public static Import importWithTestFile(String fileName) throws IOException, SAXException, ParserConfigurationException {
         File file = new File(fileName);
-        return new Import(new BufferedReader(new FileReader(file)));
-
-    }
-    // TODO: maak deze functie af wanneer de API beschikbaar is
-    public static Import importWithURL(String url) {
-        return null;
+        DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
+        DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
+        return new Import(dBuilder.parse(file));
     }
 
-    public Import(BufferedReader reader) {
-        this.reader = reader;
-    }
-
-    public void start() {
-
+    public Import(Document document) {
+        this.document = document;
     }
 
     @Autowired
-    private CustomerDao customerDao;
+    private DeclarationDAO declarationDAO;
+
+    @Autowired
+    private TreatmentDAO treatmentDAO;
 }
