@@ -29,14 +29,14 @@ public class Customer {
     @Column(name = "date_of_birth")
     private Date dateOfBirth;
     @Column(name = "phoneNumber")
-    private int phoneNumber;
+    private String phoneNumber;
     @Column(name = "email")
     private String email;
     @Column(name = "iban")
     private String iban;
 
     public Customer(int csn, String firstName, String lastName, String streetName, String houseNumber, String zipcode,
-                    String city, Date dateOfBirth, int phoneNumber, String email, String iban) {
+                    String city, Date dateOfBirth, String phoneNumber, String email, String iban) {
         this.csn = csn;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -51,7 +51,7 @@ public class Customer {
     }
 
     public Customer(String firstName, String lastName, String streetName, String houseNumber, String zipcode,
-                    String city, Date dateOfBirth, int phoneNumber, String email, String iban) {
+                    String city, Date dateOfBirth, String phoneNumber, String email, String iban) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.streetName = streetName;
@@ -131,11 +131,11 @@ public class Customer {
         this.dateOfBirth = dateOfBirth;
     }
 
-    public int getPhoneNumber() {
+    public String getPhoneNumber() {
         return phoneNumber;
     }
 
-    public void setPhoneNumber(int phoneNumber) {
+    public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
     }
 

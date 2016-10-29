@@ -10,11 +10,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-/**
- * Created by Pascal van Hoof on 13-10-2016.
- */
-
-
 @Controller
 @RequestMapping("/vat")
 public class VatController {
@@ -26,7 +21,7 @@ public class VatController {
 
     /**
      * Overview page
-     * @return template/customer/overview.html
+     * @return template/customer/index.html
      */
     @RequestMapping("")
     public String index(Model theModel) {
