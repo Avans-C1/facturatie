@@ -25,7 +25,20 @@
                     <h3 class="box-title" th:text="${customer.fullName}"></h3>
                 </div>
                 <div class="box-body">
-
+                    <table>
+                        <tr>
+                            <td>Address: </td>
+                            <!--/*@thymesVar id="customer" type="nl.avansc1.facturatie.model.customers.Customer"*/-->
+                            <!--/*@thymesVar id="streetName" type="nl.avansc1.facturatie.model.customers.Customer"*/-->
+                            <td>
+                                <span th:text="${customer.streetName} + ${customer.houseNumber}"></span><br />
+                                <span th:text="${customer.city}"></span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                        </tr>
+                    </table>
                 </div>
             </div>
         </div>

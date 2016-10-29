@@ -87,6 +87,26 @@ public class CustomerController {
         return "saved!";
     }
 
+    @RequestMapping(value = "/edit/{csn}", method = RequestMethod.GET)
+    public String editCustomer(Model model, @PathVariable int csn) {
+        Customer customer = customerDAO.findByCsn(csn);
+        model.addAttribute("customer", customer);
+        return "customer/edit";
+    }
+
+    @RequestMapping(value = "/delete/{csn}")
+    public String deleteCustomer(Model model, @PathVariable int csn) {
+        Customer customer = customerDAO.findByCsn(csn);
+        customerDAO.delete(customer);
+
+        List<Customer> customers = new ArrayList<Customer>();
+        customers.add(customerDAO.findByCsn(csn));
+
+        model.addAttribute("customers", customers);
+
+        return "customer/index";
+    }
+
     @Autowired
     private CustomerDAO customerDAO;
 }
