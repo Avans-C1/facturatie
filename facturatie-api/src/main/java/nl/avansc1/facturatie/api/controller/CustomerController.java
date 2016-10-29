@@ -1,7 +1,7 @@
 package nl.avansc1.facturatie.api.controller;
 
 import nl.avansc1.facturatie.api.model.customers.Customer;
-import nl.avansc1.facturatie.api.model.customers.CustomerDao;
+import nl.avansc1.facturatie.api.repository.CustomerDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
