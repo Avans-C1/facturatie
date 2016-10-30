@@ -3,6 +3,7 @@ package nl.avansc1.facturatie.controller;
 import nl.avansc1.facturatie.model.administration.InsuranceCompany;
 import nl.avansc1.facturatie.model.billing.Declaration;
 import nl.avansc1.facturatie.model.billing.Invoice;
+import nl.avansc1.facturatie.model.billing.PaymentCondition;
 import nl.avansc1.facturatie.model.customers.Customer;
 import nl.avansc1.facturatie.model.insurances.Policy;
 import nl.avansc1.facturatie.repository.*;
@@ -36,9 +37,10 @@ public class InvoiceController {
     private PolicyDAO policyDAO;
     @Autowired
     private DeclarationDAO declarationDAO;
-
     @Autowired
     private PaymentConditionDAO paymentConditionDAO;
+    @Autowired
+    private CustomerDAO customerDAO;
 
     @RequestMapping("")
     public String listInvoices(Model theModel) {
@@ -95,7 +97,7 @@ public class InvoiceController {
     }
 
     @RequestMapping(value = "/print/{id}", method = RequestMethod.GET)
-    public String CreateInvoice(Model model, @PathVariable int id) {
+    public String PrintInvoice(Model model, @PathVariable int id) {
         Invoice invoice = invoiceDAO.findOne(id);
         Customer customer = invoice.getCustomer();
         Policy policy = policyDAO.findByCustomer(customer);
@@ -119,13 +121,38 @@ public class InvoiceController {
         String paymentCondition = invoice.getPaymentCondition().getTemplate();
         paymentCondition = paymentCondition.replace("%Amount%", formatter.format((subTotal + vatAmount)));
         paymentCondition = paymentCondition.replace("%period_in_days%", Integer.toString(invoice.getPaymentCondition().getPeriodInDays()));
-        paymentCondition = paymentCondition.replace("%BankAccount%", "1234567890");
-        paymentCondition = paymentCondition.replace("%Company_Name%", "Zilverenhuis");
+        paymentCondition = paymentCondition.replace("%BankAccount%", company.getIban());
+        paymentCondition = paymentCondition.replace("%Company_Name%", company.getCompanyname());
         paymentCondition = paymentCondition.replace("%Invoice_Ref%", Integer.toString(invoice.getId()));
 
         model.addAttribute("PaymentCondition", paymentCondition);
 
         return "invoice/print";
+    }
+
+    @RequestMapping(value = "/create/{customerId}/{condition}", method = RequestMethod.GET)
+    public void GenerateInvoice(Model model, @PathVariable int customerId, @PathVariable int condition) {
+        Customer customer = customerDAO.findByCsn(customerId);
+        List<Declaration> declarations = declarationDAO.findByCustomerInvoice(customerId);
+        Policy policy = policyDAO.findByCustomer(customer);
+        InsuranceCompany company = policy.getInsurance().getInsuranceCompany();
+        PaymentCondition paymentCondition = paymentConditionDAO.findOne(condition);
+
+        if (declarations.size() > 0) {
+
+            Invoice invoice = new Invoice();
+            invoice.setCustomer(customer);
+            invoice.setPaymentCondition(paymentCondition);
+            invoice.setVat(company.getVat());
+            invoice.setDateCreated(new Date());
+            invoice.setState(1);
+            invoiceDAO.save(invoice);
+
+            for (Declaration d : declarations) {
+                d.setInvoice(invoice);
+                declarationDAO.save(d);
+            }
+        }
     }
 
     @ModelAttribute("page")

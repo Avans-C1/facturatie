@@ -6,9 +6,7 @@
     .invoice-box {
         max-width: 800px;
         margin: auto;
-        padding: 30px;
-        border: 1px solid #eee;
-        box-shadow: 0 0 10px rgba(0, 0, 0, .15);
+        padding: 0px;
         font-size: 16px;
         line-height: 24px;
         font-family: 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif;
@@ -19,6 +17,11 @@
         width: 100%;
         line-height: inherit;
         text-align: left;
+    }
+
+    .item {
+        line-height: 16px;
+        font-size: 13px;
     }
 
     .invoice-box table td {
@@ -35,8 +38,8 @@
     }
 
     .invoice-box table tr.top table td.title {
-        font-size: 45px;
-        line-height: 45px;
+        font-size: 30px;
+        line-height: 30px;
         color: #333;
     }
 
@@ -67,6 +70,14 @@
         font-weight: bold;
     }
 
+    .companyInfo {
+        font-size: 11px;
+    }
+
+    .footer {
+        font-size: 10px;
+    }
+
     @media only screen and (max-width: 600px) {
         .invoice-box table tr.top table td {
             width: 100%;
@@ -91,17 +102,17 @@
                 <table>
                     <tr>
                         <td class="title">
-                            ${Company.Name} Logo?
+                            <span th:text="${Company.companyname}"/>
                         </td>
-                        <td>
-                            <span th:text="${Company.name}"></span><br>
-                            <span th:text="${Company.name}"></span><br>
+                        <td class="companyInfo">
+                            <span th:text="${Company.companyname}"></span><br>
+                            <span th:text="${Company.companyname} + ' ' + ${Company.houseNumber}"></span><br>
                             <span th:text="${Company.zipcode}"></span><br>
                             <span th:text="${Company.phoneNumber}"></span><br>
                             <br>
                             KVK: <span th:text=" ${Company.kvkNumber}"></span><br>
-                            <!--BTW: <span th:text="${Company.VATNumber}"></span><br>
-                            Bank: <span th:text="${Company.BankAccount}"></span><br>-->
+                            BTW: <span th:text="${Company.btw}"></span><br>
+                            Bank: <span th:text="${Company.iban}"></span>
                         </td>
                     </tr>
                 </table>
@@ -115,7 +126,7 @@
                         <td>
                             <span th:text="${Customer.FullName}"></span><br>
                             <span th:text="${Customer.streetName}"></span><br>
-                            <span th:text="${Customer.zipcode}"></span><span th:text="${Customer.city}"></span>
+                            <span th:text="${Customer.zipcode}"></span> <span th:text="${Customer.city}"></span>
                         </td>
                         <td>
 
@@ -172,14 +183,14 @@
         <tr class="total">
             <td></td>
             <td>
-                Total:
+                Totaal:
             </td>
             <td th:text="${Total}"></td>
         </tr>
     </table>
     <table>
         <tr>
-            <td colspan="4" th:text="${PaymentCondition}">
+            <td class="footer" colspan="4" th:text="${PaymentCondition}">
 
             </td>
         </tr>

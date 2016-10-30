@@ -52,7 +52,7 @@ public class InsuranceCompany {
      * @param email email address of the Insurance Company
      * @param kvkNumber kvk number of the Insurance Company
      * @param vat id of a vat percentage will be used as foreign key in Database.
-     * @param btw BTW number of the Insurance Company
+     * @param btw VAT number of the Insurance Company
      * @param iban IBAN of the Insurance Company
      */
     public InsuranceCompany(int id, String companyname, String streetname, String houseNumber, String zipcode, String city, int phoneNumber, String email, int kvkNumber, Vat vat, String btw, String iban) {
