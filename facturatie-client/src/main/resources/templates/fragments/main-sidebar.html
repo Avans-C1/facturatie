@@ -20,57 +20,59 @@
                 <i class="fa fa-dashboard"></i> <span>Dashboard</span>
             </a>
         </li>
-        <li th:class="${page == 'customers'} ? 'active' : ''">
+        <li th:class="${page == 'customers'} ? 'active' : ''" sec:authorize="hasAnyRole('ROLE_CUSTOMER, ROLE_ADMIN')">
             <a th:href="@{~/customer}">
                 <i class="fa fa-user"></i> <span>Customers</span>
             </a>
         </li>
-        <li th:class="${page == 'invoices'} ? 'active' : ''">
+
+        <li th:class="${page == 'invoices'} ? 'active' : ''" sec:authorize="hasAnyRole('ROLE_FINANCIAL', 'ROLE_ADMIN')">
             <a th:href="@{~/invoice}">
                 <i class="fa fa-file-text"></i> <span>Invoices</span>
             </a>
         </li>
-        <li th:class="${page == 'declarations'} ? 'active' : ''">
+        <li th:class="${page == 'declarations'} ? 'active' : ''"  sec:authorize="hasAnyRole('ROLE_INSURANCE', 'ROLE_ADMIN')">
             <a th:href="@{~/declaration}">
                 <i class="fa fa-inbox"></i> <span>Declarations</span>
             </a>
         </li>
-        <li th:class="${page == 'policies'} ? 'active' : ''">
+        <li th:class="${page == 'policies'} ? 'active' : ''"  sec:authorize="hasAnyRole('ROLE_INSURANCE', 'ROLE_ADMIN')">
             <a th:href="@{~/policy}">
                 <i class="fa fa-archive"></i> <span>Policies</span>
             </a>
         </li>
-        <li th:class="${page == 'insurances'} ? 'active' : ''">
+        <li th:class="${page == 'insurances'} ? 'active' : ''"  sec:authorize="hasAnyRole('ROLE_INSURANCE', 'ROLE_ADMIN')">
             <a th:href="@{~/insurance}">
                 <i class="fa fa-heartbeat"></i> <span>Insurances</span>
             </a>
         </li>
-        <li class="header">ADMINISTRATION</li>
-        <li th:class="${page == 'treatments'} ? 'active' : ''">
+        <li class="header" sec:authorize="hasAnyRole('ROLE_INSURANCE', 'ROLE_ADMIN')">ADMINISTRATION</li>
+        <li th:class="${page == 'treatments'} ? 'active' : ''" sec:authorize="hasAnyRole('ROLE_INSURANCE', 'ROLE_ADMIN')">
             <a th:href="@{~/treatments}">
                 <i class="fa fa-cubes"></i> <span>Treatments</span>
             </a>
         </li>
-        <li th:class="${page == 'vat'} ? 'active' : ''">
+        <li th:class="${page == 'vat'} ? 'active' : ''" sec:authorize="hasAnyRole('ROLE_INSURANCE', 'ROLE_ADMIN')">
             <a th:href="@{~/vat}">
                 <i class="fa fa-percent"></i> <span>Vat</span>
             </a>
         </li>
-        <li th:class="${page == 'payment-conditions'} ? 'active' : ''">
+        <li th:class="${page == 'payment-conditions'} ? 'active' : ''" sec:authorize="hasAnyRole('ROLE_INSURANCE', 'ROLE_ADMIN')">
             <a th:href="@{~/payment-condition}">
                 <i class="fa fa-bell"></i> <span>Payment Conditions</span>
             </a>
         </li>
-        <li th:class="${page == 'users'} ? 'active' : ''">
+        <li th:class="${page == 'users'} ? 'active' : '' " sec:authorize="hasAnyRole('ROLE_INSURANCE', 'ROLE_ADMIN')">
             <a th:href="@{~/user}">
                 <i class="fa fa-users"></i> <span>Users</span>
             </a>
         </li>
-        <li th:class="${page == 'insurance-companies'} ? 'active' : ''" sec:authorize="hasRole('ROLE_ADMIN')">
+        <li th:class="${page == 'insurance-companies'} ? 'active' : ''" sec:authorize="hasAnyRole('ROLE_INSURANCE', 'ROLE_ADMIN')">
             <a th:href="@{~/insurance_company}">
                 <i class="fa fa-gear"></i> <span>Settings</span>
             </a>
         </li>
+
 
     </ul>
 </section>
