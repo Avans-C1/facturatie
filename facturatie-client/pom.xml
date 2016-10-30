@@ -16,9 +16,6 @@
         <version>1.4.1.RELEASE</version>
     </parent>
     
-    <prerequisites>                       <!-- Optional, but suggested -->
-        <maven>3.3.9</maven>              <!-- Recommended minimum maven version -->
-    </prerequisites>
 
     <properties>
         <thymeleaf.version>3.0.0.RELEASE</thymeleaf.version>
@@ -86,12 +83,10 @@
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-test</artifactId>
-            <version>4.1.7.RELEASE</version>
         </dependency>
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-context</artifactId>
-            <version>4.1.7.RELEASE</version>
         </dependency>
     </dependencies>
 
