@@ -68,7 +68,7 @@ public class InsuranceController {
     }
 
     /**
-     * Mapping of success message upon successfully submitting filled policy form.
+     * Mapping of success message upon successfully submitting filled insurance form.
      * @param model
      * @param insurance
      * @return
@@ -82,6 +82,12 @@ public class InsuranceController {
         return this.index(model);
     }
 
+    /**
+     * Mapping of link to corresponding Insurance for each policy
+     * @param model
+     * @param id
+     * @return insurance/index
+     */
     //show method
     @GetMapping(value = "/show/{id}")
     String show(Model model, @PathVariable int id) {

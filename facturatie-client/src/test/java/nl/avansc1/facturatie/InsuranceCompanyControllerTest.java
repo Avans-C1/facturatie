@@ -43,7 +43,7 @@ public class InsuranceCompanyControllerTest {
 
 
     @Before
-    public void setUp() { mockMvc = MockMvcBuilders.webAppContextSetup(webApplicationContext).build(); }
+    public void setUp() { mockMvc = MockMvcBuilders.webAppContextSetup(webApplicationContext).build(); logger.info("---- setUp ----");}
 
     @After
     public void tearDown() { logger.info("---- tearDown ----");

@@ -95,6 +95,6 @@ public class InsuranceControllerTest {
 
     @Test
     public void checkInsuranceHomepageExists() throws Exception {
-        mockMvc.perform(get("/insurance/index")).andExpect(status().isFound());
+        mockMvc.perform(get("/insurance/index/")).andExpect(status().isFound());
     }
 }
