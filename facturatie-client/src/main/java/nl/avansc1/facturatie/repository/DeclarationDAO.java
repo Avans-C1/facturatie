@@ -20,4 +20,6 @@ public interface DeclarationDAO extends CrudRepository<Declaration, Integer> {
             value = "SELECT * FROM declarations WHERE customer_id = :Customer_Id AND (invoice_id IS NULL OR invoice_id = 0)",
             nativeQuery = true)
     public List<Declaration> findByCustomerInvoice(@Param("Customer_Id") int Id);
+
+    public List<Declaration> findByCustomerAndInvoiceNotNullOrderById(Customer customer);
 }

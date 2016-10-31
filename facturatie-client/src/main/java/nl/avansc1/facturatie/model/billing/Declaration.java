@@ -31,22 +31,26 @@ public class Declaration {
     private Date declaredAt;
     @Column(name = "price")
     private float price;
+    @Column(name = "compensated")
+    private float compensated;
 
-    public Declaration(int id, Customer customer, Treatment treatment, Invoice invoice, Date declaredAt, float price) {
+    public Declaration(int id, Customer customer, Treatment treatment, Invoice invoice, Date declaredAt, float price, float compensated) {
         this.id = id;
         this.customer = customer;
         this.treatment = treatment;
         this.invoice = invoice;
         this.declaredAt = declaredAt;
         this.price = price;
+        this.compensated = compensated;
     }
 
-    public Declaration(Customer customer, Treatment treatment, Invoice invoice, Date declaredAt, float price) {
+    public Declaration(Customer customer, Treatment treatment, Invoice invoice, Date declaredAt, float price, float compensated) {
         this.customer = customer;
         this.treatment = treatment;
         this.invoice = invoice;
         this.declaredAt = declaredAt;
         this.price = price;
+        this.compensated = compensated;
     }
 
     public Declaration() {
@@ -98,5 +102,13 @@ public class Declaration {
 
     public void setPrice(float price) {
         this.price = price;
+    }
+
+    public float getCompensated() {
+        return compensated;
+    }
+
+    public void setCompensated(float compensated) {
+        this.compensated = compensated;
     }
 }
