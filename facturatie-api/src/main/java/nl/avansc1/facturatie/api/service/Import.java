@@ -11,6 +11,7 @@ import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
+import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
 
 import javax.xml.parsers.DocumentBuilder;
@@ -18,6 +19,7 @@ import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 import java.io.File;
 import java.io.IOException;
+import java.net.URL;
 import java.util.Date;
 
 /**
@@ -39,15 +41,30 @@ public class Import {
         DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
         return new Import(dBuilder.parse(file));
     }
-    //TODO: finish this function when the other group api is done
-    public static Import importWithURL(String url) {
-        return null;
+
+    /**
+     * Import treatments from API url
+     * @param link
+     * @return
+     * @throws IOException
+     * @throws ParserConfigurationException
+     * @throws SAXException
+     */
+    public static Import importWithURL(String link) throws IOException, ParserConfigurationException, SAXException {
+        URL url = new URL(link);
+        InputSource inputSource = new InputSource(url.openStream());
+        DocumentBuilderFactory documentBuilderFactory = DocumentBuilderFactory.newInstance();
+        DocumentBuilder documentBuilder = documentBuilderFactory.newDocumentBuilder();
+        return new Import(documentBuilder.parse(inputSource));
     }
 
     public Import(Document document) {
         this.document = document;
     }
 
+    /**
+     * Run the xml parser that saved into the database
+     */
     public void start() {
         NodeList nList = document.getElementsByTagName("treatments");
 

@@ -18,7 +18,7 @@ import java.io.IOException;
 public class ImportController {
     @RequestMapping("/")
     public String importRoute() throws ParserConfigurationException, SAXException, IOException {
-        Import xml = Import.importWithTestFile("treatments.xml");
+        Import xml = Import.importWithURL("https://fysiocenter.herokuapp.com/api/treatment/169005078");
         xml.start();
         return "Import succesfully completed";
     }
