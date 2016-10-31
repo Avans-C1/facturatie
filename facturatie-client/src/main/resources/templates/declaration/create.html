@@ -25,17 +25,9 @@
                 </div>
                 <!-- /.box-header -->
                 <div class="box-body">
-                    <!-- Form om een nieuwe declaration te maken. Het object 'declaration' is het object waarin de
-                    waarden uit het formulier worden ingevuld. Het is afkomstig uit de DeclarationController. -->
+
                     <form action="#" th:action="@{/declaration/create}" th:object="${declaration}" method="post">
 
-                        <!-- Het formulier wordt na verzenden gevalideerd in de DeclarationController.
-                            Als er fouten waren kun je hier een lijst met foutmeldingen tonen.
-                            Je kunt ook de melding bij het inputveld tonen (zie code hieronder) en evt. de CSS class
-                            van het inputveld veranderen. -->
-                        <!--<ul th:if="${#fields.hasErrors('*')}" class="errorlist">-->
-                        <!--<li th:each="err : ${#fields.errors('*')}" th:text="${err}">Input is incorrect</li>-->
-                        <!--</ul>-->
 
                         <div th:if="${#fields.hasErrors('*')}">
                             <div layout:include="views/fragments/alert :: alert" th:with="type='danger', header='Fouten in het formulier'" th:remove="tag">

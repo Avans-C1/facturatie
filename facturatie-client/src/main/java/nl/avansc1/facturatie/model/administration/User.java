@@ -83,6 +83,10 @@ public class User {
         this.password = BCrypt.hashpw(password, BCrypt.gensalt());
     }
 
+    public void setPasswordWithoutHash(String password) {
+        this.password = password;
+    }
+
     public String getRole() {
         return role;
     }
