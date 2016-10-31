@@ -15,11 +15,6 @@
     <ul class="sidebar-menu">
         <li class="header">MAIN NAVIGATION</li>
 
-        <li th:class="${page == 'dashboard'} ? 'active' : ''">
-            <a th:href="@{~/}">
-                <i class="fa fa-dashboard"></i> <span>Dashboard</span>
-            </a>
-        </li>
         <li th:class="${page == 'customers'} ? 'active' : ''" sec:authorize="hasAnyRole('ROLE_CUSTOMER, ROLE_ADMIN')">
             <a th:href="@{~/customer}">
                 <i class="fa fa-user"></i> <span>Customers</span>
