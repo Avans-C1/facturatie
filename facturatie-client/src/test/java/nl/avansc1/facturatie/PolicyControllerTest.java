@@ -5,17 +5,22 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.MockitoAnnotations;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
+import org.springframework.security.test.web.servlet.setup.SecurityMockMvcConfigurers;
+import org.springframework.security.web.FilterChainProxy;
 import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 
+import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.user;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
@@ -42,7 +47,11 @@ public class PolicyControllerTest {
     private WebApplicationContext webApplicationContext;
 
     @Before
-    public void setUp() { mockMvc = MockMvcBuilders.webAppContextSetup(webApplicationContext).build(); }
+    public void setUp() {
+        mockMvc = MockMvcBuilders.webAppContextSetup(webApplicationContext)
+                //.apply(SecurityMockMvcConfigurers.springSecurity())
+                .build();
+        MockitoAnnotations.initMocks(this);}
 
     @After
     public void tearDown() { logger.info("---- tearDown ----");
@@ -98,5 +107,6 @@ public class PolicyControllerTest {
     @Test
     public void checkInsuranceHomepageExists() throws Exception {
         mockMvc.perform(get("/policy/index")).andExpect(status().isFound());
+        //.with(user("admin@test.com").password("password").roles("ADMIN"))
     }
 }

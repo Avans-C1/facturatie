@@ -44,18 +44,4 @@ public class TestContextConfig {
     public static final String INSURANCE_COMPANY_BTWNUMBER = "12345678";
     public static final String INSURANCE_COMPANY_IBAN = "12345678";
 
-    @Bean
-    public InsuranceDAO insuranceDAO() {
-        return Mockito.mock(InsuranceDAO.class);
-    }
-
-    @Bean
-    public InsuranceCompanyDAO insuranceCompanyDAO() {
-        return Mockito.mock(InsuranceCompanyDAO.class);
-    }
-
-    @Bean
-    public PolicyDAO policyDAO() {
-        return Mockito.mock(PolicyDAO.class);
-    }
 }
