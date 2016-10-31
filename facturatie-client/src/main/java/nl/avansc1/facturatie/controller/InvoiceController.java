@@ -12,10 +12,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
 
 import java.text.DecimalFormat;
 import java.util.Date;
@@ -56,6 +53,27 @@ public class InvoiceController {
         //Add invoices to model
         theModel.addAttribute("invoices", invoiceList);
         theModel.addAttribute("paymentConditions", paymentConditionDAO.findAll());
+
+        //Return page name
+        return "invoice/index";
+    }
+
+    @RequestMapping(value = "/show/{csn}", method = RequestMethod.GET)
+    public String showInvoiceByCsn(Model theModel, @PathVariable int csn) {
+        //Get Customer by csn
+        Customer customer = customerDAO.findByCsn(csn);
+
+        //Get invoices from DAO
+        Iterable<Invoice> invoiceList = invoiceDAO.findByCustomer(customer);
+
+        Invoice invoice = new Invoice();
+        invoice.setCustomer(customer);
+
+        //Add invoices to model
+        theModel.addAttribute("invoices", invoiceList);
+        theModel.addAttribute("invoice", invoice);
+        theModel.addAttribute("paymentConditions", paymentConditionDAO.findAll());
+        theModel.addAttribute("customer", customer);
 
         //Return page name
         return "invoice/index";
@@ -189,16 +207,14 @@ public class InvoiceController {
     /**
      * Generates a new invoice for a given customer
      * @param model
-     * @param customerId Customer id
-     * @param condition Payment condition id
      */
-    @RequestMapping(value = "/create/{customerId}/{condition}", method = RequestMethod.GET)
-    public String GenerateInvoice(Model model, @PathVariable int customerId, @PathVariable int condition) {
+    @PostMapping("/create")
+    public String GenerateInvoice(Model model, @ModelAttribute Invoice invoice) {
         //Find the customer given
-        Customer customer = customerDAO.findByCsn(customerId);
+        Customer customer = customerDAO.findByCsn(invoice.getCustomer().getCsn());
 
         //Find the open decelerations
-        List<Declaration> decelerations = declarationDAO.findByCustomerInvoice(customerId);
+        List<Declaration> decelerations = declarationDAO.findByCustomerInvoice(customer.getCsn());
 
         //Find decelerations count already on invoice
         int coveredDecelerations = declarationDAO.findByCustomerAndInvoiceNotNullOrderById(customer).size();
@@ -208,7 +224,7 @@ public class InvoiceController {
         //Find the insurance company of the customer
         InsuranceCompany company = policy.getInsurance().getInsuranceCompany();
         //Find the payment condition
-        PaymentCondition paymentCondition = paymentConditionDAO.findOne(condition);
+        PaymentCondition paymentCondition = paymentConditionDAO.findOne(invoice.getPaymentCondition().getId());
 
         int needToCover = policy.getInsurance().getCoveredTreatments() - coveredDecelerations;
 
@@ -218,7 +234,7 @@ public class InvoiceController {
         //Create an invoice if there are decelerations
         if (decelerations.size() > 0) {
 
-            Invoice invoice = new Invoice();
+            invoice = new Invoice();
             invoice.setCustomer(customer);
             invoice.setPaymentCondition(paymentCondition);
             invoice.setVat(company.getVat());
@@ -249,13 +265,14 @@ public class InvoiceController {
                 d.setInvoice(invoice);
                 declarationDAO.save(d);
             }
+        } else {
+            model.addAttribute("failure", "No declarations for this customer at this moment");
         }
-
         return listInvoices(model);
     }
 
     /**
-     *
+     * Module name of page
      * @return returns the module name
      */
     @ModelAttribute("page")
