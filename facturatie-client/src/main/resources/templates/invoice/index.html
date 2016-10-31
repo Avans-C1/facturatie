@@ -37,6 +37,20 @@
                 <div class="box-body table-responsive">
 
                     <div class="flex-wrapper" style="display: flex; align-items: center;">
+                        <div th:if="${customer}">
+                            <form action="#" th:action="@{/invoice/create}" th:object="${invoice}" method="post">
+                                <select name="paymentCondition" id="paymentCondition" th:field="*{paymentCondition}"
+                                        class="form-control">
+                                    <option
+                                            th:each="paymentCondition: ${paymentConditions}"
+                                            th:value="${paymentCondition.id}"
+                                            th:text="${paymentCondition.name}"
+                                    ></option>
+                                </select>
+                                <input hidden th:field="*{customer}" th:value="${customer}"/>
+                                <button type="submit" class="btn-app btn fa fa-plus" name="save">Add</button>
+                            </form>
+                        </div>
 
                         <div th:if="${success}" style="flex: 1; margin: 0 30px;">
                             <div layout:include="fragments/alert :: alert" th:with="type='success', header='Success!'" th:remove="tag">
@@ -72,7 +86,11 @@
                         </tr>
                         <tr th:each="invoice : ${invoices}">
                             <td th:text="${invoice.id}"></td>
-                            <td th:text="${invoice.customer.fullName}"></td>
+                            <td>
+                                <a th:href="@{~/invoice/show/} + ${invoice.customer.csn}">
+                                    <span th:text="${invoice.customer.fullName}"/>
+                                </a>
+                            </td>
                             <td th:text="${invoice.dateCreated}"></td>
                             <td>
                                 <!--Pay date-->

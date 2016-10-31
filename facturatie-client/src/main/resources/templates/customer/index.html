@@ -55,7 +55,11 @@
                         <!--/*@thymesVar id="customers" type="nl.avansc1.facturatie.controller.CustomerController"*/-->
                         <tr th:each="customer : ${customers}">
                             <td th:text="${customer.csn}"></td>
-                            <td th:text="${customer.fullName}"></td>
+                            <td>
+                                <a th:href="@{~/invoice/show/} + ${customer.csn}">
+                                    <span th:text="${customer.fullName}"/>
+                                </a>
+                            </td>
                             <td th:text="${customer.email}"></td>
                             <td th:text="${customer.phoneNumber}"></td>
                             <td th:text="${customer.city}"></td>
