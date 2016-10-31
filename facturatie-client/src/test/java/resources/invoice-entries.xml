@@ -1,0 +1,19 @@
+<dataset>
+    <invoice
+            id="1"
+            customer_id="1"
+            vat_id="1"
+            date_created="2016-10-31"
+            date_payed="2016-10-31"
+            state="1"
+            payment_condition_id="1"
+    />
+    <invoice
+            id="2"
+            customer_id="1"
+            vat_id="1"
+            date_created="2016-11-31"
+            date_payed="NULL"
+            state="0"
+            payment_condition_id="1"/>
+</dataset>

@@ -255,7 +255,7 @@ public class InvoiceController {
     }
 
     /**
-     *
+     * Module name of page
      * @return returns the module name
      */
     @ModelAttribute("page")

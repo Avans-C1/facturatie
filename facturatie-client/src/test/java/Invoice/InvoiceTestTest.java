@@ -13,7 +13,7 @@ import static org.junit.Assert.assertEquals;
  */
 
 
-public class InvoiceTest {
+public class InvoiceTestTest {
 
     @Autowired
     private InvoiceController invoiceController;
