@@ -65,7 +65,7 @@
         border-bottom: none;
     }
 
-    .invoice-box table tr.total td:nth-child(2), .invoice-box table tr.total td:nth-child(3) {
+    .invoice-box table tr.total td:nth-child(3), .invoice-box table tr.total td:nth-child(4) {
         border-top: 2px solid #eee;
         font-weight: bold;
     }
@@ -98,7 +98,7 @@
 <div class="invoice-box">
     <table cellpadding="0" cellspacing="0">
         <tr class="top">
-            <td colspan="4">
+            <td colspan="5">
                 <table>
                     <tr>
                         <td class="title">
@@ -120,7 +120,7 @@
         </tr>
 
         <tr class="Customer">
-            <td colspan="4">
+            <td colspan="5">
                 <table>
                     <tr>
                         <td>
@@ -137,7 +137,7 @@
         </tr>
 
         <tr class="information">
-            <td colspan="4">
+            <td colspan="5">
                 <table>
                     <tr>
                         <td>
@@ -158,6 +158,7 @@
             <td></td>
             <td>Omschrijving</td>
             <td>Totaal</td>
+            <td>Vergoed bedrag</td>
             <td>BTW</td>
         </tr>
 
@@ -165,9 +166,11 @@
             <td th:text="${item.treatment.duration} +'uur'"></td>
             <td th:text="${item.treatment.name}"></td>
             <td th:text="'€' + ${item.price}"></td>
+            <td th:text="${item.compensated}"></td>
             <td th:text="${Company.vat.percentage}"></td>
         </tr>
         <tr class="total">
+            <td></td>
             <td></td>
             <td>
                 Subtotaal:
@@ -176,11 +179,13 @@
         </tr>
         <tr class="">
             <td></td>
+            <td></td>
             <td th:text="${Company.vat.percentage} + ' BTW: '">
             </td>
             <td th:text="${VatAmount}"></td>
         </tr>
         <tr class="total">
+            <td></td>
             <td></td>
             <td>
                 Totaal:
