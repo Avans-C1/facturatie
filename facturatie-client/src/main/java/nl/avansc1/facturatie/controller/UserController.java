@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
@@ -52,7 +53,13 @@ public class UserController {
     }
 
     @PostMapping(value = "/create")
-    String store(Model model, HttpSession session,  @ModelAttribute User user) {
+    String store(Model model, HttpSession session,  @ModelAttribute User user, @RequestParam("password") String password) {
+
+        // reset old password when password field was empty
+        if (password.equals("")) {
+            user.setPasswordWithoutHash(session.getAttribute("oldPassword").toString());
+        }
+
         userDAO.save(user);
 
         model.addAttribute("success", "User successfully saved");
@@ -60,12 +67,15 @@ public class UserController {
         return this.index(model);
     }
 
-
+    
     // edit
 
     @GetMapping(value = "/edit/{id}")
     String edit(Model model, HttpSession session, @PathVariable int id) {
-        model.addAttribute("user", userDAO.findOne(id));
+        User user = userDAO.findOne(id);
+        model.addAttribute("user", user);
+        session.setAttribute("oldPassword", user.getPassword());
+
 
         return "user/edit";
     }

@@ -165,8 +165,8 @@
         <tr class="item" th:each="item : ${Declarations}">
             <td th:text="${item.treatment.duration} +'uur'"></td>
             <td th:text="${item.treatment.name}"></td>
-            <td th:text="'€' + ${item.price}"></td>
-            <td th:text="${item.compensated}"></td>
+            <td th:text="${'&euro; ' + #numbers.formatDecimal(item.price, 1, 'COMMA', 2, 'POINT')}"></td>
+            <td th:text="${'&euro; ' + #numbers.formatDecimal(item.compensated, 1, 'COMMA', 2, 'POINT')}"></td>
             <td th:text="${Company.vat.percentage}"></td>
         </tr>
         <tr class="total">
