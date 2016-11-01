@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.*;
 /**
  * Created by Matthijs Wilhelmus on 13-10-2016.
  *
- * This ia a controller for <code>InsuranceCompany</code>.
+ * This is a controller for <code>InsuranceCompany</code>.
  * This controller regulates the mapping of the Settings(insuranceCompany) page
  * for viewing the current insurance Company data as well as for updating this data.
  * This controller uses the linked <code>InsuranceCompanyDAO</code> and <code>VatDAO</code>.

@@ -78,7 +78,7 @@
                                         <div class="col-sm-6">
                                             <label for="coveredTreatments">Covered Treatments</label>
                                             <!-- th:field="*{name}" is de koppeling naar het attribuut 'name' van het object 'member'-->
-                                            <input type="number" min="0" max="10" step="1" class="form-control" id="coveredTreatments" th:field="*{coveredTreatments}"/>
+                                            <input type="number" min="0" max="70" step="1" class="form-control" id="coveredTreatments" th:field="*{coveredTreatments}"/>
                                             <p th:if="${#fields.hasErrors('coveredTreatments')}" th:errors="*{coveredTreatments}">Name Error</p>
                                         </div>
                                     </div>

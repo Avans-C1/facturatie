@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.*;
 /**
  * Created by Matthijs Wilhelmus on 13-10-2016.
  *
- * This ia a controller for <code>Insurance</code>.
+ * This is a controller for <code>Insurance</code>.
  * This controller regulates the mapping of the insurance pages
  * for viewing all insurances as well as creating/updating/deleting an insurance
  * using the linked <code>InsuranceDAO</code>.
