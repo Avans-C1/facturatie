@@ -82,14 +82,19 @@ public class InsuranceController {
         return this.index(model);
     }
 
-    //show method
+    /**
+     * Mapping of link to corresponding Insurance for each policy
+     * @param model
+     * @param id
+     * @return insurance/index
+     */
     @GetMapping(value = "/show/{id}")
     String show(Model model, @PathVariable int id) {
         model.addAttribute("insurances", insuranceDAO.findOne(id));
 
         return "insurance/index";
     }
-    //end show method
+
     // edit
 
     /**
