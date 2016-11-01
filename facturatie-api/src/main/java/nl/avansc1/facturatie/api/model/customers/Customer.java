@@ -1,9 +1,9 @@
 package nl.avansc1.facturatie.api.model.customers;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
-import javax.xml.bind.annotation.XmlRootElement;
 import java.util.Date;
 
 /**
@@ -13,22 +13,33 @@ import java.util.Date;
  */
 @Entity
 @Table(name = "customers")
-@XmlRootElement
 public class Customer {
-    private @Id int csn;
+    @Id
+    @Column(name = "csn")
+    private int csn;
+    @Column(name = "first_name")
     private String firstName;
+    @Column(name = "last_name")
     private String lastName;
+    @Column(name = "street_name")
     private String streetName;
+    @Column(name = "house_name")
     private String houseNumber;
+    @Column(name = "zipcode")
     private String zipcode;
+    @Column(name = "city")
     private String city;
+    @Column(name = "date_of_birth")
     private Date dateOfBirth;
-    private int phoneNumber;
+    @Column(name = "phoneNumber")
+    private String phoneNumber;
+    @Column(name = "email")
     private String email;
+    @Column(name = "iban")
     private String iban;
 
     public Customer(int csn, String firstName, String lastName, String streetName, String houseNumber, String zipcode,
-                    String city, Date dateOfBirth, int phoneNumber, String email, String iban) {
+                    String city, Date dateOfBirth, String phoneNumber, String email, String iban) {
         this.csn = csn;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -43,7 +54,7 @@ public class Customer {
     }
 
     public Customer(String firstName, String lastName, String streetName, String houseNumber, String zipcode,
-                    String city, Date dateOfBirth, int phoneNumber, String email, String iban) {
+                    String city, Date dateOfBirth, String phoneNumber, String email, String iban) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.streetName = streetName;
@@ -123,11 +134,11 @@ public class Customer {
         this.dateOfBirth = dateOfBirth;
     }
 
-    public int getPhoneNumber() {
+    public String getPhoneNumber() {
         return phoneNumber;
     }
 
-    public void setPhoneNumber(int phoneNumber) {
+    public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
     }
 
@@ -145,5 +156,9 @@ public class Customer {
 
     public void setIban(String iban) {
         this.iban = iban;
+    }
+
+    public String getFullName() {
+        return firstName + " " + lastName;
     }
 }
