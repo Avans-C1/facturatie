@@ -50,7 +50,7 @@
                             <th>E-mail</th>
                             <th>Phone</th>
                             <th>City</th>
-                            <th width="4%">&nbsp;</th>
+                            <th width="4%" sec:authorize="hasAnyRole('ROLE_CUSTOMER', 'ROLE_ADMIN')">&nbsp;</th>
                         </tr>
                         <!--/*@thymesVar id="customers" type="nl.avansc1.facturatie.controller.CustomerController"*/-->
                         <tr th:each="customer : ${customers}">
@@ -64,7 +64,7 @@
                             <td th:text="${customer.email}"></td>
                             <td th:text="${customer.phoneNumber}"></td>
                             <td th:text="${customer.city}"></td>
-                            <td>
+                            <td sec:authorize="hasAnyRole('ROLE_CUSTOMER', 'ROLE_ADMIN')">
                                 <div class="btn-group">
                                     <a th:href="@{'/customer/edit/' + ${customer.csn}}" class="btn btn-xs btn-primary"><span class="fa fa-pencil"></span></a>
                                     <a th:href="@{'/customer/delete/' + ${customer.csn}}" class="btn btn-xs btn-danger"><span class="fa fa-trash"></span></a>
