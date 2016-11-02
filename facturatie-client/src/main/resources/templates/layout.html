@@ -105,22 +105,6 @@
 <script th:src="@{/vendor/AdminLTE/dist/js/app.min.js}"></script>
 <script th:src="@{/vendor/AdminLTE/dist/js/pages/dashboard.js}"></script>
 <script th:src="@{/vendor/AdminLTE/dist/js/demo.js}"></script>
-<script type="text/javascript">
-    $("#customerForm").submit(function(e) {
-        console.log("Geklikt");
-        // validate and process form here
-        var postData = $("#customerForm").serialize();
-
-        $.ajax({
-            type: "POST",
-            url: "http://localhost:8080/customer/new", //TODO: add to actual url
-            data: postData,
-            success: function() {
-                console.log("Saved whoohooo");
-            }
-        });
-    })
-</script>
 <script type="text/javascript" layout:fragment="custom-javascript"></script>
 </body>
 </html>

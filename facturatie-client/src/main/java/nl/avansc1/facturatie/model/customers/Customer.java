@@ -1,7 +1,6 @@
 package nl.avansc1.facturatie.model.customers;
 
 import javax.persistence.*;
-import java.util.Date;
 
 /**
  * Object of a customer
@@ -27,7 +26,7 @@ public class Customer {
     @Column(name = "city")
     private String city;
     @Column(name = "date_of_birth")
-    private Date dateOfBirth;
+    private String dateOfBirth;
     @Column(name = "phoneNumber")
     private String phoneNumber;
     @Column(name = "email")
@@ -36,7 +35,7 @@ public class Customer {
     private String iban;
 
     public Customer(int csn, String firstName, String lastName, String streetName, String houseNumber, String zipcode,
-                    String city, Date dateOfBirth, String phoneNumber, String email, String iban) {
+                    String city, String dateOfBirth, String phoneNumber, String email, String iban) {
         this.csn = csn;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -51,7 +50,7 @@ public class Customer {
     }
 
     public Customer(String firstName, String lastName, String streetName, String houseNumber, String zipcode,
-                    String city, Date dateOfBirth, String phoneNumber, String email, String iban) {
+                    String city, String dateOfBirth, String phoneNumber, String email, String iban) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.streetName = streetName;
@@ -123,11 +122,11 @@ public class Customer {
         this.city = city;
     }
 
-    public Date getDateOfBirth() {
+    public String getDateOfBirth() {
         return dateOfBirth;
     }
 
-    public void setDateOfBirth(Date dateOfBirth) {
+    public void setDateOfBirth(String dateOfBirth) {
         this.dateOfBirth = dateOfBirth;
     }
 

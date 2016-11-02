@@ -31,7 +31,7 @@ public class AppConfig {
     public InvoiceDAO invoiceDAO() {
         Vat testVat = new Vat(1, 21.0);
         PaymentCondition testPaymentCondition = new PaymentCondition("Test", "test template", 12);
-        Customer testCustomer = new Customer(1, "Kevin", "Bos", "Vijfhagen", "209", "4812XT", "Breda", new Date(), "0638178232", "k.bos@test.com", "NL37Rabo028383292");
+        Customer testCustomer = new Customer(1, "Kevin", "Bos", "Vijfhagen", "209", "4812XT", "Breda", "2016-01-01", "0638178232", "k.bos@test.com", "NL37Rabo028383292");
 
         Invoice testInvoiceNotPaid = new Invoice(1, null, testVat, new Date(), null, 0, testPaymentCondition);
         Invoice testInvoicePaid = new Invoice(1, null, testVat, new Date(), new Date(), 1, testPaymentCondition);

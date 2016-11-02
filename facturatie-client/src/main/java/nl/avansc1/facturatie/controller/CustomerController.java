@@ -1,15 +1,14 @@
 package nl.avansc1.facturatie.controller;
 
+import nl.avansc1.facturatie.model.administration.User;
 import nl.avansc1.facturatie.model.customers.Customer;
 import nl.avansc1.facturatie.repository.CustomerDAO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -66,18 +65,10 @@ public class CustomerController {
      * Process the saving stuff
      * @return saved message is the customer is saved
      */
-    @RequestMapping(value = "/store", method = RequestMethod.POST)
-    public String store(int csn, String firstName, String lastName, Date dateOfBirth, String streetName, String houseNumber,
-                             String city, String zipcode, String phone, String email, String iban, Model model) {
-        try {
-            Customer customer = new Customer(csn, firstName, lastName, streetName, houseNumber, zipcode, city, dateOfBirth,
-                    phone, email, iban);
-            customerDAO.save(customer);
-        } catch (Exception ex) {
-            return editCustomer(model, csn);
-        }
-
-        model.addAttribute("success", "Customer saved!");
+    @PostMapping(value = "/store")
+    String store(Model model, @ModelAttribute Customer customer) {
+        customerDAO.save(customer);
+        model.addAttribute("success", "Customer successfully saved");
 
         return this.overview(model);
     }
