@@ -6,24 +6,32 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 
 import javax.persistence.*;
 
+/**
+ * User model object
+ * Roles can be comma separated.
+ *
+ * @author Bob van der Valk / Robin Valk
+ * @version 1.0
+ * @see BCrypt Password hashed in BCrypt.
+ */
 @Entity
-@Table(name ="users")
+@Table(name = "users")
 public class User {
     @Id
-    @Column(name="id")
-    @GeneratedValue(strategy=GenerationType.IDENTITY)
+    @Column(name = "id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @Column(name="name")
+    @Column(name = "name")
     private String name;
 
-    @Column(name="email")
+    @Column(name = "email")
     private String email;
 
-    @Column(name="password")
+    @Column(name = "password")
     private String password;
 
-    @Column(name="role")
+    @Column(name = "role")
     private String role;
 
     public User(int id, String email, String name, String role) {
