@@ -56,7 +56,7 @@
                         <tr th:each="customer : ${customers}">
                             <td th:text="${customer.csn}"></td>
                             <td>
-                                <a th:href="@{~/invoice/show/} + ${customer.csn}" sec:authorize="hasAnyRole('ROLE_FINANCIAL', 'ROLE_ADMIN')">
+                                <a th:href="@{~/invoice/show/} + ${customer.csn}" sec:authorize="hasAnyRole('ROLE_FINANCIAL', 'ROLE_INSURANCE', 'ROLE_ADMIN')">
                                     <span th:text="${customer.fullName}"/>
                                 </a>
                                 <span th:text="${customer.fullName}" sec:authorize="hasAnyRole('ROLE_CUSTOMER')"/>
