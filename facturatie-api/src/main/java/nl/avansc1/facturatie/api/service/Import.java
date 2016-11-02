@@ -1,8 +1,5 @@
 package nl.avansc1.facturatie.api.service;
 
-import nl.avansc1.facturatie.api.model.billing.Declaration;
-import nl.avansc1.facturatie.api.model.billing.Treatment;
-import nl.avansc1.facturatie.api.model.customers.Customer;
 import nl.avansc1.facturatie.api.repository.CustomerDao;
 import nl.avansc1.facturatie.api.repository.DeclarationDAO;
 import nl.avansc1.facturatie.api.repository.TreatmentDAO;
@@ -66,17 +63,18 @@ public class Import {
      * Run the xml parser that saved into the database
      */
     public void start() {
-        NodeList nList = document.getElementsByTagName("treatments");
+        NodeList nList = document.getElementsByTagName("List");
 
         for (int temp = 0; temp < nList.getLength(); temp++) {
             Node nNode = nList.item(temp);
             if (nNode.getNodeType() == Node.ELEMENT_NODE) {
                 Element eElement = (Element) nNode;
-                Customer customer = customerDao.findByCsn(Integer.parseInt(eElement.getAttribute("customer")));
-                Treatment treatment = treatmentDAO.findOne(Integer.parseInt(eElement.getAttribute("code")));
+                System.out.println(eElement.getAttribute("BSN"));
+//                Customer customer = customerDao.findByCsn(Integer.parseInt(eElement.getAttribute("BSN")));
+//                Treatment treatment = treatmentDAO.findOne(Integer.parseInt(eElement.getAttribute("TreatmentCode")));
                 Date today = new Date();
-                Declaration declaration = new Declaration(customer, treatment, today, treatment.getPrice());
-                declarationDAO.save(declaration);
+//                Declaration declaration = new Declaration(customer, treatment, today, treatment.getPrice());
+//                declarationDAO.save(declaration);
             }
         }
     }
