@@ -26,14 +26,15 @@ public class InvoiceTest {
 
     @Autowired
     private InvoiceDAO invoiceDAO;
+
     /*
      @Autowired
     private WebApplicationContext context;
 
     private MockMvc mvc;
-     */
 
-    /*@Before
+
+    @Before
     public void setup() {
         mvc = MockMvcBuilders
                 .webAppContextSetup(context)
@@ -52,6 +53,7 @@ public class InvoiceTest {
         ;
     }
     */
+
 
     @Test
     public void findAllInRepository() {

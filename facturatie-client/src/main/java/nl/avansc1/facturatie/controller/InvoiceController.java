@@ -14,6 +14,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.io.IOException;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.ProtocolException;
+import java.net.URL;
 import java.text.DecimalFormat;
 import java.util.Date;
 import java.util.List;
@@ -210,6 +215,21 @@ public class InvoiceController {
      */
     @PostMapping("/create")
     public String GenerateInvoice(Model model, @ModelAttribute Invoice invoice) {
+        String url = "https://ivh5c1-api.herokuapp.com/import/" + invoice.getCustomer().getCsn();
+
+        try {
+            URL obj = new URL(url);
+            HttpURLConnection con = (HttpURLConnection) obj.openConnection();
+            con.getInputStream();
+        } catch (ProtocolException e) {
+            e.printStackTrace();
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+
         //Find the customer given
         Customer customer = customerDAO.findByCsn(invoice.getCustomer().getCsn());
 
@@ -221,52 +241,58 @@ public class InvoiceController {
 
         //Find the policy for the customer
         Policy policy = policyDAO.findByCustomer(customer);
-        //Find the insurance company of the customer
-        InsuranceCompany company = policy.getInsurance().getInsuranceCompany();
-        //Find the payment condition
-        PaymentCondition paymentCondition = paymentConditionDAO.findOne(invoice.getPaymentCondition().getId());
 
-        int needToCover = policy.getInsurance().getCoveredTreatments() - coveredDecelerations;
+        if (policy != null) {
 
-        float contributionToPay = (policy.getContribution() - policy.getContributionUsed());
+            //Find the insurance company of the customer
+            InsuranceCompany company = policy.getInsurance().getInsuranceCompany();
+            //Find the payment condition
+            PaymentCondition paymentCondition = paymentConditionDAO.findOne(invoice.getPaymentCondition().getId());
+
+            int needToCover = policy.getInsurance().getCoveredTreatments() - coveredDecelerations;
+
+            float contributionToPay = (policy.getContribution() - policy.getContributionUsed());
 
 
-        //Create an invoice if there are decelerations
-        if (decelerations.size() > 0) {
+            //Create an invoice if there are decelerations
+            if (decelerations.size() > 0) {
 
-            invoice = new Invoice();
-            invoice.setCustomer(customer);
-            invoice.setPaymentCondition(paymentCondition);
-            invoice.setVat(company.getVat());
-            invoice.setDateCreated(new Date());
-            invoice.setState(1);
-            invoiceDAO.save(invoice);
+                invoice = new Invoice();
+                invoice.setCustomer(customer);
+                invoice.setPaymentCondition(paymentCondition);
+                invoice.setVat(company.getVat());
+                invoice.setDateCreated(new Date());
+                invoice.setState(1);
+                invoiceDAO.save(invoice);
 
-            for (Declaration d : decelerations) {
-                if (needToCover > 0) {
-                    d.setCompensated(d.getPrice());
-                    needToCover -= 1;
-                }
-                if (d.getCompensated() <= 0) {
-                    contributionToPay = (policy.getContribution() - policy.getContributionUsed());
-                    if (contributionToPay <= 0) {
+                for (Declaration d : decelerations) {
+                    if (needToCover > 0) {
                         d.setCompensated(d.getPrice());
-                    } else {
-                        if ((contributionToPay - d.getPrice()) < 0) {
-                            d.setCompensated(d.getPrice() - contributionToPay);
-                            policy.setContributionUsed(policy.getContributionUsed() + contributionToPay);
-                        } else {
-                            d.setCompensated(0);
-                            policy.setContributionUsed(policy.getContributionUsed() + d.getPrice());
-                        }
-                        policyDAO.save(policy);
+                        needToCover -= 1;
                     }
+                    if (d.getCompensated() <= 0) {
+                        contributionToPay = (policy.getContribution() - policy.getContributionUsed());
+                        if (contributionToPay <= 0) {
+                            d.setCompensated(d.getPrice());
+                        } else {
+                            if ((contributionToPay - d.getPrice()) < 0) {
+                                d.setCompensated(d.getPrice() - contributionToPay);
+                                policy.setContributionUsed(policy.getContributionUsed() + contributionToPay);
+                            } else {
+                                d.setCompensated(0);
+                                policy.setContributionUsed(policy.getContributionUsed() + d.getPrice());
+                            }
+                            policyDAO.save(policy);
+                        }
+                    }
+                    d.setInvoice(invoice);
+                    declarationDAO.save(d);
                 }
-                d.setInvoice(invoice);
-                declarationDAO.save(d);
+            } else {
+                model.addAttribute("failure", "No declarations for this customer at this moment");
             }
         } else {
-            model.addAttribute("failure", "No declarations for this customer at this moment");
+            model.addAttribute("failure", "No policy for this customer at this moment");
         }
         return listInvoices(model);
     }
