@@ -27,6 +27,16 @@ import java.util.Date;
  */
 public class Import {
     private Document document;
+    @Autowired
+    private CustomerDao customerDao;
+    @Autowired
+    private DeclarationDAO declarationDAO;
+    @Autowired
+    private TreatmentDAO treatmentDAO;
+
+    public Import(Document object) {
+        this.document = object;
+    }
 
     /**
      * This method imports the data from the xml example sheet
@@ -39,13 +49,10 @@ public class Import {
         DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
         return new Import(dBuilder.parse(file));
     }
-    //TODO: finish this function when the other group api is done
-    public static Import importWithURL(String url) {
-        return null;
-    }
 
-    public Import(Document document) {
-        this.document = document;
+    //TODO: finish this function when the other group api is done
+    public static Import importWithURL(String url) throws IOException, SAXException, ParserConfigurationException {
+        return null;
     }
 
     public void start() {
@@ -58,18 +65,9 @@ public class Import {
                 Customer customer = customerDao.findByCsn(Integer.parseInt(eElement.getAttribute("customer")));
                 Treatment treatment = treatmentDAO.findOne(Integer.parseInt(eElement.getAttribute("code")));
                 Date today = new Date();
-                Declaration declaration = new Declaration(customer, treatment, today, treatment.getPrice());
+                Declaration declaration = new Declaration(customer, treatment, today, treatment.getPrice(), 0);
                 declarationDAO.save(declaration);
             }
         }
     }
-
-    @Autowired
-    private CustomerDao customerDao;
-
-    @Autowired
-    private DeclarationDAO declarationDAO;
-
-    @Autowired
-    private TreatmentDAO treatmentDAO;
 }
