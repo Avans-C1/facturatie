@@ -3,6 +3,7 @@ package nl.avansc1.facturatie.controller;
 import nl.avansc1.facturatie.model.billing.Invoice;
 import nl.avansc1.facturatie.model.billing.Treatment;
 import nl.avansc1.facturatie.model.billing.Vat;
+import nl.avansc1.facturatie.model.customers.Customer;
 import nl.avansc1.facturatie.repository.TreatmentDAO;
 import nl.avansc1.facturatie.repository.VatDAO;
 import org.slf4j.Logger;
@@ -13,6 +14,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.ArrayList;
 
 /**
  * Created by kevin on 11-10-2016.
@@ -30,6 +33,25 @@ public class TreatmentController {
 
         return "treatments/index";
     }
+
+
+    @RequestMapping(value = "/show/{id}", method = RequestMethod.GET)
+    public String showInvoiceByCsn(Model theModel, @PathVariable int id) {
+        //Get Customer by csn
+        Treatment Treatment = treatmentDAO.findOne(id);
+
+        ArrayList<Treatment> treatments = new ArrayList<Treatment>();
+        treatments.add(Treatment);
+
+
+
+        //Add invoices to model
+        theModel.addAttribute("treatments", treatments);
+
+        //Return page name
+        return "treatments/index";
+    }
+
 
     private Iterable<Treatment> getTreatmentList() {
         return treatmentDAO.findAll();
@@ -90,6 +112,10 @@ public class TreatmentController {
             return "treatments/index";
         }
     }
+
+
+
+
 
 
     @ModelAttribute("page")

@@ -53,7 +53,7 @@
                                     <a th:href="@{~/customer/show/} + ${declaration.customer.csn}"><span class="fa fa-user"> <span th:text="${declaration.customer.fullName}"></span></span></a>
                                 </td>
                                 <td>
-                                    <a th:href="@{~/treatment/show/} + ${declaration.treatment.id}"><span class="fa fa-cubes"></span> <span th:text="${declaration.treatment.name}"></span></a>
+                                    <a th:href="@{~/treatments/show/} + ${declaration.treatment.id}"><span class="fa fa-cubes"></span> <span th:text="${declaration.treatment.name}"></span></a>
                                 </td>
                                 <td th:text="${'&euro; ' + #numbers.formatDecimal(declaration.price, 1, 'COMMA', 2, 'POINT')}"></td>
                             </tr>
