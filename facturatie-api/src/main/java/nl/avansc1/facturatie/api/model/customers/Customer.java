@@ -23,7 +23,7 @@ public class Customer {
     private String lastName;
     @Column(name = "street_name")
     private String streetName;
-    @Column(name = "house_name")
+    @Column(name = "house_number")
     private String houseNumber;
     @Column(name = "zipcode")
     private String zipcode;
